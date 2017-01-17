@@ -21,7 +21,7 @@ curl -o httpd-2.4.25.tar.bz2 http://apache.mirrors.tds.net//httpd/httpd-2.4.25.t
 
 
 # 4.) configure/make/install httpd
-tar -xvzf httpd-2.4.25.tar.bz2
+tar -xjf httpd-2.4.25.tar.bz2
 cd httpd-2.4.25/
 ./configure --prefix=$1
 make
