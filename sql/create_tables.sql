@@ -6,31 +6,32 @@ Author - Cole Vikupitz
 Creates the tables associated with the OSNAP data model.
 */
 
+/* Asset Tables */
 CREATE TABLE products (
-	product_pk	-- primary key for a product instance
-	vendor				TEXT,	-- who sells this product
-	description			TEXT,	-- desc of the asset
-	alt_description		TEXT	-- alt desc of the asset
+	product_pk			SERIAL PRIMARY KEY,	-- primary key for a product instance
+	vendor				TEXT,				-- who sells this product
+	description			TEXT,				-- desc of the asset
+	alt_description		TEXT				-- alt desc of the asset
 );
 
 CREATE TABLE assets (
-	asset_pk	-- primary key for an asset instance
+	asset_pk			SERIAL PRIMARY KEY, -- primary key for an asset instance
 	product_fk	-- id for the product instance the asset was spawned from
-	asset_tag			TEXT,	-- stick or engraved id used for inventory tracking
-	description			TEXT,	-- desc of the asset
-	alt_description		TEXT	-- alt desc of the asset
+	asset_tag			TEXT,				-- stick or engraved id used for inventory tracking
+	description			TEXT,				-- desc of the asset
+	alt_description		TEXT				-- alt desc of the asset
 );
 
-CREATE TABLE vehicles(
-	vehicle_pk	-- primary key for a vehicle instance
+CREATE TABLE vehicles (
+	vehicle_pk			SERIAL PRIMARY KEY,	-- primary key for a vehicle instance
 	asset_fk	-- id for the associated asset record
 );
 
 CREATE TABLE facilities (
-	facility_pk		-- primary key for a facility instance
-	fcode				VARCHAR(6),	-- code to id the facility (6> chars)
-	common_name			TEXT,		-- common name for facility
-	location			TEXT		-- addressing info for facility
+	facility_pk			SERIAL PRIMARY KEY,	-- primary key for a facility instance
+	fcode				VARCHAR(6),			-- code to id the facility (6> chars)
+	common_name			TEXT,				-- common name for facility
+	location			TEXT				-- addressing info for facility
 );
 
 CREATE TABLE asset_at (
@@ -41,7 +42,7 @@ CREATE TABLE asset_at (
 );
 
 CREATE TABLE convoys (
-	convoy pk	-- primary key for a convoy instance
+	convoy pk			SERIAL PRIMARY KEY,	-- primary key for a convoy instance
 	request				TEXT,	-- request id for the convoy
 	source_fk	-- source facility				
 	dest_fk		-- dest facility
@@ -61,15 +62,16 @@ CREATE TABLE asset_on (
 	unload_dt			TIMESTAMP	-- when the asset was unloaded
 );
 
+/* User Tables */
 CREATE TABLE users (
-	user_pk		-- primary key for a user instance
+	user_pk				SERIAL PRIMARY KEY,	-- primary key for a user instance
 	username			TEXT,		-- login name used by the user
 	active				BOOLEAN		-- is the user active?
 );
 
 CREATE TABLE roles (
-	role_pk	-- primary key for a role instance
-	title				TEXT	-- short textual name for the role
+	role_pk				SERIAL PRIMARY KEY,	-- primary key for a role instance
+	title				TEXT				-- short textual name for the role
 );
 
 CREATE TABLE user_is (
@@ -82,20 +84,21 @@ CREATE TABLE user_supports (
 	facility_fk		-- id for the facility instance
 );
 
+/* Security Tables */
 CREATE TABLE levels (
-	level_pk		-- primary key for security level lookups
-	abbrv				TEXT,	-- abbr for the security levels
-	comment				TEXT	-- comment, if any
+	level_pk			SERIAL PRIMARY KEY,	-- primary key for security level lookups
+	abbrv				TEXT,				-- abbr for the security levels
+	comment				TEXT				-- comment, if any
 );
 
 CREATE TABLE compartments (
-	compartment_pk		-- primary key for compartment lookups
-	abbrv				TEXT,	-- abbr for the security compartment
-	comment				TEXT	-- comment, if any
+	compartment_pk		SERIAL PRIMARY KEY,	-- primary key for compartment lookups
+	abbrv				TEXT,				-- abbr for the security compartment
+	comment				TEXT				-- comment, if any
 );
 
 CREATE TABLE security_tags (
-	tag_pk		-- primary key for security tag instance
+	tag_pk				SERIAL PRIMARY KEY,	-- primary key for security tag instance
 	level_fk	-- id for the tag level
 	compartment_fk	-- id for the tag compartment
 	user_fk		-- user the tag is applied to or NULL
