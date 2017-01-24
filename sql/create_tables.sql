@@ -101,7 +101,7 @@ CREATE TABLE security_tags (
 	tag_pk			SERIAL PRIMARY KEY,						-- primary key for security tag instance
 	level_fk		INTEGER REFERENCES levels (level_pk) NOT NULL,			-- id for the tag level
 	compartment_fk		INTEGER REFERENCES compartments (compartment_pk) NOT NULL,	-- id for the tag compartment
-	user_fk			INTEGER REFERENCES users (user_pk) NOT NULL,			-- user the tag is applied to or NULL
-	product_fk		INTEGER REFERENCES products (product_pk) NOT NULL,		-- product the tag is applied to or NULL
-	asset_fk		INTEGER REFERENCES assets (asset_pk) NOT NULL			-- asset the tag is applied to or NULL
+	user_fk			INTEGER REFERENCES users (user_pk),				-- user the tag is applied to or NULL
+	product_fk		INTEGER REFERENCES products (product_pk),			-- product the tag is applied to or NULL
+	asset_fk		INTEGER REFERENCES assets (asset_pk)				-- asset the tag is applied to or NULL
 );
