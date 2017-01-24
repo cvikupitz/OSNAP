@@ -8,17 +8,17 @@ Creates the tables associated with the OSNAP data model.
 
 CREATE TABLE products (
 	product_pk
-	vendor
-	description
-	alt_description
+	vendor				TEXT,
+	description			TEXT,
+	alt_description		TEXT
 );
 
 CREATE TABLE assets (
 	asset_pk
 	product_fk
-	asset_tag
-	description
-	alt_description
+	asset_tag			TEXT,
+	description			TEXT,
+	alt_description		TEXT
 );
 
 CREATE TABLE vehicles(
@@ -28,25 +28,25 @@ CREATE TABLE vehicles(
 
 CREATE TABLE facilities (
 	facility_pk
-	fcode
-	common_name
-	location
+	fcode				TEXT,
+	common_name			TEXT,
+	location			TEXT
 );
 
 CREATE TABLE asset_at (
 	asset_fk
 	facility_fk
-	arrive_dt
-	depart_dt
+	arrive_dt			TIMESTAMP,		
+	depart_dt			TIMESTAMP
 );
 
 CREATE TABLE convoys (
 	convoy pk
-	request
+	request				TEXT,
 	source_fk
 	dest_fk
-	depart_dt
-	arrive_dt
+	depart_dt			TIMESTAMP,
+	arrive_dt			TIMESTAMP
 );
 
 CREATE TABLE used_by (
@@ -57,19 +57,19 @@ CREATE TABLE used_by (
 CREATE TABLE asset_on (
 	asset_fk
 	convoy_fk
-	load_dt
-	unload_dt
+	load_dt				TIMESTAMP,
+	unload_dt			TIMESTAMP
 );
 
 CREATE TABLE users (
 	user_pk
-	username
-	active
+	username			TEXT,
+	active				BOOLEAN
 );
 
 CREATE TABLE roles (
 	role_pk
-	title
+	title				TEXT
 );
 
 CREATE TABLE user_is (
@@ -83,15 +83,15 @@ CREATE TABLE user_supports (
 );
 
 CREATE TABLE levels (
-	level_pk integer primary key for security level lookups
-	abbrv
-	comment
+	level_pk
+	abbrv				TEXT,
+	comment				TEXT
 );
 
 CREATE TABLE compartments (
 	compartment_pk
-	abbrv
-	comment
+	abbrv				TEXT,
+	comment				TEXT
 );
 
 CREATE TABLE security_tags (
