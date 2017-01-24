@@ -7,4 +7,5 @@ Imports the downloaded legacy data into the specified database.
 """
 
 if __name__ == "__main__":
-	print("Hello")
+	print(" ***** FIXME ***** ")
+	print("Legacy data not imported yet.")
