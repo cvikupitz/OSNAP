@@ -11,3 +11,7 @@ Contains script files that create/manage the DERP databases.
 |       Usage:
 |         >> ./ import_data [database_name] [port_number]
 |
+|-- import_legacy.py
+|     * Python program that will install the legacy data into the database into the best fit areas
+|       decided.
+|
