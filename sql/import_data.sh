@@ -10,3 +10,5 @@ tar -xjf osnap_legacy.tar.gz
 # Create database, use create_tables.sql to generate tables
 psql --filename=create_tables.sql $1
 
+# Run the python script to import the legacy data
+python3 import_legacy.py $1 $2
