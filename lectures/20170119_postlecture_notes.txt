@@ -1,10 +1,15 @@
 Additional Notes Following Lecture:
-I'm hopeful that these notes will be useful to you... they take a while to write up. If you find value in these, please let me know via the daily. If no one is getting value from these, I'll repurpose the time to office hours or other more benificial activities.
+I'm hopeful that these notes will be useful to you... they take a while to write up. If you find value in these, please 
+let me know via the daily. If no one is getting value from these, I'll repurpose the time to office hours or other more 
+benificial activities.
 
 
-On Andy's behalf, we went over the expected structure of the repository. Only your work products should be in the repository (this is mostly in the form of the python, shell, and sql code you are writing). Things like the legacy data downloaded from the course web page and the directory the postgres server uses to store its working data should not be in your repository.
+On Andy's behalf, we went over the expected structure of the repository. Only your work products should be in the repository 
+(this is mostly in the form of the python, shell, and sql code you are writing). Things like the legacy data downloaded from
+the course web page and the directory the postgres server uses to store its working data should not be in your repository.
 
-The structure of your repo should look like the following... where $REPO is the path to where your repository has been checked out.
+The structure of your repo should look like the following... where $REPO is the path to where your repository has been 
+checked out.
 
 $REPO/
     README
@@ -16,22 +21,31 @@ $REPO/
         ...
 
 We rehashed some of the tactical information regarding running Postgres...
-Before the Postgres server can be started, a special directory must be created for the postgres server to store its data in. Creation of the special directory only needs to occur once. This directory is created with the initdb command.
+Before the Postgres server can be started, a special directory must be created for the postgres server to store its data in. 
+Creation of the special directory only needs to occur once. This directory is created with the initdb command.
 initdb -D $HOME/data
 
 Once the directory is created, the database server can be started.
 pg_ctl -D $HOME/data -l $HOME/db_log.txt start
 
-Once the database server is running, databases can be created. To create a database named 'lost' the following command could be used.
+Once the database server is running, databases can be created. To create a database named 'lost' the following command could 
+be used.
 createdb lost
 
-To interact with the database server for executing scripts, psql is used. For example, runnign the script 'create_tables.sql' on the database named 'lost' could be accomplished with:
+To interact with the database server for executing scripts, psql is used. For example, runnign the script 'create_tables.sql' 
+on the database named 'lost' could be accomplished with:
 psql lost -f create_tables.sql
 
 
-We talked some about the challenges associated with the data that has been given. There are lots of potential design tradeoffs in how these are challenges are handled. I trust you to think through these design tradeoffs and make reasoned decisions; there is not a single right way to solve these problems. Always feel free to ask and engage in a discussion about design choices.
+We talked some about the challenges associated with the data that has been given. There are lots of potential design tradeoffs 
+in how these are challenges are handled. I trust you to think through these design tradeoffs and make reasoned decisions; there 
+is not a single right way to solve these problems. Always feel free to ask and engage in a discussion about design choices.
 
-For this assignment, we will be testing with a query to get a listing of all assets and where they are currently located. I owe the class an example query based on the data model in the LOST requirements document. This will be posted to piazza.
+For this assignment, we will be testing with a query to get a listing of all assets and where they are currently located. I 
+owe the class an example query based on the data model in the LOST requirements document. This will be posted to piazza.
 
 
-We also talked a bit about how the import_data.sh script might be structured. There is a design decision to be made regarding wether python interacts with the database via the psycopg2 library or writes out sql scripts. An example using python writing sql scripts was covered in class. I intend to post examples of both techniques but need a little time to write up the other solution. Where to find these examples will be posted to piazza.
+We also talked a bit about how the import_data.sh script might be structured. There is a design decision to be made regarding 
+wether python interacts with the database via the psycopg2 library or writes out sql scripts. An example using python writing 
+sql scripts was covered in class. I intend to post examples of both techniques but need a little time to write up the other 
+solution. Where to find these examples will be posted to piazza.
