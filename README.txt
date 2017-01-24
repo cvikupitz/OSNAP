@@ -21,9 +21,13 @@ CIS 322
 |    |-- ....
 |
 |-- sql/
+|    | (Contains scripts for creating SQL tables for data and also a script for importing legacy data.)
 |    |
+|    |-- create_tables.sql
+|    | (Creates SQL tables that meet the OSNAP data model.)
 |    |
-|    |-- ...
+|    |-- import_data.sh
+|    | (Bash script that downloads and installs the OSNP legacy data into a given data base.)
 |
 |
 |- install_daemons.sh 
