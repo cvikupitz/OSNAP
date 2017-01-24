@@ -22,5 +22,5 @@ CIS 322
 |    |-- import_data.sh
 |
 |- install_daemons.sh 
-|	   (Bash script that downloads httpd apache and postgres.)
+|	(Bash script that downloads httpd apache and postgres.)
 |
