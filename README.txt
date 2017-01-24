@@ -7,7 +7,7 @@ CIS 322
 |    | (Contains documentation files on the OSNAP project.)
 |    |
 |    |-- derp_req.pdf
-|    | (Development Experience REporting Platform- Product Requirements & Design Documents)
+|    | (Development Experience Reporting Platform- Product Requirements & Design Documents)
 |    |
 |    |-- lost_req.pdf
 |    | (Logistical Operations Service Tracker- Product Requirements & Design Documents)
