@@ -11,4 +11,4 @@ tar -xjf osnap_legacy.tar.gz
 psql --filename=create_tables.sql $1
 
 # Run the python script to import the legacy data
-python3 import_legacy.py $1 $2
+python3 import_inventories.py $1 $2
