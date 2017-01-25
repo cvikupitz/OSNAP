@@ -6,6 +6,9 @@ CIS 322
 |-- documentation/
 |    | (Contains documentation files on the OSNAP project.)
 |    |
+|    |-- assignment1.pdf
+|    |-- assignment2.pdf
+|    |-- assignment3.pdf
 |    |-- derp_req.pdf
 |    |-- lost_req.pdf
 |    |-- who_req.pdf
@@ -20,6 +23,7 @@ CIS 322
 |    |
 |    |-- create_tables.sql
 |    |-- import_data.sh
+|    |-- import_legacy.py
 |
 |- install_daemons.sh 
 |	(Bash script that downloads httpd apache and postgres.)
