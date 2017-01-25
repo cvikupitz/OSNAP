@@ -37,8 +37,8 @@ CREATE TABLE facilities (
 CREATE TABLE asset_at (
 	asset_fk		INTEGER REFERENCES asset (asset_pk) NOT NULL,		-- asset at a facility
 	facility_fk		INTEGER REFERENCES facilities (facility_pk) NOT NULL,	-- facility the asset is at
-	arrive_dt		TIMESTAMP,												-- when the asset arrived
-	depart_dt		TIMESTAMP												-- when the asset left
+	arrive_dt		TIMESTAMP,						-- when the asset arrived
+	depart_dt		TIMESTAMP						-- when the asset left
 );
 
 CREATE TABLE convoys (
