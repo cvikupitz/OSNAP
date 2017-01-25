@@ -1,6 +1,7 @@
 Contains script files that create/manage the DERP databases.
 
-.
+...
+|
 |-- create_tables.sql
 |     * SQL script that creates the data tables that is associated with the data model decribed in 
 |       the lost requirements document found in lost_req.pdf.
