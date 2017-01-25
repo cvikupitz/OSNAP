@@ -25,13 +25,12 @@ def import_inventory(name, base):
     file = open(name)
     reader = csv.reader(file)
     data = list(reader)
-    for dt in data[1:]:
-        curr.execute("INSERT INTO assets (product_pk, asset_tag, description) VALUES (NULL, %s, %s)", dt[0], dt[1])
-    conn = psycopg2.connect(dbname = base, host = "localhost")
+	conn = psycopg2.connect(dbname = base, host = "localhost")
     curr = conn.cursor()
+	for dt in data[1:]:
+        curr.execute("INSERT INTO assets (product_pk, asset_tag, description) VALUES (NULL, %s, %s)", dt[0], dt[1])
     conn.close()
     curr.close()
-    
     
 
 if __name__ == "__main__":
