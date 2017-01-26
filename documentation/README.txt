@@ -11,14 +11,15 @@ Contains product requirements and design documents on different incrementals of 
 |      one with the specified data model.)
 |
 |-- assignment3.pdf
-|     (FIXME)
+|     (Incremental assignment to build a web application with Flask that fetches data from the
+|      database.)
 |
 |-- derp_req.pdf
-|     (FIXME)
+|     (Requirements document for the Development Experience Reporting Platform.)
 |
 |-- lost_req.pdf
-|     (FIXME)
+|     (Requirements document for the Logistical Operations Service Tracker.)
 |
 |-- who_req.pdf
-|     (FIXME)
+|     (Requirements document for the Worker Handle Origin.)
 |
