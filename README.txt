@@ -23,7 +23,7 @@ CIS 322
 |    |
 |    |-- create_tables.sql
 |    |-- import_data.sh
-|    |-- import_legacy.py
+|    |-- import_inventories.py
 |
 |- install_daemons.sh 
 |	(Bash script that downloads httpd apache and postgres.)
