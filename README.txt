@@ -2,7 +2,8 @@ OSNAP Git Repository
 ------------------------------------------------------------------------------
 CIS 322
 
-.
+...
+|
 |-- documentation/
 |    | (Contains documentation files on the OSNAP project.)
 |    |
@@ -16,7 +17,7 @@ CIS 322
 |-- lectures/
 |    | (Contains lecture slides/notes from class website.)
 |    |
-|    |-- ....
+|    |-- <..>
 |
 |-- sql/
 |    | (Contains scripts for creating SQL tables for data and also a script for importing legacy data.)
