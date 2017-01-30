@@ -5,14 +5,36 @@ CIS 322 - Assignment 3
 ----------------------------------------------
 HTML file for the login screen.
 -->
-
 <!DOCTYPE html>
+<html lang="en-US">
 
 <html>
+
+<head><style>
+body {
+	background-color: #ffffcc;
+	font-family: verdana;
+    font-size: 100%;
+	margin: 30px;
+}
+input {
+	font-family: verdana;
+    font-size: 100%;
+	margin-bottom: 10px;
+}
+</style></head>
+
 <body>
 
-<h1>Login Screen</h1>
-<p>Welcome....</p>
+<title>L.O.S.T. (Login)</title>
+<h1>Authenticate User</h1>
+<p>Please login to continue.</p>
+
+<form>
+Username: <input type="text" name="username" required><br>
+Password: <input type="password" name="password" required><br>
+<input type="submit" value="Submit">
+</form>
 
 </body>
 </html>
