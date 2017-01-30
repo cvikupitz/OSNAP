@@ -6,7 +6,7 @@ Author - Cole Vikupitz
 Imports the downloaded legacy data into the specified database.
 
 Usage:
-    >> python3 import_legacy.py [database] [port_number]
+    >> python3 import_inventories.py [database] [port_number]
 
 Files:
     DC_inventory.csv
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     # Incorrect usage
     if len(sys.argv) != 3:
         print("Usage:")
-        print("\t>> python3 import_legacy.py [database_name] [port_number]")
+        print("\t>> python3 import_inventories.py [database_name] [port_number]")
         sys.exit()
 
     # Execute the imports
