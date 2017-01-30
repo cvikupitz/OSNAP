@@ -4,13 +4,45 @@ Author - Cole Vikupitz
 CIS 322 - Assignment 3
 ********************************************************
 HTML file for the report filter screen. Allows users to select parameters to use for a report
-to run.
+to run. These parameters include filtering the reports by facility, date, and compartments.
 -->
 <!DOCTYPE html>
 <html lang="en-US">
 
 <html>
-<body>
-<!-- FIXME -->
-</body>
+
+<head>
+<link rel="icon" href="alien_icon.png"/>
+<style>
+body {
+	background-color: #ccccff;
+    margin: 30px;
+	font-family: verdana;
+    font-size: 100%;
+}
+input {
+	font-family: verdana;
+    font-size: 100%;
+	margin-bottom: 10px;
+}
+</style></head>
+
+<body><center>
+<title>L.O.S.T. Reports</title>
+<h1>L.O.S.T. Reports Homepage</h1><br><br>
+
+<h3>Facility Report</h3>
+<p>This report lists all the assets in the facility they're located at and their arrival and expunged dates.</p>
+<input type="submit" value="View Facility Report">
+<br><br>
+
+<h3>Transit Report</h3>
+<p>This report lists all assets in transit including the locations and dates of departure and arrival.</p>
+<input type="submit" value="View Transit Report">
+<br><br><br><br><br><br><br><br>
+
+<p>Currently logged in as <b>cvikupit</b></p>
+<p>Not you? Click <a href="logout.html">here</a> to logout.</p>
+
+</center></body>
 </html>
