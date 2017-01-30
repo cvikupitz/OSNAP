@@ -22,7 +22,7 @@ def import_levels(base, port_num):
     """
 
     # Opens the csv file
-    file = open("")
+    file = open("security_levels.csv")
     reader = csv.reader(file)
     data = list(reader)
 
@@ -31,7 +31,8 @@ def import_levels(base, port_num):
     curr = conn.cursor()
 
     # Inserts the data in the appropriate places
-    ### FIXME
+    for dt in data[1:]:
+        curr.execute("INSERT INTO levels (abbrv, comment) VALUES (%s, %s)", dt[0], dt[1])
 
     # Closes the database
     conn.close()
@@ -54,7 +55,8 @@ def import_compartments(base, port_num):
     curr = conn.cursor()
 
     # Inserts the data in the appropriate places
-    ### FIXME
+    for dt in data[1:]:
+        curr.execute("INSERT INTO compartments (abbrv, comment) VALUES (%s, %s)", dt[0], dt[1])
 
     # Closes the database
     conn.close()

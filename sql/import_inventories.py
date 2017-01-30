@@ -35,7 +35,7 @@ def import_inventory(name, base, port_num):
 
     # Inserts the data in the appropriate places
     for dt in data[1:]:
-        curr.execute("INSERT INTO assets (product_pk, asset_tag, description) VALUES (NULL, %s, %s)", dt[0], dt[1])
+        curr.execute("INSERT INTO assets (asset_tag, description) VALUES (%s, %s)", dt[0], dt[1])
 
     # Close the database
     conn.close()
