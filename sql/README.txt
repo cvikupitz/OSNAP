@@ -12,7 +12,18 @@ Contains script files that create/manage the DERP databases.
 |       Usage:
 |         >> ./ import_data [database_name] [port_number]
 |
-|-- import_legacy.py
-|     * Python program that will install the legacy data into the database into the best fit areas
-|       decided.
+|----------- import_data.sh executes the following files, no need to run them individually:
+|
+|-- import_assets.py
+|     * Imports the legacy data from the files acquisition_list.csv and product_list.csv.
+|
+|-- import_inventories.py
+|     * Imports the legacy data from the files DC_inventory.csv, HQ_inventory.csv, MB005_inventory.csv,
+|       NC_inventory.csv, SPNV_inventory.csv.
+|
+|-- import_securities.py
+|     * Imports the legacy data from the files security_levels.csv and security_compartments.csv.
+|
+|-- import_transport.py
+|     * Imports the legacy data from the files convoy.csv and transit.csv.
 |
