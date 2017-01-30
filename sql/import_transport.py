@@ -32,7 +32,7 @@ def import_convoy(base, port_num):
 
     # Inserts the data in the appropriate places
     for dt in data[1:]:
-        ########## FIXME
+        curr.execute("INSERT INTO convoys (depart_dt, arrive_dt) VALUES (%s, %s)", dt[1], dt[6])
 
     # Closes the database
     conn.close()
@@ -56,7 +56,8 @@ def import_transit(base, port_num):
 
     # Inserts the data in the appropriate places
     for dt in data[1:]:
-        ###### FIXME
+        curr.execute("INSERT INTO asset_at (asset_fk, facility_fk, arrive_dt, depart_dt) VALUES (%s, %s, %s, %s)",
+                     dt[0], dt[1], dt[4], dt[3])
 
     # Closes the database
     conn.close()
