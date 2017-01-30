@@ -10,6 +10,7 @@ CIS 322
 |    |-- assignment1.pdf
 |    |-- assignment2.pdf
 |    |-- assignment3.pdf
+|    |-- assignment4.pdf
 |    |-- derp_req.pdf
 |    |-- lost_req.pdf
 |    |-- who_req.pdf
@@ -23,8 +24,11 @@ CIS 322
 |    | (Contains scripts for creating SQL tables for data and also a script for importing legacy data.)
 |    |
 |    |-- create_tables.sql
+|    |-- import_assets.py
 |    |-- import_data.sh
 |    |-- import_inventories.py
+|    |-- import_securities.py
+|    |-- import_transport.py
 |
 |-- src/
 |    | (<FIXME>)
