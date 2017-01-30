@@ -14,6 +14,9 @@ Contains product requirements and design documents on different incrementals of 
 |     (Incremental assignment to build a web application with Flask that fetches data from the
 |      database.)
 |
+|-- assignment4.pdf
+|     (Incremental assignment for project documentation - optional.)
+|
 |-- derp_req.pdf
 |     (Requirements document for the Development Experience Reporting Platform.)
 |
