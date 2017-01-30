@@ -31,9 +31,13 @@ CIS 322
 |    |-- import_transport.py
 |
 |-- src/
-|    | (<FIXME>)
+|    | <DESC - FIXME>
 |    |
-|    |-- <FIXME>
+|    |-- facility_inventory.html
+|    |-- in_transit.html
+|    |-- login.html
+|    |-- logout.html
+|    |-- report_filter.html
 |
 |- install_daemons.sh 
 |	(Bash script that downloads httpd apache and postgres.)
