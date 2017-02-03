@@ -1,0 +1,102 @@
+Additional Notes Following Lecture:
+Thank you for your attendance at lecture today. I hope you found some value in the discussion 
+and presentation today.
+
+
+Configuration File:
+The LOST requirements document on the website includes documentation on the configuration 
+file format and desired behavior. A reference implementation is in the instructor's LOST repository.
+
+
+Web Service:
+The web service 
+documentation has been updated in the LOST requirements documentation. The assignment 5 text should be posted on Friday. I hope to 
+have some example code together to show the crypto by Friday.
+
+After completing assignment 3, you will have worked with all of the 
+major technologies in for the project. Aside from assignment 6, all of the remaining assignments will pull primarily from the 
+requirement's document.
+
+For the web service implementation, each of the functions will occur at a different URL:
+
+
+http://127.0.0.1:8080/rest/lost_key
+
+http://127.0.0.1:8080/rest/activate_user
+
+http://127.0.0.1:8080/rest/suspend_user
+
+http://127.0.0.1:8080/rest/list_products
+
+http://127.0.0.1:8080/rest/add_products
+
+http://127.0.0.1:8080/rest/add_asset
+
+
+
+If the user goes to
+
+http://127.0.0.1:8080/rest
+an HTML page should provide information regarding the available service calls.
+Revision Control:
+Revision control helps to handle the problem of concurrent development and hot fixing. Ideally, concurrent work occurs 
+in different files, allowing changes to be merged trivially. Good revision control systems should be able to detect conflicting changes 
+and provide an opportunity for a developer to merge the changes before storing the changes in the repository ("don't break the build" 
+are words to live by).
+
+
+
+Some additional git commands to look into are:
+
+git branch - used to create new branches of development
+git 
+merge  - used to merge code from one branch into another
+
+git tag    - used to mark a particular commit with an easier name
+
+If you find yourself in need of multiple upstream repos... which almost no 
+one ever needs...
+git remote - used to add upstream repositories to push and pull from
+
+
+Guest Presentation:
+John Fuller spoke about the environment 
+he works in. He talked a lot about their DevOps challenge and a technical solution his team produced. The slides will be posted online once John 
+has cleared them for general release.
+
+Organizational politics are part of being in organizations. Your functional managers are there in part to 
+handle coordination between teams so that the team members can focus on getting work done.
+
+Agile practices like DevOps, to be effective, are 
+about interteam communication more than specific technologies or management processes. Each team on a project has different concerns and requirements; 
+the interactions between teams can have major impacts on project success. 
+
+Development and Operations are commonly seen in conflict. Development wants 
+to roll out new features and tends to see operations as a roadblock to deployment. Operations wants the system to be secure and stable so they don't 
+get paged after hours and tend to see developers a reckless. DevOps should align the developer and operations teams so that they work together rather 
+than against one another.
+
+Internal projects have some additional challenges to externally visible projects. These often result directly or indirectly 
+from not being tied directly to revenue. Regular processes for requirements gathering and project management may be skipped due to a perception that 
+skipping these activities will reduce cost. Someone in the organization needs to pay for the internal project resources, resources that aren't 
+producing product for sale. Other managers will question wether working on the internal project is a better use of resources than their own pet
+project.
+
+Several environments may be involved in getting from development to production. As the application moves through these environments, the 
+stability and correctness should be evaluated. Each environment likely involves different evaluators. Multiple environments allow development work 
+to continue in parallel with the evaluation activity.
+
+Applications at scale always have bottlenecks. The bottleneck will likely move over time as 
+solutions to the current bottleneck are found. Over time, a system's architecture will evolve and can become quite complex.
+
+The slide deck included 
+an example of a really useful tool, a requirements traceability matrix. There should be a correspondence between what the customer asked for and the 
+technical solution delivered. A requirements traceability matrix will enumerate each of the customer requests with the technical solution. Technical 
+work that was done that can't be traced to requirements is likely wasted effort. Customer requirements that can't be traced to technical components 
+are likely gaps in the implementation.
+
+
+And One More Thing:
+Those of you using mod_wsgi and getting 500 errors may or may not have discovered where the 
+error log is located. Generally, these 500 errors occur due to some exception in the python code. A python traceback is generated and Apache does store 
+it. The errors are logged to $HOME/logs/error_log and can be viewed with 'tail $HOME/logs/error_log'
