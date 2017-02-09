@@ -12,6 +12,7 @@ CIS 322
 |    |-- assignment3.pdf
 |    |-- assignment4.pdf
 |    |-- assignment5.pdf
+|    |-- assignment6.pdf
 |    |-- derp_req.pdf
 |    |-- lost_req.pdf
 |    |-- who_req.pdf

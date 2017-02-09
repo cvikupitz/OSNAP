@@ -20,6 +20,9 @@ Contains product requirements and design documents on different incrementals of 
 |-- assignment5.pdf
 |     (Incremental assignment for implementing a web service based on the LOST specifications.)
 |
+|-- assignment6.pdf
+|     (Incremental assignment for archiving and replanning the project.)
+|
 |-- derp_req.pdf
 |     (Requirements document for the Development Experience Reporting Platform.)
 |
