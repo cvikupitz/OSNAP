@@ -27,3 +27,6 @@ Contains script files that create/manage the DERP databases.
 |-- import_transport.py
 |     * Imports the legacy data from the files convoy.csv and transit.csv.
 |
+|-- osnap_legacy.tar.gz
+|     * The legacy data to import.
+|

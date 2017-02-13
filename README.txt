@@ -31,6 +31,7 @@ CIS 322
 |    |-- import_inventories.py
 |    |-- import_securities.py
 |    |-- import_transport.py
+|    |-- osnap_legacy.tar.gz
 |
 |-- src/
 |    | <DESC - FIXME>
@@ -41,6 +42,9 @@ CIS 322
 |    |-- logout.html
 |    |-- report_filter.html
 |
-|- install_daemons.sh 
+|-- app.py
+|-- install_daemons.sh 
 |	(Bash script that downloads httpd apache and postgres.)
+|-- lost.wsgi
+|-- preflight.sh
 |
