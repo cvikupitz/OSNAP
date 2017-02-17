@@ -1,0 +1,38 @@
+Here is my personal break down for assignment 3, if I was trying to complete this project on my own... I'm leaning pretty hard on my database experience so I expect that technical risk will be much higher for you.
+
+The assignment was posted early enough to read through the first time on 1/20. That is when my reading and planning should start. Reading the assignment lets me assess the difficulty of the assignment and better prioritize/balance when and how much time I give to different work threads.
+
+I start by reading through the description. There are 3 steps in the assignment. 
+- Step 3, for me, seems low risk and trivial. I'll make a mental note to add the files to the README while I develop the code.
+- Step 1 feels more complex than it sounds to me. I've done a lot of HTML so generating the static screens is likely low risk, the reports however could be tricky since I don't know how I would iterate over the data for display.
+- The step 2 description is deceptively short, most of the work will happen here. I don't know Flask well, so this is my major risk. I feel pretty good about my database skills and have connected to the database before using the OVA so, that part seems much lower risk to me.
+
+My basic technical challenges are:
+    Can I use Flask to deliver any content at all? 
+    Can I display a list via Flask?
+    Can I take in user input?
+    Can I Flask and the database talk to each other?
+
+
+I want to try to make some progress each day; time slicing between this project an the other work I'm doing. 4 problems make me want to pace for 1 problem per day... if one problem solves quickly then I can start the next one early and have extra time should a later problem solve slowly. In planning out the time, I want to assume I'll get stuck at least once for each challenge (things always take longer than I think and never work on the first try). I should also have an idea of what else I can pivot to when I get stuck and need to wait. Ideally, before office hours are over for the week, all of the technical challenges will be solved and the work over the weekend will be mostly mechanical. If I can start this project on Monday (1/23) and keep to pace then my challenges should be understood by Thursday; I will have Friday to wrap up (freeing my weekend) or be able to absorb a large unexpected challenge.
+
+It may be that I'm too busy to make much progress during the week. I know that pushing my challenges into the future increases the risk of non-delivery, but I'll accept that risk since there is some higher priority task that is more important for me to complete first. The exercise of thinking about the steps in detail, even if I'm not coding, will still provide some value for identifying challenges and gaps to ask about. Thinking about the problems should also help for following along with and adding to discussions about the project.
+
+
+Here's my plan... breaking my risks into some smaller and measurable tasks towards the overall assignment deliverable. No plan survives contact with reality but the plan does provide some direction and organization to help me focus efficiently. I will expect to make changes as I work through the project or other events happen in my life to change the time pressures I'm under. 
+
+1/23 --- Top risk - Can I use Flask at all?
+My major challenge is basic Flask. I'm going to verify that I can connect to the Flask application distributed by the OVA and figure out how to replace that application with a simple Flask application of my own. From there, I'm going to try to implement the page flow with static pages that just show which page they are and link to the other pages in the workflow.
+
+1/24 --- Next risk - Can I display a list of values using Flask?
+Next there is the problem of how to present multiple records in a template. That is the next challenge I research. The Flask code will have some static list in it that one of the report template pages needs to render. If I get stuck and have to call out for help, I can task switch to coding the static HTML pages or work on another class while I wait.
+
+1/25 --- Next risk - Can I get data from the user?
+Finally, I look at how to take in data from the user so that I can show the username at the logout screen and setup the query filters for the reports. This is going to involve the session, which doesn't behave for me like it is described in the tutorial... I probably stop using wsgi at this point at run the flask application directly, like in the tutorial, and ask a question on piazza about the inconsistent behavior I'm seeing.
+
+1/26 --- Next risk - Can I couple to the database?
+Connecting to the database with the flask application is my next challenge. Maybe this is the point where I notice that the instructions are missing direction on how the flask application will know which database to query... this puts a gap in my progress since I need to ask for clarification via piazza and the instructor rarely is on piazza late at night. While I wait I can work a bit on the other template html for the report pages, use a temporary configuration to keep going, or work on some other class.
+
+1/27 --- Out of identified risks, from here on the work will hopefully be mechanical.
+With the Flask application running, the username reliably in the session, and the database connection working; most of the risk for me has been removed at this point. The remainder of the project is completing the templates, making sure my queries return the expected data, and testing the application behavior.
+

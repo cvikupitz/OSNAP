@@ -1,0 +1,33 @@
+Additional Notes Following Lecture:
+Thank you all for attending lecture today. Today has been a bit of a blur so my notes aren't likely to be very good this round.
+
+We followed the slides pretty well. 
+- We talked a bit about the data that will be used for testing the final application, I owe the class some well structured data to import that structurally aligns with the documented schema.
+
+- I talked about some of the time pressure I'm trying to manage on the instructional side. A few things you can do to help us are:
+    - Make sure the structure of your repository matches the structure we expect
+    - Avoid hard coded absolute paths, database names, and other configuration items in your code. If we give you an assignment description that does not say how to configure something that should be configurable, let us know so that we can fix the assignment description.
+    - The code in your master branch should always build and run. If you want to commit intermediate code that won't run, let's talk about how to do branching/merging in git.
+
+- I talked a bit about the inversion of expertise that will become coming as you move into your career. After graduation you will be the expert. Your manager should be there to help you but that help will come through running cover for you and finding other experts for you to talk to. Your manager likely won't have time to remain an expert and probably can't tell you specific technical details on how to solve a problem.
+
+- I mentioned a bit about what Flask is trying to give us and we wrote a web application together. The code is in my lost repo (https://github.com/dellswor/lost.git) and commits were made after each step in the solution.
+
+
+Several shell commands went by during the live coding... You should be able to look these up online.
+The command to copy files is: cp
+The command to move files is: mv
+The command to start/stop/restart apache is: apachectl
+
+
+The architecture used for the Flask application we built during lecture does not follow best practices... The architecture was targeted at the fast time to demo some basic Flask. There are some brief notes in src/README.txt about this issue.
+
+
+You will run into a problem with your Flask session object while using mod_wsgi. The problem has to do with an interaction between python and mod_wsgi... basically there are several parallel instances of your Flask application running and, for each request, mod_wsgi randomly chooses one of the many instances. To get around this, you'll need to add a session implementation. The DERP project has one of these (picklesession.py) that I found here (http://flask.pocoo.org/snippets/132/).
+
+Also, keep in mind that the Apache configuration should limit the files it will serve to '/home/osnapdev/wsgi'. A side effect of this will be needing to copy between the 'src' directory in your repository for versioning and the wsgi directory for viewing your changes. You can probably write a bash script to do this, so that you don't have to manually key in copy commands every time. You might also look up the 'rsync' command since it solves a similar problem.
+
+The apache log files are written to '/home/osnapdev/logs'. If your program crashes, the 'error_log' should provide some information. If you want to see the sequence of requests made to the webserver, look in the 'access_log'.
+
+
+If you choose not to use mod_wsgi, running your Flask application directly with python instead, you will need to configure your application to bind to all of the network interfaces on port 8080. There is a piazza thread that talks about how to do this.
