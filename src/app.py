@@ -11,19 +11,17 @@ app = Flask(__name__)
 
 
 @app.route('/')
-@app.route('/login', methods = ['GET','POST'])
-def login():
-    return render_template("login.html")
+##@app.route('/login', methods = ['GET','POST'])
+##def login():
+##    return render_template("login.html")
 
 
 @app.route('/create_user', methods = ['GET','POST'])
 def create_user():
-    return render_template("create_user.html")
-
-
-@app.route('/dashboard', methods = ['GET','POST'])
-def create_user():
-    return render_template("dashboard.html")
+    if (request.method == 'GET'):
+        return render_template("create_user.html")
+    else:
+        return render_template("login.html")
 
 	
 if __name__ == "__main__":

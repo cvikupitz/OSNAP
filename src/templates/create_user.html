@@ -1,0 +1,45 @@
+<!--
+login.html
+Author - Cole Vikupitz
+CIS 322 - Assignment 6
+********************************************************
+HTML file for the new account screen. Asks for a username and password and a button for 
+creating a new user. Text fields must be filled out to create a new user account.
+-->
+
+<!DOCTYPE html>
+<html lang="en-US">
+<html>
+
+<head>
+<style>
+body {
+	background-color: #ccccff;
+	font-family: verdana;
+    font-size: 100%;
+	margin: 30px;
+}
+input {
+	font-family: verdana;
+    font-size: 100%;
+	margin-bottom: 10px;
+}
+</style></head>
+
+<body><center>
+
+<!-- Title and header set -->
+<title>L.O.S.T. (New Account)</title>
+<h1>New Account</h1>
+<h4>Enter a new username and password.</h4>
+
+<!-- Entry boxes and button for login -->
+<form method="get">
+Username: <input type="text" name="username" placeholder="Username" required/><br>
+Password: <input type="password" name="password" placeholder="Password" required/><br>
+Confirm Password: <input type="password" name="confirm" placeholder="Confirm Password" required/><br>
+<input type="submit" value="Submit"/>
+</form>
+
+</center></body>
+</html>
