@@ -5,8 +5,23 @@ Repository for the LOST Web Application - Designed for CIS 322.
 ...
 |
 |-- doc/
+|    |
+|    |-- assignment1.pdf
+|    |-- assignment2.pdf
+|    |-- assignment3.pdf
+|    |-- assignment4.pdf
+|    |-- assignment5.pdf
+|    |-- assignment6.pdf
+|    |-- assignment7.pdf
+|    |-- assignment8.pdf
+|    |-- assignment9.pdf
+|    |-- derp_req.pdf
+|    |-- lost_req.pdf
+|    |-- who_req.pdf
 |
 |-- lectures/
+|    |
+|    |-- < Lecture slides & notes are here. >
 |
 |-- sql/
 |
