@@ -24,8 +24,19 @@ Repository for the LOST Web Application - Designed for CIS 322.
 |    |-- < Lecture slides & notes are here. >
 |
 |-- sql/
+|    |
+|    |-- create_tables.sql
 |
 |-- src/
+|    |
+|    |-- templates/
+|    |    |
+|    |    |-- create_user.html
+|    |    |-- dashboard.html
+|    |    |-- login.html
+|    |
+|    |-- app.py
+|    |-- config.py
 |
 |-- preflight.sh
 |
