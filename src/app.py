@@ -11,33 +11,19 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
+@app.route('/login', methods = ['GET','POST'])
+def login():
     return render_template("login.html")
 
 
-##@app.route('/login')
-##def login():
-##    return "Login...."
-##
-##
-##@app.route('/filter')
-##def filter():
-##    return "Filter...."
-##
-##
-##@app.route('/inventory')
-##def inventory():
-##    return "Inventory...."
-##
-##
-##@app.route('/transit')
-##def transit():
-##    return "Transit...."
-##
-##
-##@app.route('/logout')
-##def logout():
-##    return "Logout...."
+@app.route('/create_user', methods = ['GET','POST'])
+def create_user():
+    return render_template("create_user.html")
+
+
+@app.route('/dashboard', methods = ['GET','POST'])
+def create_user():
+    return render_template("dashboard.html")
 
 	
 if __name__ == "__main__":
