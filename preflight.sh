@@ -3,6 +3,7 @@
 # preflight.sh
 # Author: Cole Vikupitz
 # CIS 322 Assignment 6
+# File borrowed from dellswor
 
 # Incorrect usage, display message, exit.
 if [ "$#" -ne 1 ]; then
