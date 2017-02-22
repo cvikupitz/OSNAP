@@ -1,0 +1,91 @@
+Additional Notes Following Lecture:
+Today's lecture was primarily around the topic of testing. The setup was around SDLC and organizational risk.
+
+
+Our systems exist in both space and time.
+-- The system you are working on likely has upstream and downstream systems, this locates your system in the space of all organizational information system. As these upstream and downstream systems change, the inputs and outputs will change. 
+-- The system you are working on also exists in time. Even if the nearby systems remain unchanged the organizational goals and objectives will change around it. These organizational shifts may require changes to your system.
+
+The executives that decide how to spend the organizations resources work from a view of costs. There is a cost for the existing solution, the existing solution may be expensive but it is known. Introducing new development requires making the decider feel comfortable that the solution will reduce cost or in increase revenue by more than enough to offset the risks/costs of change.
+
+Development processes, project management, and IT lifecycle management often look like overhead to developers. These activities provide value to the project by reducing the perception of risk to the executives controlling the budget.
+
+Perceived risk: Is a solution possible?
+Past performance (e.g. I delivered one of these for XYZ) is one of the strongest ways to counter this fear. If you know of and can speak about other projects that have done similar tasks, that can also be effective to reduce the level of fear regarding a project.
+
+Perceived risk: Do you understand what I need?
+The class correctly identified this involves a _lot_ of meetings. We talked a bit about what kinds of tools are likely to be used in those meetings.
+Meetings:
+    Mockups
+    User stories
+    Definitions
+    Limitations
+    Benefits/challenges
+Putting the complete development team in all the meetings would be really expensive and the time commitment would likely kill actual productivity. Generally project and technical management will be in these meetings, inviting particular developers when the meetings require particular expertise. Out of these meetings will generally come documentation that will distill the meeting decisions into lists of requirements. These documents can then serve as artifacts demonstrating a shared understanding of the problem and desired solution.
+
+Perceived risk: How do I know progress is happening?
+Demonstrations during development can be an effective strategy. The demonstrations should show the features being implemented, which should tie back to the requirements. This gives a strong sense that the system is moving forward.
+
+Perceived risk: Does the delivered solution do what we needed?
+Executing a test plan should support this. The test plan is a document that should tie tests to features. The test plan should exercise all the needed features and will therefore scale with the number of requirements.
+
+Perceived risk: What happens when something goes wrong?
+Even the best software system is no match for a backhoe cutting a network or power line. Continuity of operations and disaster recovery plans help to address these problems. Along with the working system, documentation and procedures for different problem cases the system might encounter (e.g. how to recover from HD failure, how to recover from intermittent network outages).
+
+
+Testing is an important tool for understanding if we are delivering what has been requested. I like to think of testing as applying science to our software. We have beliefs of how our software behaves and tests are experiments to confirm or falsify our beliefs.
+
+Correctness proofs aren't tractable for large systems. Correctness proofs are still useful for small components however.
+
+Testing amounts to spot checking. Due to the cost in time to invent and execute tests, we want to put some thought into which cases we check.
+Some of the things we might consider when determining test cases are:
+    Edge cases (code and reqs)
+    Types
+    Memory - Big/small inputs
+
+
+We started working toward a test plan for assignment 7. We hacked it together pretty quickly, so it is incomplete and a bit of a mess... but it does show a start towards what a document might look like. In practice, we would definitely want the requirements and test cases to be better ordered and with less confusing numbering.
+
+--- Requirements:
+Asset defn
+   11. assets always have asset tag and facility (unless disposed)
+Add Assets
+   1. If tag matches existing don't add
+   2. If no tag matches add
+Add Role to User:
+   3. Users should be assigned role at creation
+Dispose asset
+   4. Asset should be disposable (no longer associated with a facility)
+   5. Only Logistics Officer disposes
+   6. Assets can be disposed only once
+GitHub
+   7. Branch exists for assignment 7
+   8. assignment 7 branch merged with master
+Server env
+   9. wsgi is used to serve application
+Data model
+   10. Database has correct tables to hold all enties
+Add Facilities
+   12. If fcode matches existing don't add
+   13. If no fcode matched add
+   14. Is maximum fcode length obeyed
+
+--- Test Cases:
+   1. All of the needed tables are in the DB - req 10
+      run preflight to setup the application -- assumes db server running and db is empty
+      psql <dbname>
+      \dt
+      check that the tables match the expected descriptions
+   2. Adding assets 1 - req 2,9
+      run preflight to setup the application with a clean db --
+      apachectl start -- also tests 9
+      Use the browser to add a user
+      Use the browser to add a facility
+      Use the browser to add the asset
+      psql <dbname>
+      SELECT * from assets -- verify that the asset tag is listed
+   3. assignment 7 branch exists - req 7
+      GitHub via the browser, use the drop down to see the branches
+      git branch --list # to verify that the branch is there
+   4. assignment 7 branch merged - req 8
+      GitHub via the browser, check that master includes the last change made to assignment 7
