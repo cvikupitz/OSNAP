@@ -1,0 +1,7 @@
+{
+    "database": {
+        "dbname": "hw",
+        "dbhost": "localhost",
+        "dbport": 5432
+    }
+}
