@@ -11,9 +11,9 @@ app = Flask(__name__)
 
 
 @app.route('/')
-##@app.route('/login', methods = ['GET','POST'])
-##def login():
-##    return render_template("login.html")
+@app.route('/login')
+def login():
+    return ""
 
 
 @app.route('/create_user', methods = ['GET','POST'])
@@ -22,6 +22,14 @@ def create_user():
         return render_template("create_user.html")
     else:
         return render_template("login.html")
+
+@app.route('/dashboard')
+def dashboard():
+    return ""
+
+@app.route('/logout')
+def logout():
+    return ""
 
 	
 if __name__ == "__main__":
