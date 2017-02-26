@@ -12,16 +12,21 @@ import psycopg2
 app = Flask(__name__, template_folder = 'templates')
 app.config['SECRET_KEY'] = "5a7c8059c6f4b390b06bcdbf81c03affdc67a3f8f0006c8e"
 
+
 """
 Login page for the users. User can login with a username
 and password, and will link to dashboard if the login
 was successful, or notify user if unsuccessful.
 """
-##@app.route('/login', methods = ['GET','POST'])
-##def login():
-##    return """"""
-##
-##
+@app.route('/login', methods = ['GET','POST'])
+def login():
+    if (request.method == 'GET'):
+        return render_template('login.html')
+    else if (request.method == 'POST'):
+        ####### FIXME #######
+        return render_template('login.html')
+    else:
+        abort(401)
 
 
 """
@@ -36,8 +41,8 @@ def create_user():
     if (request.method == 'GET'):
         return render_template('create_user.html')
     else:
-        ####### FIXME
-        return render_template('login.html')
+        ####### FIXME #######
+        return render_template('create_user.html')
 
 
 """
@@ -48,6 +53,17 @@ from here.
 @app.route('/dashboard/<user>')
 def dashboard(user):
     return render_template('dashboard.html', name = user)
+
+
+"""
+Send the user to a page containing a message. This message
+will be an error message describing the nature of the
+redirection (i.e. username and password incorrect). User will
+be able to redirect back to the login page.
+"""
+@app.route('/message')
+def message():
+    return render_template('message.html')
 
 
 """
