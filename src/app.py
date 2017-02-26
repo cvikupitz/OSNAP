@@ -7,7 +7,7 @@ CIS 322 Assignment 6
 # Imports
 from flask import *
 from config import dbname, dbhost, dbport
-#import psycopg2
+import psycopg2
 
 app = Flask(__name__, template_folder = 'templates')
 app.config['SECRET_KEY'] = "5a7c8059c6f4b390b06bcdbf81c03affdc67a3f8f0006c8e"
@@ -45,15 +45,16 @@ Send the user to the dashboard screen upon login. Displays
 the username on the screen. User should be able to logout
 from here.
 """
-@app.route('/dashboard/<user>', methods = ['GET', 'POST'])
+@app.route('/dashboard/<user>')
 def dashboard(user):
     return render_template('dashboard.html', name = user)
+
 
 """
 User has logged out of the system, go to the logout page, link
 user back to the login page upon request.
 """
-@app.route('/logout', methods = ['GET', 'POST'])
+@app.route('/logout')
 def logout():
     session.pop('username', None)
     return render_template('logout.html')
@@ -61,3 +62,5 @@ def logout():
 	
 if __name__ == "__main__":
     app.run(host = '0.0.0.0', port = 8080, debug = True)
+
+
