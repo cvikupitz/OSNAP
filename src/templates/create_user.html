@@ -39,6 +39,8 @@ input {
 Username: <input type="text" name="username" placeholder="Username" required/><br>
 Password: <input type="password" name="password" placeholder="Password" required/><br>
 Confirm Password: <input type="password" name="confirm" placeholder="Confirm Password" required/><br>
+<input type="radio" name="role" value="1" checked>Logistics Officer
+<input type="radio" name="role" value="2">Facilities Officer<br>
 <input type="submit" value="Submit"/><br><br>
 </form>
 <a href="{{url_for('login')}}">Return to login page</a>

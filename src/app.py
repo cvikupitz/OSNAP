@@ -65,16 +65,23 @@ def create_user():
     # User creates a new account, creates the account or rejects the request.
     else:
         if ('username' in request.form and 'password' in request.form and 'confirm' in request.form):
-            entries = (request.form['username'], request.form['password'], request.form['confirm'])
+            entries = (request.form['username'], request.form['password'],
+                       request.form['confirm'], request.form['role'])
+
+            # Password and confirmation must match.
             if (entries[1] != entries[2]):
                 session['message'] = "Password Mismatch: Make sure that your passwords match."
                 return redirect(url_for('message'))
+
+            # Check to see if there already exists an account with the username.
             cur.execute("SELECT username FROM users WHERE username=%s", (entries[:1]))
             if (cur.fetchone() != None):
-
                 session['message'] = "Occupied User: That username already exists."
                 return redirect(url_for('message'))
-            cur.execute('INSERT INTO users (username, password) VALUES (%s, %s)', entries[:2])
+
+            # Creates the new account, goes to the dashboard.
+            cur.execute('INSERT INTO users (username, password, role) VALUES (%s, %s, %d)',
+                        (entries[0], entries[1], int(entries[3])))
             session['username'] = entries[0]
             return redirect(url_for('dashboard'))
 
@@ -89,6 +96,7 @@ from here.
 """
 @app.route('/dashboard', methods = ['GET', 'POST'])
 def dashboard():
+    # Sign in to the dashboard.
     return render_template('dashboard.html', name = session['username'])
 
 
@@ -100,6 +108,7 @@ be able to redirect back to the login page.
 """
 @app.route('/message', methods = ['GET', 'POST'])
 def message():
+    # Go to message screen with message.
     return render_template('message.html', message = session['message'])
 
 
@@ -109,6 +118,7 @@ user back to the login page upon request.
 """
 @app.route('/logout', methods = ['GET', 'POST'])
 def logout():
+    # Pop out username from session, go to logout screen.
     session.pop('username', None)
     return render_template('logout.html')
 
