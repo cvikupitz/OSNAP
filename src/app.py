@@ -1,7 +1,7 @@
 """
 app.py
 Author: Cole Vikupitz
-CIS 322 Assignment 6
+CIS 322
 """
 
 # Imports
@@ -12,7 +12,7 @@ import psycopg2
 # Set up flask application
 app = Flask(__name__, template_folder = 'templates')
 app.config['SECRET_KEY'] = "5a7c8059c6f4b390b06bcdbf81c03affdc67a3f8f0006c8e"
-conn = psycopg2.connect(dbname = database, host = dbhost, dbport = port)
+conn = psycopg2.connect(dbname = database, dbhost = host, dbport = port)
 cur = conn.cursor()
 
 
@@ -24,18 +24,19 @@ was successful, or notify user if unsuccessful.
 @app.route('/')
 @app.route('/login', methods = ['GET','POST'])
 def login():
-##    if (request.method == 'GET'):
-##        return render_template('login.html')
-##    else if (request.method == 'POST'):
-##        if ('username' in request.form and 'password' in password.form):
-##            un = request.form['username']
-##            pw = request.form['password']
-##            res = cur.execute("SELECT COUNT(*) FROM USERS WHERE username=%s AND password=%s", (un, pw))
-##            
-##
-##        return """"""
-    else:
-        abort(401)
+    # Loads the login page
+    if (request.method == 'GET'):
+        return render_template('login.html')
+    # User attempts login, get username and password, checks entries in database.
+    else if (request.method == 'POST'):
+        if ('username' in request.form and 'password' in password.form):
+            
+            # Obtain the account from the database.
+            entries= (request.form['username'], request.form['password'])
+            cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", entries)
+            if (cur.fetchone() == None):
+                session['message'] = "Unauthenticated User - Incorrect username/password."
+                return redirect(url_for('message'))
 
 
 """
@@ -73,8 +74,8 @@ redirection (i.e. username and password incorrect). User will
 be able to redirect back to the login page.
 """
 @app.route('/message', methods = ['GET', 'POST'])
-def message(msg):
-    return render_template('message.html', message = msg)
+def message():
+    return render_template('message.html', message = session['message'])
 
 
 """
