@@ -30,25 +30,23 @@ def login():
         return render_template('login.html')
     
     # User attempts login, get username and password, checks entries in database.
-    elif (request.method == 'POST'):
+    else:
         if ('username' in request.form and 'password' in password.form):
             # Obtain the account from the database.
             entries = (request.form['username'], request.form['password'])
             cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", entries)
-            
+
+            # Incorrect login, redirect to error message.
             if (cur.fetchone() == None):
-                # Incorrect login, redirect to error message.
                 session['message'] = "Unauthenticated User: Incorrect username/password."
                 return redirect(url_for('message'))
-            
+
+            # Successful login, go to dashboard.
             else:
-                # Successful login, go to dashboard.
                 session['username'] = request.form['username']
                 return redirect(url_for('dashboard'))
         else:
             abort(400)
-    else:
-        abort(400)
 
 
 """
@@ -59,14 +57,7 @@ exists and alerts users if so.
 """
 @app.route('/create_user', methods = ['GET','POST'])
 def create_user():
-    if (request.method == 'GET'):
-        return render_template('create_user.html')
-    else:
-        if ('username' in request.form and 'password' in request.form):
-            un = request.form['username']
-            pw = request.form['password']
-
-        return render_template('create_user.html')
+    return render_template('create_user.html')
 
 
 """
