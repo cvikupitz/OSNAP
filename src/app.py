@@ -100,20 +100,10 @@ from here.
 def dashboard():
     # Sign in to the dashboard.
     cur.execute("SELECT name FROM roles WHERE role_pk=%s", (session['role']))
-    temp = cur.fetchone()[0]
-    return render_template('dashboard.html', name = session['username'], role = temp)
+    return render_template('dashboard.html', name = session['username'], role = cur.fetchone()[0])
 
 
-"""
-Send the user to a page containing a message. This message
-will be an error message describing the nature of the
-redirection (i.e. username and password incorrect). User will
-be able to redirect back to the login page.
-"""
-@app.route('/message', methods = ['GET', 'POST'])
-def message():
-    # Go to message screen with message.
-    return render_template('message.html', message = session['message'])
+
 
 
 """"""
@@ -161,6 +151,18 @@ def asset_report():
 
 
 """
+Send the user to a page containing a message. This message
+will be an error message describing the nature of the
+redirection (i.e. username and password incorrect). User will
+be able to redirect back to the login page.
+"""
+@app.route('/message', methods = ['GET', 'POST'])
+def message():
+    # Go to message screen with message.
+    return render_template('message.html', message = session['message'])
+
+
+"""
 User has logged out of the system, go to the logout page, link
 user back to the login page upon request.
 """
@@ -174,6 +176,5 @@ def logout():
 # Starts and runs the application.
 if __name__ == "__main__":
     app.run(host = '0.0.0.0', port = 8080, debug = True)
-
 
 
