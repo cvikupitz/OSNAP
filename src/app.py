@@ -57,7 +57,28 @@ exists and alerts users if so.
 """
 @app.route('/create_user', methods = ['GET','POST'])
 def create_user():
-    return render_template('create_user.html')
+
+    # Loads the create user page.
+    if (request.method == 'GET'):
+        return render_template('create_user.html')
+    
+    # User creates a new account, creates the account or rejects the request.
+    else:
+        if ('username' in request.form and 'password' in request.form and 'confirm' in request.form):
+            entries = (request.form['username'], request.form['password'], request.form['confirm'])
+            if (entries[1] != entries[2]):
+                session['message'] = "Password Mismatch: Make sure that your passwords match."
+                return redirect(url_for('message'))
+            cur.execute("SELECT username FROM users WHERE username=%s", (request.form['username']))
+            if (cur.fetchone() != None):
+                session['message'] = "Occupied User: That username already exists."
+                return redirect(url_for('message'))
+            cur.execute('INSERT INTO users VALUES (username, password) VALUES (%s, %s)', entries[:2])
+            session['username'] = entries[0]
+            return redirect(url_for('dashboard'))
+
+        else:
+            abort(400)
 
 
 """
