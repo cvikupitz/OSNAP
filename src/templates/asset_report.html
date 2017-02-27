@@ -5,3 +5,27 @@ CIS 322 - Assignment 6
 ********************************************************
 HTML file for reporting information on the assets in the system.
 -->
+
+<!DOCTYPE html>
+<html lang="en-US">
+<html>
+
+<head>
+<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
+<style>
+body {
+	background-color: #ccccff;
+    margin: 30px;
+	font-family: verdana;
+    font-size: 100%;
+}
+</style></head>
+
+<body>
+<!-- Title and header set, display the icon -->
+<title>L.O.S.T.</title>
+<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
+<center>
+<h1>Asset Report</h1><br>
+</center></body>
+</html>

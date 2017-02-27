@@ -27,12 +27,18 @@ input {
 }
 </style></head>
 
-<body><left>
-
+<body>
+<left>
 Currently logged in as <b>{{ name }}, {{ role }}.</b><br>
 Click <a href="{{url_for('logout')}}">here</a> to logout.
+</left>
 
-</form>
+<center>
+<h1>L.O.S.T. Dashboard</h1><br><br>
+<h3><a href="{{url_for('add_facility')}}">Add Facility</a></h3>
+<h3><a href="{{url_for('add_asset')}}">Add Asset</a></h3>
+<h3><a href="{{url_for('dispose_facility')}}">Dispose Facility</a></h3>
+<h3><a href="{{url_for('asset_report')}}">Asset Report</a></h3>
 
-</left></body>
+</center></body>
 </html>

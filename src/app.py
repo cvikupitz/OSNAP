@@ -115,6 +115,30 @@ def message():
     return render_template('message.html', message = session['message'])
 
 
+""""""
+@app.route('/add_facility', methods = ['GET', 'POST'])
+def add_facility():
+    return render_template('add_facility.html')
+
+
+""""""
+@app.route('/add_asset', methods = ['GET', 'POST'])
+def add_asset():
+    return render_template('add_asset.html')
+
+
+""""""
+@app.route('/dispose_asset', methods = ['GET', 'POST'])
+def dispose_asset():
+    return render_template('dispose_asset.html')
+
+
+""""""
+@app.route('/asset_report', methods = ['GET', 'POST'])
+def asset_report():
+    return render_template('asset_report.html')
+
+
 """
 User has logged out of the system, go to the logout page, link
 user back to the login page upon request.
