@@ -23,6 +23,12 @@ HTML file for adding a facility.
 				font-size: 100%;
 				margin-bottom: 10px;
 			}
+			table, th, td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			th, td { padding: 5px; }
+			th { text-align: left; }
 		</style>
 	</head>
 	<body>
@@ -31,12 +37,12 @@ HTML file for adding a facility.
 		<center>
 			<h1>Add Facility</h1><br>
 			<table style="width:100%">
-				<tr><th>Common Name</th><th>Facility Code</th></tr>
+				<tr><th>Facility Name</th><th>Facility Code</th></tr>
 			</table><br>
 			<form method="post">
-				Name: <input type="text" name="name" placeholder="Facility Name" required/><br>
-				Code: <input type="text" name="code" placeholder="Facility Code" required/></br>
-				<input type="submit" value="Add"/>
+				Name: <input type="text" name="name" placeholder="Facility Name" required maxlength=32 /><br>
+				Code: <input type="text" name="code" placeholder="Facility Code" required maxlength=6 /></br>
+				<input type="submit" value="Insert"/>
 			</form>
 		</center>
 	</body>

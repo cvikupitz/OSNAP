@@ -33,7 +33,7 @@ def login():
     else:
         if ('username' in request.form and 'password' in request.form):
             # Obtain the account from the database.
-            entries = (str(request.form['username']), str(request.form['password']))
+            entries = (request.form['username'], request.form['password'])
             cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", entries)
 
             # Incorrect login, redirect to error message.
@@ -121,7 +121,11 @@ def add_facility():
     if (request.method == 'GET'):
         return render_template('add_facility.html')
     else:
-        ####
+##        if ('name' in request.form and 'code' in request.form):
+##            entries = (request.form['name'], request.form['code'])
+##            cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s",
+##                        (entries[0], entries[1]))
+
         return render_template('add_facility.html')
 
 
