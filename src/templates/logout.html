@@ -5,28 +5,27 @@ CIS 322 - Assignment 6
 ********************************************************
 HTML file for the logout screen. Contains a message and a link to return to the login screen.
 -->
+
 <!DOCTYPE html>
 <html lang="en-US">
 <html>
-
-<head>
-<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
-<style>
-body {
-	background-color: #ccccff;
-    margin: 30px;
-	font-family: verdana;
-    font-size: 100%;
-}
-</style></head>
-
-<body><center>
-
-<!-- Title and header set, display the icon -->
-<title>L.O.S.T. (Logout)</title>
-<h1>Session Expired</h1>
-<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br><br><br>
-<a href="{{url_for('login')}}">Return to login page</a>
-
-</center></body>
+	<head>
+		<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
+		<style>
+			body {
+				background-color: #ccccff;
+				margin: 30px;
+				font-family: verdana;
+				font-size: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<center>
+			<title>L.O.S.T. (Logout)</title>
+			<h1>Session Expired</h1>
+			<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br><br><br>
+			<a href="{{url_for('login')}}">Return to login page</a>
+		</center>
+	</body>
 </html>
