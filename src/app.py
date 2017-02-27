@@ -80,10 +80,10 @@ def create_user():
                 return redirect(url_for('message'))
 
             # Creates the new account, goes to the dashboard.
-            cur.execute('INSERT INTO users (username, password, role) VALUES (%s, %s, %d)',
-                        (entries[0], entries[1], int(entries[3])))
+            cur.execute('INSERT INTO users (username, password) VALUES (%s, %s)',
+                        (entries[0], entries[1]))
             session['username'] = entries[0]
-            #session['role'] = int(entries[3])
+            session['role'] = entries[3]
             return redirect(url_for('dashboard'))
 
         else:
@@ -98,7 +98,7 @@ from here.
 @app.route('/dashboard', methods = ['GET', 'POST'])
 def dashboard():
     # Sign in to the dashboard.
-    return render_template('dashboard.html', name = session['username'])
+    return render_template('dashboard.html', name = session['username'], role = session['role'])
 
 
 """
