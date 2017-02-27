@@ -19,6 +19,11 @@ body {
 	font-family: verdana;
     font-size: 100%;
 }
+input {
+	font-family: verdana;
+    font-size: 100%;
+	margin-bottom: 10px;
+}
 </style></head>
 
 <body>
@@ -27,5 +32,8 @@ body {
 <left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 <center>
 <h1>Add Asset</h1><br>
+Tag: <input type="text" name="tag" placeholder="Asset Tag" required/><br>
+Description: <input type="text" name="desc" placeholder="Description" required/></br>
+<input type="submit" value="Add"/>
 </center></body>
 </html>

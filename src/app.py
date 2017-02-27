@@ -118,7 +118,11 @@ def message():
 """"""
 @app.route('/add_facility', methods = ['GET', 'POST'])
 def add_facility():
-    return render_template('add_facility.html')
+    if (request.method == 'GET'):
+        return render_template('add_facility.html')
+    else:
+        ####
+        return render_template('add_facility.html')
 
 
 """"""
