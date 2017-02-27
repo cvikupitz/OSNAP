@@ -24,16 +24,16 @@ was successful, or notify user if unsuccessful.
 @app.route('/')
 @app.route('/login', methods = ['GET','POST'])
 def login():
-    if (request.method == 'GET'):
-        return render_template('login.html')
-    else if (request.method == 'POST'):
-        if ('username' in request.form and 'password' in password.form):
-            un = request.form['username']
-            pw = request.form['password']
-            res = cur.execute("SELECT COUNT(*) FROM USERS WHERE username=%s AND password=%s", (un, pw))
-
-
-        return """"""
+##    if (request.method == 'GET'):
+##        return render_template('login.html')
+##    else if (request.method == 'POST'):
+##        if ('username' in request.form and 'password' in password.form):
+##            un = request.form['username']
+##            pw = request.form['password']
+##            res = cur.execute("SELECT COUNT(*) FROM USERS WHERE username=%s AND password=%s", (un, pw))
+##            
+##
+##        return """"""
     else:
         abort(401)
 
