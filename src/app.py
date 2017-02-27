@@ -69,8 +69,9 @@ def create_user():
             if (entries[1] != entries[2]):
                 session['message'] = "Password Mismatch: Make sure that your passwords match."
                 return redirect(url_for('message'))
-            cur.execute("SELECT username FROM users WHERE username=%s", (entries[:1])
+            cur.execute("SELECT username FROM users WHERE username=%s", (entries[:1]))
             if (cur.fetchone() != None):
+
                 session['message'] = "Occupied User: That username already exists."
                 return redirect(url_for('message'))
             cur.execute('INSERT INTO users VALUES (username, password) VALUES (%s, %s)', entries[:2])
