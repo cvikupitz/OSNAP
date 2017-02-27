@@ -30,10 +30,18 @@ HTML file for adding an asset to the system..
 		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
 			<h1>Add Asset</h1><br>
-			
-			Tag: <input type="text" name="tag" placeholder="Asset Tag" required maxlength=16 /><br>
-			Description: <input type="text" name="desc" placeholder="Description" required maxlength=80/></br>
-			<input type="submit" value="Add"/>
+			<table style="width:70%">
+				<tr><th>Facility Name</th><th>Facility Code</th></tr>
+				{% for asset in assets %}
+					<tr><th> {{ asset[1] }} </th>
+					<th> {{ asset[2] }} </th></tr>
+				{% endfor %}
+			</table><br>
+			<form method="post">
+				Tag: <input type="text" name="tag" size=16 placeholder="Asset Tag" required maxlength=16 /><br>
+				Description: <input type="text" name="desc" size=36 placeholder="Asset Description" maxlength=80/></br>
+				<input type="submit" value="Insert"/>
+			</form>
 		</center>
 	</body>
 </html>

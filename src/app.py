@@ -103,7 +103,11 @@ def dashboard():
     return render_template('dashboard.html', name = session['username'], role = cur.fetchone()[0])
 
 
-""""""
+"""
+Sends the user to the facilities screen. Here, users can add
+new facilities into the database, and view all the facilities in
+the database.
+"""
 @app.route('/add_facility', methods = ['GET', 'POST'])
 def add_facility():
     if (request.method == 'GET'):
@@ -117,7 +121,7 @@ def add_facility():
             cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s", entries)
             if (cur.fetchone() != None):
                 flash("You entered a duplicate name and/or code.")
-                return render_template('add_facility.html')
+                #return render_template('add_facility.html')
 
             else:
                 cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", entries)
@@ -131,10 +135,24 @@ def add_facility():
 @app.route('/add_asset', methods = ['GET', 'POST'])
 def add_asset():
     if (request.method == 'GET'):
-        return render_template('add_asset.html')
+        cur.execute("SELECT * FROM assets")
+        res = cur.fetchall()
+        return render_template('add_asset.html', assets = res)
     else:
-        ####
-        return render_template('add_asset.html')
+        if ('tag' in request.form and 'desc' in request.form):
+            entries = (request.form['tag'], request.form['desc'])
+
+            cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
+            if (cur.fetchone() != None):
+                flash("You entered a duplicate name and/or code.")
+                #return render_template('add_asset.html')
+
+            else:
+                cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", entries)
+                conn.commit()
+                return redirect(url_for('add_asset'))
+        else:
+            abort(401)
 
 
 """"""
