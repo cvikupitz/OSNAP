@@ -113,6 +113,12 @@ def add_facility():
     else:
         if ('name' in request.form and 'code' in request.form):
             entries = (request.form['name'], request.form['code'])
+
+            cur.execute("SELECT * FROM facilities WHERE common_name=%s AND code=%s", entries)
+            if (cur.fetchone != None):
+                alert("DUPLICATE")
+                return
+
             cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", entries)
             conn.commit()
             return redirect(url_for('add_facility'))
