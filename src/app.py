@@ -120,8 +120,8 @@ def add_facility():
 
             cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s", entries)
             if (cur.fetchone() != None):
-                flash("You entered a duplicate name and/or code.")
-                #return render_template('add_facility.html')
+                session['message'] = "Duplicate Entry: There's already a facility with that name/code."
+                return redirect(url_for('dashboard_redirect'))
 
             else:
                 cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", entries)
@@ -144,8 +144,8 @@ def add_asset():
 
             cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
             if (cur.fetchone() != None):
-                flash("You entered a duplicate name and/or code.")
-                #return render_template('add_asset.html')
+                session['message'] = "Duplicate Entry: There's already an asset with that tag."
+                return redirect(url_for('dashboard_redirect'))
 
             else:
                 cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", entries)
@@ -185,6 +185,18 @@ be able to redirect back to the login page.
 def message():
     # Go to message screen with message.
     return render_template('message.html', message = session['message'])
+
+
+"""
+Send the user to a page containing a message. This message
+will be an error message describing the nature of the
+redirection (i.e. duplicate entries). User will
+be able to redirect back to the dashboard.
+"""
+@app.route('/dashboard_redirect', methods = ['GET', 'POST'])
+def dashboard_redirect():
+    # Go to message screen with message.
+    return render_template('dashboard_redirect.html', message = session['message'])
 
 
 """
