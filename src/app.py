@@ -110,19 +110,25 @@ the database.
 """
 @app.route('/add_facility', methods = ['GET', 'POST'])
 def add_facility():
+
+    # Loads the facilities page.
     if (request.method == 'GET'):
         cur.execute("SELECT * FROM facilities")
         res = cur.fetchall()
         return render_template('add_facility.html', facilities = res)
+
+    # User inserts a new facility into the database.
     else:
         if ('name' in request.form and 'code' in request.form):
             entries = (request.form['name'], request.form['code'])
 
+            # If the facility entered has an existing name/code, notify user.
             cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s", entries)
             if (cur.fetchone() != None):
                 session['message'] = "Duplicate Entry: There's already a facility with that name/code."
                 return redirect(url_for('dashboard_redirect'))
 
+            # Inserts the facility into the database.
             else:
                 cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", entries)
                 conn.commit()
@@ -131,7 +137,11 @@ def add_facility():
             abort(401)
 
 
-""""""
+"""
+Sends the user to the assets screen. Here, users can add
+new assets into the database, and view all the assets in
+the database.
+"""
 @app.route('/add_asset', methods = ['GET', 'POST'])
 def add_asset():
     if (request.method == 'GET'):
