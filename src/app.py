@@ -22,31 +22,31 @@ and password, and will link to dashboard if the login
 was successful, or notify user if unsuccessful.
 """
 @app.route('/')
-#@app.route('/login', methods = ['GET','POST'])
-#def login():
+@app.route('/login', methods = ['GET','POST'])
+def login():
     
     # Loads the login page
-#    if (request.method == 'GET'):
-#        return render_template('login.html')
+    if (request.method == 'GET'):
+        return render_template('login.html')
     
     # User attempts login, get username and password, checks entries in database.
-#    else:
-#        if ('username' in request.form and 'password' in password.form):
+    else:
+        if ('username' in request.form and 'password' in request.form):
             # Obtain the account from the database.
-#            entries = (request.form['username'], request.form['password'])
-#            cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", entries)
+            entries = (str(request.form['username']), str(request.form['password']))
+            cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", entries)
 
             # Incorrect login, redirect to error message.
-#            if (cur.fetchone() == None):
-#                session['message'] = "Unauthenticated User: Incorrect username/password."
-#                return redirect(url_for('message'))
+            if (cur.fetchone() == None):
+                session['message'] = "Unauthenticated User: Incorrect username/password."
+                return redirect(url_for('message'))
 
             # Successful login, go to dashboard.
-#            else:
-#                session['username'] = request.form['username']
-#                return redirect(url_for('dashboard'))
-#        else:
-#            abort(400)
+            else:
+                session['username'] = entries[0]
+                return redirect(url_for('dashboard'))
+        else:
+            abort(400)
 
 
 """
@@ -69,7 +69,7 @@ def create_user():
             if (entries[1] != entries[2]):
                 session['message'] = "Password Mismatch: Make sure that your passwords match."
                 return redirect(url_for('message'))
-            cur.execute("SELECT username FROM users WHERE username=%s", (entries[0]))
+            cur.execute("SELECT username FROM users WHERE username=%s", (entries[:1])
             if (cur.fetchone() != None):
                 session['message'] = "Occupied User: That username already exists."
                 return redirect(url_for('message'))
