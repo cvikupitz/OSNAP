@@ -1,0 +1,30 @@
+<!--
+message.html
+Author - Cole Vikupitz
+CIS 322
+********************************************************
+HTML file for a message screen. Contains a message and a link to return to the dashboard.
+-->
+
+<!DOCTYPE html>
+<html lang="en-US">
+<html>
+	<head>
+		<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
+		<style>
+			body {
+				background-color: #ccccff;
+				margin: 30px;
+				font-family: verdana;
+				font-size: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<center>
+			<title>L.O.S.T.</title>
+			<h5>{{message}}</h5><br>
+			<a href="{{url_for('dashboard')}}">Return to dashboard</a>
+		</center>
+	</body>
+</html>
