@@ -36,7 +36,8 @@ CREATE TABLE roles (
 	/* The primary key for the role, used for sorting/accessing different roles from the table. */
 	role_pk		SERIAL PRIMARY KEY,
 
-	/*  */
+	/* The name of the role. */
+	name		varchar(24)
 	
 );
 
