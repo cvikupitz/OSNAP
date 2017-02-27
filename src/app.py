@@ -49,7 +49,10 @@ def create_user():
     if (request.method == 'GET'):
         return render_template('create_user.html')
     else:
-        ####### FIXME #######
+        if ('username' in request.form and 'password' in request.form):
+            un = request.form['username']
+            pw = request.form['password']
+
         return render_template('create_user.html')
 
 
