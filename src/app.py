@@ -12,7 +12,7 @@ import psycopg2
 # Set up flask application
 app = Flask(__name__, template_folder = 'templates')
 app.config['SECRET_KEY'] = "5a7c8059c6f4b390b06bcdbf81c03affdc67a3f8f0006c8e"
-conn = psycopg2.connect(dbname = database, dbhost = host, dbport = port)
+conn = psycopg2.connect(dbname = dbname, host = dbhost, port = dbport)
 cur = conn.cursor()
 
 
@@ -24,19 +24,31 @@ was successful, or notify user if unsuccessful.
 @app.route('/')
 @app.route('/login', methods = ['GET','POST'])
 def login():
+    
     # Loads the login page
     if (request.method == 'GET'):
         return render_template('login.html')
+    
     # User attempts login, get username and password, checks entries in database.
-    else if (request.method == 'POST'):
+    elif (request.method == 'POST'):
         if ('username' in request.form and 'password' in password.form):
-            
             # Obtain the account from the database.
-            entries= (request.form['username'], request.form['password'])
+            entries = (request.form['username'], request.form['password'])
             cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", entries)
+            
             if (cur.fetchone() == None):
-                session['message'] = "Unauthenticated User - Incorrect username/password."
+                # Incorrect login, redirect to error message.
+                session['message'] = "Unauthenticated User: Incorrect username/password."
                 return redirect(url_for('message'))
+            
+            else:
+                # Successful login, go to dashboard.
+                session['username'] = request.form['username']
+                return redirect(url_for('dashboard'))
+        else:
+            abort(400)
+    else:
+        abort(400)
 
 
 """
@@ -87,8 +99,10 @@ def logout():
     session.pop('username', None)
     return render_template('logout.html')
 
-	
+
+# Starts and runs the application.
 if __name__ == "__main__":
     app.run(host = '0.0.0.0', port = 8080, debug = True)
+
 
 
