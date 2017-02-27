@@ -30,3 +30,10 @@ CREATE TABLE users (
 
 );
 
+
+CREATE TABLE roles ();
+
+CREATE TABLE assets ();
+
+CREATE TABLE facilities ();
+
