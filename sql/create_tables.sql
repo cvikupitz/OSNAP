@@ -7,6 +7,21 @@ Creates the tables associated with the OSNAP data model.
 */
 
 
+/* This table holds information on user roles. Contains a key representing a role and a name for that role. */
+CREATE TABLE roles (
+	
+	/* 
+	The primary key for the role, used for sorting/accessing different roles from the table. The user will reference
+	this key for their role.
+	*/
+	role_pk			SERIAL PRIMARY KEY,
+
+	/* The name of the role. */
+	name			varchar(36)
+	
+);
+
+
 /* This table will contain user information, which will include their user name, password, and role. */
 CREATE TABLE users (
 
@@ -35,21 +50,6 @@ CREATE TABLE users (
 	*/
 	role			integer REFERENCES roles (role_pk)
 
-);
-
-
-/* This table holds information on user roles. Contains a key representing a role and a name for that role. */
-CREATE TABLE roles (
-	
-	/* 
-	The primary key for the role, used for sorting/accessing different roles from the table. The user will reference
-	this key for their role.
-	*/
-	role_pk			SERIAL PRIMARY KEY,
-
-	/* The name of the role. */
-	name			varchar(36)
-	
 );
 
 
