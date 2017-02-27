@@ -128,19 +128,31 @@ def add_facility():
 """"""
 @app.route('/add_asset', methods = ['GET', 'POST'])
 def add_asset():
-    return render_template('add_asset.html')
+    if (request.method == 'GET'):
+        return render_template('add_asset.html')
+    else:
+        ####
+        return render_template('add_asset.html')
 
 
 """"""
 @app.route('/dispose_asset', methods = ['GET', 'POST'])
 def dispose_asset():
-    return render_template('dispose_asset.html')
+    if (request.method == 'GET'):
+        return render_template('dispose_asset.html')
+    else:
+        ####
+        return render_template('dispose_asset.html')
 
 
 """"""
 @app.route('/asset_report', methods = ['GET', 'POST'])
 def asset_report():
-    return render_template('asset_report.html')
+    if (request.method == 'GET'):
+        return render_template('asset_report.html')
+    else:
+        ####
+        return render_template('asset_report.html')
 
 
 """

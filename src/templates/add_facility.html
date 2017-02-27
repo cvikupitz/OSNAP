@@ -30,10 +30,13 @@ HTML file for adding a facility.
 		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
 			<h1>Add Facility</h1><br>
+			<table style="width:100%">
+				<tr><th>Common Name</th><th>Facility Code</th></tr>
+			</table><br>
 			<form method="post">
-			Name: <input type="text" name="name" placeholder="Facility Name" required/><br>
-			Code: <input type="text" name="code" placeholder="Facility Code" required/></br>
-			<input type="submit" value="Add"/>
+				Name: <input type="text" name="name" placeholder="Facility Name" required/><br>
+				Code: <input type="text" name="code" placeholder="Facility Code" required/></br>
+				<input type="submit" value="Add"/>
 			</form>
 		</center>
 	</body>
