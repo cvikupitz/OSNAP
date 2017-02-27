@@ -30,10 +30,41 @@ CREATE TABLE users (
 
 );
 
+/**/
+CREATE TABLE roles (
+	
+	/* The primary key for the role, used for sorting/accessing different roles from the table. */
+	role_pk		SERIAL PRIMARY KEY,
 
-CREATE TABLE roles ();
+	/*  */
+	
+);
 
-CREATE TABLE assets ();
+/**/
+CREATE TABLE assets (
 
-CREATE TABLE facilities ();
+	/* The primary key used for sorting/accessing assets from the table. */
+	asset_pk	SERIAL PRIMARY KEY,
+
+	/* A tag for the asset, up to 16 characters in length. */
+	tag		varchar(16),
+
+	/* A small description of the asset, can be up to 100 characters in length. */
+	description	varchar(100)
+
+);
+
+/**/
+CREATE TABLE facilities (
+
+	/* Primary key used for the facilities, used for accessing facilities from the table. */
+	facility_pk	SERIAL PRIMARY KEY,
+
+	/* The name of the facility, up to 32 characters in length. */
+	name		varchar(32),
+
+	/* A code, up to 6 characters, for the facility. */
+	code		varchar(6)
+);
+
 
