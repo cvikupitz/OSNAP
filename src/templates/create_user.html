@@ -12,7 +12,7 @@ creating a new user. Text fields must be filled out to create a new user account
 <html>
 
 <head>
-<link rel="icon" href="templates/alien_icon.png"/>
+<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
 <style>
 body {
 	background-color: #ccccff;
@@ -32,7 +32,7 @@ input {
 <!-- Title and header set, display the icon -->
 <title>L.O.S.T. (New User)</title>
 <h1>New Account</h1>
-<img src="templates/alien_icon.png" alt="HTML5 Icon" style="width:209px;height:246px;"/><br>
+<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br>
 <h4>Enter a new username and password.</h4>
 <!-- Entry boxes and button for login -->
 <form method="post">

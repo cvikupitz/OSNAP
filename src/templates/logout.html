@@ -10,7 +10,7 @@ HTML file for the logout screen. Contains a message and a link to return to the 
 <html>
 
 <head>
-<link rel="icon" href="templates/alien_icon.png"/>
+<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
 <style>
 body {
 	background-color: #ccccff;
@@ -25,7 +25,7 @@ body {
 <!-- Title and header set, display the icon -->
 <title>L.O.S.T. (Logout)</title>
 <h1>Session Expired</h1>
-<img src="templates/alien_icon.png" style="width:209px;height:246px;"/><br><br><br>
+<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br><br><br>
 <a href="{{url_for('login')}}">Return to login page</a>
 
 </center></body>
