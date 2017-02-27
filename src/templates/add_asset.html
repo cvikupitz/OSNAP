@@ -30,6 +30,9 @@ HTML file for adding an asset to the system..
 		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
 			<h1>Add Asset</h1><br>
+			<table style="width:100%">
+				<tr><th>Common Name</th><th>Facility Code</th></tr>
+			</table>
 			Tag: <input type="text" name="tag" placeholder="Asset Tag" required/><br>
 			Description: <input type="text" name="desc" placeholder="Description" required/></br>
 			<input type="submit" value="Add"/>
