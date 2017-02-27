@@ -74,7 +74,7 @@ def create_user():
 
                 session['message'] = "Occupied User: That username already exists."
                 return redirect(url_for('message'))
-            cur.execute('INSERT INTO users VALUES (username, password) VALUES (%s, %s)', entries[:2])
+            cur.execute('INSERT INTO users (username, password) VALUES (%s, %s)', entries[:2])
             session['username'] = entries[0]
             return redirect(url_for('dashboard'))
 
