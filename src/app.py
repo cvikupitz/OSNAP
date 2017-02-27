@@ -83,6 +83,7 @@ def create_user():
             cur.execute('INSERT INTO users (username, password, role) VALUES (%s, %s, %d)',
                         (entries[0], entries[1], int(entries[3])))
             session['username'] = entries[0]
+            #session['role'] = int(entries[3])
             return redirect(url_for('dashboard'))
 
         else:

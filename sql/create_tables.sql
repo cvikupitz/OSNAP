@@ -26,14 +26,14 @@ CREATE TABLE users (
 	The password will also not be longer than 16 characters, so again a variable length string of 16 will 
 	also be used for the password.
 	*/
-	password		varchar(16) NOT NULL
+	password		varchar(16) NOT NULL,
 	
 	/*
 	The role of the user will be a number corresponding with the role primary key. We will just have a pre-set
 	table of roles and each user will point to one of the roles in the table. Should eliminate redundancy and make
 	it easy to add new roles if needed.
 	*/
-	role			integer REFERENCES roles
+	role			integer
 
 );
 
@@ -80,3 +80,4 @@ CREATE TABLE facilities (
 	/* A code, up to 6 characters, for the facility. */
 	code			varchar(6)
 );
+
