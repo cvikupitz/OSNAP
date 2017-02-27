@@ -80,7 +80,7 @@ def create_user():
                 return redirect(url_for('message'))
 
             # Creates the new account, goes to the dashboard.
-            cur.execute('INSERT INTO users (username, password, role) VALUES (%s, %s, %s)',
+            cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
                         (entries[0], entries[1], entries[3]))
             conn.commit()
             session['username'] = entries[0]
@@ -103,21 +103,21 @@ def dashboard():
     return render_template('dashboard.html', name = session['username'], role = cur.fetchone()[0])
 
 
-
-
-
 """"""
 @app.route('/add_facility', methods = ['GET', 'POST'])
 def add_facility():
     if (request.method == 'GET'):
-        return render_template('add_facility.html')
+        cur.execute("SELECT * FROM facilities")
+        res = cur.fetchall()
+        return render_template('add_facility.html', facilities = res)
     else:
-##        if ('name' in request.form and 'code' in request.form):
-##            entries = (request.form['name'], request.form['code'])
-##            cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s",
-##                        (entries[0], entries[1]))
-
-        return render_template('add_facility.html')
+        if ('name' in request.form and 'code' in request.form):
+            entries = (request.form['name'], request.form['code'])
+            cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", entries)
+            conn.commit()
+            return redirect(url_for('add_facility'))
+        else:
+            abort(401)
 
 
 """"""
