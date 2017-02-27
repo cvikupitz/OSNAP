@@ -48,7 +48,7 @@ CREATE TABLE roles (
 	role_pk			SERIAL PRIMARY KEY,
 
 	/* The name of the role. */
-	name			varchar(16)
+	name			varchar(36)
 	
 );
 
@@ -60,7 +60,7 @@ CREATE TABLE assets (
 	asset_pk		SERIAL PRIMARY KEY,
 
 	/* A tag for the asset, up to 16 characters in length. */
-	tag				varchar(16),
+	tag			varchar(16),
 
 	/* A small description of the asset, can be up to 80 characters in length. */
 	description		varchar(80)
@@ -80,4 +80,7 @@ CREATE TABLE facilities (
 	/* A code, up to 6 characters, for the facility. */
 	code			varchar(6)
 );
+
+INSERT INTO roles (name) VALUES ('Logistics Officer');
+INSERT INTO roles (name) VALUES ('Facilities Officer');
 
