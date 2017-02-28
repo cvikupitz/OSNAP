@@ -155,11 +155,8 @@ def add_asset():
 
     # User enters an asset into the database.
     else:
-        if ('tag' in request.form and 'desc' in request.form and 'facility' in request.form):
-            entries = (request.form['tag'], request.form['desc'], request.form['facility'])
-            if (entries[2] == ""):
-                session['message'] = "Null Facility: You must select a facility for the asset."
-                return redirect(url_for('dashboard_redirect'))
+        if ('tag' in request.form and 'desc' in request.form and 'facility' in request.form and 'date' in request.form):
+            entries = (request.form['tag'], request.form['desc'], request.form['facility'], request.form['date'])
 
             # The asset tag already exists, redirect with error message.
             cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
@@ -169,8 +166,9 @@ def add_asset():
 
             # Inserts the asset into the database.
             else:
-                cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", entries)
+                cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", entries[:2])
                 conn.commit()
+                ##### GET THE DATE, INSERT INFO INTO ASSET STATUS TABLE....
                 return redirect(url_for('add_asset'))
         else:
             abort(401)

@@ -28,7 +28,10 @@ HTML file for adding a facility.
 				border-collapse: collapse;
 			}
 			th, td { padding: 5px; }
-			th { text-align: left; }
+			th { 
+				text-align: left;
+				font-weight: normal;	
+			}
 		</style>
 	</head>
 	<body>
@@ -37,7 +40,7 @@ HTML file for adding a facility.
 		<center>
 			<h1>Add Facility</h1><br>
 			<table style="width:50%">
-				<tr><th>Facility Name</th><th>Facility Code</th></tr>
+				<tr><th><b>Facility Name</b></th><th><b>Facility Code</b></th></tr>
 				{% for fac in facilities %}
 					<tr><th> {{ fac[1] }} </th>
 					<th> {{ fac[2] }} </th></tr>

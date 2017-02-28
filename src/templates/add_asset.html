@@ -28,7 +28,10 @@ HTML file for adding an asset to the system..
 					border-collapse: collapse;
 				}
 				th, td { padding: 5px; }
-				th { text-align: left; }
+				th { 
+					font-weight: normal;
+					text-align: left; 
+				}
 				select { margin-bottom: 10px; }
 			</style>
 	</head>
@@ -38,7 +41,7 @@ HTML file for adding an asset to the system..
 		<center>
 			<h1>Add Asset</h1><br>
 			<table style="width:70%">
-				<tr><th>Asset Tag</th><th>Asset Description</th></tr>
+				<tr><th><b>Asset Tag</b></th><th><b>Asset Description</b></th></tr>
 				{% for asset in assets %}
 					<tr><th> {{ asset[1] }} </th>
 					<th> {{ asset[2] }} </th></tr>
@@ -53,7 +56,7 @@ HTML file for adding an asset to the system..
 						<option value={{fac}}> {{ fac[1] }} </option>
 					{% endfor %} 
 				</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrival Date: 
-				<input type="text" name="date" size=10 placeholder="DD/MM/YYYY" required maxlength=10 /><br>
+				<input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 /><br>
 				<input type="submit" value="Insert"/>
 			</form>
 		</center>
