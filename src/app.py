@@ -178,6 +178,9 @@ def add_asset():
 @app.route('/dispose_asset', methods = ['GET', 'POST'])
 def dispose_asset():
     if (request.method == 'GET'):
+        if (session['role'] != 'Logistics Officer'):
+            session['message'] = "Page Restricted: Only logistics officers may access this page."
+            return redirect(url_for('dashboard_redirect'))
         return render_template('dispose_asset.html')
     else:
         ####
