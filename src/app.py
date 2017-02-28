@@ -48,7 +48,7 @@ def login():
             # Successful login, go to dashboard.
             else:
                 session['username'] = entries[0]
-                session['message'] = ""
+                session.pop('message', None)
                 return redirect(url_for('dashboard'))
         else:
             abort(400)
@@ -62,6 +62,10 @@ exists and alerts users if so.
 """
 @app.route('/create_user', methods = ['GET','POST'])
 def create_user():
+
+    # Initialize the message.
+    if (session.get('message') == None):
+        session['message'] = ""
 
     # Loads the create user page.
     if (request.method == 'GET'):
@@ -90,7 +94,7 @@ def create_user():
             conn.commit()
             session['username'] = entries[0]
             session['role'] = entries[3]
-            session['message'] = ""
+            session.pop('message', None)
             return redirect(url_for('dashboard'))
 
         else:
