@@ -24,14 +24,10 @@ was successful, or notify user if unsuccessful.
 @app.route('/')
 @app.route('/login', methods = ['GET','POST'])
 def login():
-    
-    # Initialize the message.
-    if (session.get('message') == None):
-        session['message'] = ""
 
     # Loads the login page
     if (request.method == 'GET'):
-        return render_template('login.html', message = session['message'])
+        return render_template('login.html')
     
     # User attempts login, get username and password, checks entries in database.
     else:
@@ -43,12 +39,11 @@ def login():
             # Incorrect login, redirect to error message.
             if (cur.fetchone() == None):
                 session['message'] = "Unauthenticated User: Incorrect username/password."
-                return redirect(url_for('login'))
+                return redirect(url_for('message'))
 
             # Successful login, go to dashboard.
             else:
                 session['username'] = entries[0]
-                session.pop('message', None)
                 return redirect(url_for('dashboard'))
         else:
             abort(400)
@@ -63,13 +58,9 @@ exists and alerts users if so.
 @app.route('/create_user', methods = ['GET','POST'])
 def create_user():
 
-    # Initialize the message.
-    if (session.get('message') == None):
-        session['message'] = ""
-
     # Loads the create user page.
     if (request.method == 'GET'):
-        return render_template('create_user.html', message = session['message'])
+        return render_template('create_user.html')
     
     # User creates a new account, creates the account or rejects the request.
     else:
@@ -80,13 +71,13 @@ def create_user():
             # Password and confirmation must match.
             if (entries[1] != entries[2]):
                 session['message'] = "Password Mismatch: Make sure that your passwords match."
-                return redirect(url_for('create_user'))
+                return redirect(url_for('message'))
 
             # Check to see if there already exists an account with the username.
             cur.execute("SELECT username FROM users WHERE username=%s", (entries[:1]))
             if (cur.fetchone() != None):
                 session['message'] = "Occupied User: That username already exists."
-                return redirect(url_for('create_user'))
+                return redirect(url_for('message'))
 
             # Creates the new account, goes to the dashboard.
             cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
@@ -94,7 +85,6 @@ def create_user():
             conn.commit()
             session['username'] = entries[0]
             session['role'] = entries[3]
-            session.pop('message', None)
             return redirect(url_for('dashboard'))
 
         else:
