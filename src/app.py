@@ -144,19 +144,30 @@ the database.
 """
 @app.route('/add_asset', methods = ['GET', 'POST'])
 def add_asset():
+    
+    # Loads the assets page.
     if (request.method == 'GET'):
         cur.execute("SELECT * FROM assets")
         res = cur.fetchall()
-        return render_template('add_asset.html', assets = res)
-    else:
-        if ('tag' in request.form and 'desc' in request.form):
-            entries = (request.form['tag'], request.form['desc'])
+        cur.execute("SELECT * FROM facilities")
+        res2 = cur.fetchall()
+        return render_template('add_asset.html', assets = res, facilities = res2)
 
+    # User enters an asset into the database.
+    else:
+        if ('tag' in request.form and 'desc' in request.form and 'facility' in request.form):
+            entries = (request.form['tag'], request.form['desc'], request.form['facility'])
+            if (entries[2] == ""):
+                session['message'] = "Null Facility: You must select a facility for the asset."
+                return redirect(url_for('dashboard_redirect'))
+
+            # The asset tag already exists, redirect with error message.
             cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
             if (cur.fetchone() != None):
                 session['message'] = "Duplicate Entry: There's already an asset with that tag."
                 return redirect(url_for('dashboard_redirect'))
 
+            # Inserts the asset into the database.
             else:
                 cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", entries)
                 conn.commit()

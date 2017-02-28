@@ -48,7 +48,7 @@ HTML file for adding an asset to the system..
 				Description: <input type="text" name="desc" size=36 placeholder="Asset Description" maxlength=80/></br>
 				Facility: <select name="facility">
 					{% for fac in facilities %}
-						<strong><option value={{fac}}> {{ fac }} </option></strong>
+						<strong><option value={{fac}}> {{ fac[1] }} </option></strong>
 					{% endfor %} 
 				</select><br>
 				<input type="submit" value="Insert"/>
