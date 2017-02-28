@@ -25,6 +25,10 @@ was successful, or notify user if unsuccessful.
 @app.route('/login', methods = ['GET','POST'])
 def login():
     
+    # Initialize the message.
+    if (session.get('message') == None):
+        session['message'] = ""
+
     # Loads the login page
     if (request.method == 'GET'):
         return render_template('login.html', message = session['message'])
