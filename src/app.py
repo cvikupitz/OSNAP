@@ -27,8 +27,10 @@ was successful, or notify user if unsuccessful.
 def login():
 
     # Loads the login page
+    if (session['message'] == None):
+        session['message'] = ""
     if (request.method == 'GET'):
-        return render_template('login.html')
+        return render_template('login.html', message = session['message'])
     
     # User attempts login, get username and password, checks entries in database.
     else:
@@ -40,7 +42,7 @@ def login():
             # Incorrect login, redirect to error message.
             if (cur.fetchone() == None):
                 session['message'] = "Unauthenticated User: Incorrect username/password."
-                return redirect(url_for('message'))
+                return redirect(url_for('login', message = session['message']))
 
             # Successful login, go to dashboard.
             else:
@@ -63,7 +65,7 @@ def create_user():
 
     # Loads the create user page.
     if (request.method == 'GET'):
-        return render_template('create_user.html')
+        return render_template('create_user.html', message = session['message'])
     
     # User creates a new account, creates the account or rejects the request.
     else:
@@ -74,13 +76,13 @@ def create_user():
             # Password and confirmation must match.
             if (entries[1] != entries[2]):
                 session['message'] = "Password Mismatch: Make sure that your passwords match."
-                return redirect(url_for('message'))
+                return redirect(url_for('create_user', message = session['message']))
 
             # Check to see if there already exists an account with the username.
             cur.execute("SELECT username FROM users WHERE username=%s", (entries[:1]))
             if (cur.fetchone() != None):
                 session['message'] = "Occupied User: That username already exists."
-                return redirect(url_for('message'))
+                return redirect(url_for('create_user', message = ['message']))
 
             # Creates the new account, goes to the dashboard.
             cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
