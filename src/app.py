@@ -27,10 +27,12 @@ was successful, or notify user if unsuccessful.
 def login():
 
     # Loads the login page
-    if (session['message'] == None):
+    if (session.get('message') == None):
         session['message'] = ""
     if (request.method == 'GET'):
-        return render_template('login.html', message = session['message'])
+        msg = session['message']
+        session['message'] = ""
+        return render_template('login.html', message = msg)
     
     # User attempts login, get username and password, checks entries in database.
     else:
@@ -65,7 +67,9 @@ def create_user():
 
     # Loads the create user page.
     if (request.method == 'GET'):
-        return render_template('create_user.html', message = session['message'])
+        msg = session['message']
+        session['message'] = ""
+        return render_template('create_user.html', message = msg)
     
     # User creates a new account, creates the account or rejects the request.
     else:
@@ -267,6 +271,7 @@ user back to the login page upon request.
 def logout():
     # Pop out username from session, go to logout screen.
     session.pop('username', None)
+    session['message'] = ""
     return render_template('logout.html')
 
 

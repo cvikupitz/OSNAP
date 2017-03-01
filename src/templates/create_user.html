@@ -31,9 +31,9 @@ creating a new user. Text fields must be filled out to create a new user account
 		<center>
 			<title>L.O.S.T. (New User)</title>
 			<h1>New Account</h1>
+			<h3 style="color:red;"> {{ message }} </h3>
 			<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br>
 			<h4>Enter a new username and password.</h4>
-			<h3 style="color:red;"> {{ message }} </h3>
 			<form method="post">
 				Username: <input type="text" name="username" placeholder="Username" required maxlength=16 /><br>
 				Password: <input type="password" name="password" placeholder="Password" required maxlength=16 /><br>
