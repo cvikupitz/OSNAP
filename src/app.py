@@ -222,17 +222,26 @@ def dispose_asset():
             entries = (request.form['tag'], request.form['date'])
 
             # Check to see if the asset is in the system.
+            if (not date_valid(entries[1])):
+                session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
+                return redirect(url_for('dispose_asset'))
             cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
-            if (cur.fetchone() == None):
+            asset = cur.fetchone()
+            if (asset == None):
                 session['message'] = "Asset Not Found: The asset you entered does not exist."
                 return redirect(url_for('dispose_asset'))
 
             # Check to see if the asset is already disposed.
-            res = cur.fetchone()
-            ############### FIXME ####
-            
+            cur.execute("SELECT * FROM asset_status WHERE asset_fk=%s", asset[:1])
+            facility = cur.fetchone()
+            if (facility[4] != None):
+                session['message'] = "Disposed Asset: The asset you entered has already been disposed."
+                return redirect(url_for('dispose_asset'))
+
             # Remove the asset from the system.
-            ############### FIXME ####
+            new_date = date_to_string(entries[1])
+            cur.execute("UPDATE asset_status SET depart_date=%s WHERE asset_fk=%s", (new_date, asset[0]))
+            conn.commit()
             return redirect(url_for('dispose_asset'))
         else:
             abort(401)
