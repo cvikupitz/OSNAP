@@ -12,11 +12,11 @@ def date_valid(date):
         month = int(date[:2])
         day = int(date[3:5])
         year = int(date[6:])
-        if (month > 12 or month < 1):
+        if (month < 1 or month > 12):
             return False
-        if (day > 31 or day < 1):
+        if (day < 1 or day > 31):
             return False
-        if (year > 1 or year < 1):
+        if (year < 1 or year > 9999):
             return False
         return True
     return False
