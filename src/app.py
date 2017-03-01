@@ -44,6 +44,8 @@ def login():
             # Successful login, go to dashboard.
             else:
                 session['username'] = entries[0]
+                cur.execute("SELECT r.name FROM roles JOIN users u ON r.role_pk=u.role WHERE u.username=%s", entries[:1])
+                session['role'] = cur.fetchone()[0]
                 return redirect(url_for('dashboard'))
         else:
             abort(400)
@@ -84,7 +86,8 @@ def create_user():
                         (entries[0], entries[1], entries[3]))
             conn.commit()
             session['username'] = entries[0]
-            session['role'] = entries[3]
+            cur.execute("SELECT name FROM roles WHERE role_pk=%s", entries[-1])
+            session['role'] = cur.fetchone()[0]
             return redirect(url_for('dashboard'))
 
         else:
