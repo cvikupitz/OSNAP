@@ -60,7 +60,7 @@ CREATE TABLE assets (
 	asset_pk		SERIAL PRIMARY KEY,
 
 	/* A tag for the asset, up to 16 characters in length. */
-	tag				varchar(16),
+	tag			varchar(16),
 
 	/* A small description of the asset, can be up to 80 characters in length. */
 	description		varchar(80)
@@ -93,16 +93,16 @@ CREATE TABLE asset_status (
 	asset_status_pk		SERIAL PRIMARY KEY,
 	
 	/* Reference key pointing to the asset from the assets table. */
-	asset_fk			integer REFERENCES assets (asset_pk),
+	asset_fk		integer REFERENCES assets (asset_pk),
 	
 	/* Reference key pointing to the facility the asset is located at in the facilities table. */
-	facility_fk			integer REFERENCES facilities (facility_pk),
+	facility_fk		integer REFERENCES facilities (facility_pk),
 	
 	/* The arrival date of the asset at the referenced facility. */
-	arive_date			timestamp,
+	arive_date		timestamp,
 	
 	/* The departure date the asset left the facility. */
-	depart_date			timestamp
+	depart_date		timestamp
 );
 
 /* Inserts the 2 roles into the table. */

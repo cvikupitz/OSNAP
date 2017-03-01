@@ -7,6 +7,7 @@ CIS 322
 # Imports
 from flask import *
 from config import dbname, dbhost, dbport
+from util import *
 import psycopg2
 
 # Set up flask application
@@ -170,6 +171,9 @@ def add_asset():
             else:
                 cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", entries[:2])
                 conn.commit()
+                if (not date_valid(entries[3])):
+                    session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
+                    return redirect(url_for('dashboard_redirect'))
                 ##### GET THE DATE, INSERT INFO INTO ASSET STATUS TABLE....
                 return redirect(url_for('add_asset'))
         else:
