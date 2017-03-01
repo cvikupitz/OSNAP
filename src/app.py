@@ -189,17 +189,38 @@ def add_asset():
             abort(401)
 
 
-""""""
+"""
+Sends the user to the asset disposure screen. Users can remove
+assets from their facilities given a date they left.
+"""
 @app.route('/dispose_asset', methods = ['GET', 'POST'])
 def dispose_asset():
+
+    # Loads the asset disposure page.
     if (request.method == 'GET'):
         if (session['role'] != 'Logistics Officer'):
             session['message'] = "Page Restricted: Only logistics officers may access this page."
             return redirect(url_for('dashboard_redirect'))
         return render_template('dispose_asset.html')
+
+    # Removes the asset from the asset.
     else:
-        ####
-        return render_template('dispose_asset.html')
+        if ('tag' in request.form and 'date' in request.form):
+            entries = (request.form['tag'], request.form['date'])
+
+            # Check to see if the asset is in the system.
+            cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
+            if (cur.fetchone() == None):
+                session['message'] = "Asset Not Found: The asset you entered does not exist."
+                return redirect(url_for('dashboard_redirect'))
+            res = cur.fetchone()
+
+            # Check to see if the asset is already disposed.
+            flash('HELLO WORLD!!')
+            # Remove the asset from the system.
+            return redirect(url_for('dispose_asset'))
+        else:
+            abort(401)
 
 
 """"""
