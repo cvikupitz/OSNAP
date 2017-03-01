@@ -44,7 +44,7 @@ def login():
             # Successful login, go to dashboard.
             else:
                 session['username'] = entries[0]
-                cur.execute("SELECT r.name FROM roles JOIN users u ON r.role_pk=u.role WHERE u.username=%s", entries[:1])
+                cur.execute("SELECT r.name FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s", entries[:1])
                 session['role'] = cur.fetchone()[0]
                 return redirect(url_for('dashboard'))
         else:
@@ -66,7 +66,7 @@ def create_user():
     
     # User creates a new account, creates the account or rejects the request.
     else:
-        if ('username' in request.form and 'password' in request.form and 'confirm' in request.form):
+        if ('username' in request.form and 'password' in request.form and 'confirm' in request.form and 'role' in request.form):
             entries = (request.form['username'], request.form['password'],
                        request.form['confirm'], request.form['role'])
 
@@ -102,8 +102,7 @@ from here.
 @app.route('/dashboard', methods = ['GET', 'POST'])
 def dashboard():
     # Sign in to the dashboard.
-    cur.execute("SELECT name FROM roles WHERE role_pk=%s", (session['role']))
-    return render_template('dashboard.html', name = session['username'], role = cur.fetchone()[0])
+    return render_template('dashboard.html', name = session['username'], role = session['role'])
 
 
 """
