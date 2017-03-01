@@ -250,10 +250,18 @@ def dispose_asset():
 """"""
 @app.route('/asset_report', methods = ['GET', 'POST'])
 def asset_report():
+
+    # Loads the asset report page.
     if (request.method == 'GET'):
+        msg = session['message']
+        session['message'] = ""
+        cur.execute("SELECT * FROM asset_status")
+        #### FIXME ######
+        
         return render_template('asset_report.html')
+    
     else:
-        ####
+        #### FIXME
         return render_template('asset_report.html')
 
 

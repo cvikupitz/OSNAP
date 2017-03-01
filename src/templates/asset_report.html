@@ -18,13 +18,60 @@ HTML file for reporting information on the assets in the system.
 				font-family: verdana;
 				font-size: 100%;
 			}
+			input {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+			}
+			select { height: 23px; }
+			table, th, td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			th, td { padding: 5px; }
+			th { 
+				font-weight: normal;
+				text-align: left; 
+			}
+			select { margin-bottom: 10px; }
 		</style>
 	</head>
 	<body>
 		<title>L.O.S.T.</title>
 		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
-			<h1>Asset Report</h1><br>
+			<h1>Asset Report</h1>
+			<h3 style="color:red;"> {{ message }} </h3>
+			
+			<form>
+				Facility: <select required name="facility">
+					<option value="*">All</option>
+					{% for fac in facilities %}
+						<option value={{fac[1]}}> {{ fac[1] }} </option>
+					{% endfor %} 
+				</select>&nbsp;&nbsp;&nbsp;&nbsp;
+				Arrival Date: <input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 />
+				&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Filter"/>
+			</form>
+			
+			<table style="width:100%">
+				<tr>
+					<th><b>Asset Tag</b></th>
+					<th><b>Description</b></th>
+					<th><b>Facility</b></th>
+					<th><b>Arrival Date</b></th>
+					<th><b>Departure Date</b></th>
+				</tr>
+				{% for entry in entries %}
+					<tr>
+					<th> {{ entry[0] }} </th>
+					<th> {{ entry[1] }} </th>
+					<th> {{ entry[2] }} </th>
+					<th> {{ entry[3] }} </th>
+					<th> {{ entry[4] }} </th>
+					</tr>
+				{% endfor %}
+			</table><br>
 		</center>
 	</body>
 </html>
