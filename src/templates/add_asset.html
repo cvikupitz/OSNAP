@@ -23,6 +23,7 @@ HTML file for adding an asset to the system..
 					font-size: 100%;
 					margin-bottom: 10px;
 				}
+				select { height: 23px; }
 				table, th, td {
 					border: 1px solid black;
 					border-collapse: collapse;
@@ -56,7 +57,7 @@ HTML file for adding an asset to the system..
 						<option value={{fac}}> {{ fac[1] }} </option>
 					{% endfor %} 
 				</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrival Date: 
-				<input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 /><br>
+				<input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 />&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="submit" value="Insert"/>
 			</form>
 		</center>
