@@ -38,7 +38,8 @@ HTML file for adding a facility.
 		<title>L.O.S.T.</title>
 		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
-			<h1>Add Facility</h1><br>
+			<h1>Add Facility</h1>
+			<h3 style="color:red;"> {{ message }} </h3>
 			<table style="width:50%">
 				<tr><th><b>Facility Name</b></th><th><b>Facility Code</b></th></tr>
 				{% for fac in facilities %}

@@ -109,6 +109,7 @@ from here.
 @app.route('/dashboard', methods = ['GET', 'POST'])
 def dashboard():
     # Sign in to the dashboard.
+    session['message'] = ""
     return render_template('dashboard.html', name = session['username'], role = session['role'])
 
 
@@ -122,9 +123,11 @@ def add_facility():
 
     # Loads the facilities page.
     if (request.method == 'GET'):
+        msg = session['message']
+        session['message'] = ""
         cur.execute("SELECT * FROM facilities")
         res = cur.fetchall()
-        return render_template('add_facility.html', facilities = res)
+        return render_template('add_facility.html', message = msg, facilities = res)
 
     # User inserts a new facility into the database.
     else:
@@ -135,7 +138,7 @@ def add_facility():
             cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s", entries)
             if (cur.fetchone() != None):
                 session['message'] = "Duplicate Entry: There's already a facility with that name/code."
-                return redirect(url_for('dashboard_redirect'))
+                return redirect(url_for('add_facility'))
 
             # Inserts the facility into the database.
             else:
@@ -156,11 +159,13 @@ def add_asset():
     
     # Loads the assets page.
     if (request.method == 'GET'):
+        msg = session['message']
+        session['message'] = ""
         cur.execute("SELECT * FROM assets")
         res = cur.fetchall()
         cur.execute("SELECT * FROM facilities")
         res2 = cur.fetchall()
-        return render_template('add_asset.html', assets = res, facilities = res2)
+        return render_template('add_asset.html', message = msg, assets = res, facilities = res2)
 
     # User enters an asset into the database.
     else:
@@ -171,12 +176,12 @@ def add_asset():
             cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
             if (cur.fetchone() != None):
                 session['message'] = "Duplicate Entry: There's already an asset with that tag."
-                return redirect(url_for('dashboard_redirect'))
+                return redirect(url_for('add_asset'))
 
             # Check the date for validity
             if (not date_valid(entries[3])):
                 session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
-                return redirect(url_for('dashboard_redirect'))
+                return redirect(url_for('add_asset'))
 
             # Inserts the asset into the database.
             else:
@@ -207,7 +212,9 @@ def dispose_asset():
         if (session['role'] != 'Logistics Officer'):
             session['message'] = "Page Restricted: Only logistics officers may access this page."
             return redirect(url_for('dashboard_redirect'))
-        return render_template('dispose_asset.html')
+        msg = session['message']
+        session['message'] = ""
+        return render_template('dispose_asset.html', message = msg)
 
     # Removes the asset from the asset.
     else:
@@ -218,12 +225,14 @@ def dispose_asset():
             cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
             if (cur.fetchone() == None):
                 session['message'] = "Asset Not Found: The asset you entered does not exist."
-                return redirect(url_for('dashboard_redirect'))
-            res = cur.fetchone()
+                return redirect(url_for('dispose_asset'))
 
             # Check to see if the asset is already disposed.
-            flash('HELLO WORLD!!')
+            res = cur.fetchone()
+            ############### FIXME ####
+            
             # Remove the asset from the system.
+            ############### FIXME ####
             return redirect(url_for('dispose_asset'))
         else:
             abort(401)
