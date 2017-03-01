@@ -255,14 +255,25 @@ def asset_report():
     if (request.method == 'GET'):
         msg = session['message']
         session['message'] = ""
+        cur.execute("SELECT * FROM facilities")
+        facs = cur.fetchall()
+
+        # Fetches the report, organizes into the list.
         cur.execute("SELECT * FROM asset_status")
-        #### FIXME ######
-        
-        return render_template('asset_report.html')
+        assets = cur.fetchall()
+        report = []
+        for asset in assets:
+            cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (str(asset[1])))
+            temp = cur.fetchone()
+            cur.execute("SELECT common_name FROM facilities WHERE facility_pk=%s", (str(asset[2])))
+            temp2 = cur.fetchone()
+            report.append((temp[1], temp[2], temp2[0], asset[3], asset[4]))
+        return render_template('asset_report.html', message = msg, facilities = facs, entries = report)
     
     else:
         #### FIXME
-        return render_template('asset_report.html')
+        if (not date_valid())
+        return render_template('asset_report.html', message)
 
 
 """
