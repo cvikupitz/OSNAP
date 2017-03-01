@@ -18,6 +18,11 @@ HTML file for disposing an asset from the system.
 				font-family: verdana;
 				font-size: 100%;
 			}
+			input {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+			}
 		</style>
 	</head>
 	<body>
@@ -25,6 +30,13 @@ HTML file for disposing an asset from the system.
 		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
 			<h1>Dispose Asset</h1><br>
+			<h3>Enter the asset tag and date of disposure.</h3>
+			<h3 style="color:red;"> {{ message }} </h3>
+			<form method="post">
+				Asset Tag: <input type="text" name="tag" size=16 placeholder="Asset Tag" required maxlength=16 /><br>
+				Dispose Date: <input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 /><br>
+				<input type="submit" value="Dispose"/>
+			</form>
 		</center>
 	</body>
 </html>
