@@ -99,7 +99,7 @@ CREATE TABLE asset_status (
 	facility_fk		integer REFERENCES facilities (facility_pk),
 	
 	/* The arrival date of the asset at the referenced facility. */
-	arive_date		date,
+	arrive_date		date,
 	
 	/* The departure date the asset left the facility. */
 	depart_date		date

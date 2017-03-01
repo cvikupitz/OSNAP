@@ -178,13 +178,12 @@ def add_asset():
                 conn.commit()
                 cur.execute("SELECT facility_pk FROM facilities WHERE common_name=%s", entries[2:3])
                 ffk = cur.fetchone()[0]
-                #cur.execute("SELECT asset_pk FROM assets WHERE tag=%s", entries[:1])
-                #afk = cur.fetchone()[0]
-                #date = date_to_string(entries[3])
-                #cur.execute("INSERT INTO asset_status (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
-                #        (afk, ffk, date))
-                #conn.commit()
-                print(ffk)
+                cur.execute("SELECT asset_pk FROM assets WHERE tag=%s", entries[:1])
+                afk = cur.fetchone()[0]
+                date = date_to_string(entries[3])
+                cur.execute("INSERT INTO asset_status (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
+                        (afk, ffk, date))
+                conn.commit()
                 return redirect(url_for('add_asset'))
         else:
             abort(401)
