@@ -167,13 +167,15 @@ def add_asset():
                 session['message'] = "Duplicate Entry: There's already an asset with that tag."
                 return redirect(url_for('dashboard_redirect'))
 
+            # Check the date for validity
+            if (not date_valid(entries[3])):
+                session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
+                return redirect(url_for('dashboard_redirect'))
+
             # Inserts the asset into the database.
             else:
                 cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", entries[:2])
                 conn.commit()
-                if (not date_valid(entries[3])):
-                    session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
-                    return redirect(url_for('dashboard_redirect'))
                 ##### GET THE DATE, INSERT INFO INTO ASSET STATUS TABLE....
                 return redirect(url_for('add_asset'))
         else:
