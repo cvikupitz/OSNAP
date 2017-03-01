@@ -293,7 +293,9 @@ def asset_report():
                 cur.execute("SELECT common_name FROM facilities WHERE facility_pk=%s", (str(asset[2])))
                 temp2 = cur.fetchone()
                 report.append((temp[1], temp[2], temp2[0], asset[3], asset[4]))
-            return render_template('asset_report.html', message = '', entries = report)
+            cur.execute("SELECT * FROM facilities")
+            facs = cur.fetchall()
+            return redirect(url_for('asset_report.html', message = '', facilities = facs, entries = report))
 
         else:
             abort(401)
