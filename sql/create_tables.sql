@@ -64,41 +64,17 @@ CREATE TABLE users (
 
 
 
-/* This table contains information on assets, including their tags and descriptions. */
 CREATE TABLE assets (
-
-	/* The primary key used for sorting/accessing assets from the table. */
 	asset_pk		SERIAL PRIMARY KEY,
-
-	/* A tag for the asset, up to 16 characters in length. */
-	tag			varchar(16),
-
-	/* A small description of the asset, can be up to 80 characters in length. */
+	tag				varchar(16),
 	description		varchar(80)
-
 );
 
-
-/* 
-Table that links an asset and a facility together. The asset will be linked via the asset primary key, 
-and the facility via the facility primary key. The start date timestamp will show when the asset arrived
-at that facility, and the depart date will be set when the asset leaves that facility.
-*/
 CREATE TABLE asset_status (
-
-	/* Primary key used for the asset status. */
 	asset_status_pk		SERIAL PRIMARY KEY,
-	
-	/* Reference key pointing to the asset from the assets table. */
 	asset_fk		integer REFERENCES assets (asset_pk),
-	
-	/* Reference key pointing to the facility the asset is located at in the facilities table. */
 	facility_fk		integer REFERENCES facilities (facility_pk),
-	
-	/* The arrival date of the asset at the referenced facility. */
 	arrive_date		date,
-	
-	/* The departure date the asset left the facility. */
 	depart_date		date
 );
 
