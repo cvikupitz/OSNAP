@@ -58,20 +58,35 @@ CREATE TABLE users (
 );
 
 
-
-
-
-
-
-
+/* This table holds data on an individual asset. All assets have a tag for identification
+ * that can be up to 16 characters in length. Assets can also have an option description
+ * for them, can be up to 80 characters in length. This table does not include pointers to
+ * facilities that these assets are tracked at.
+ *
+ * asset_pk (PRIMARY KEY) - Primary key for the asset instance.
+ * tag (varchar(16)) - The asset's identification tag, can be up to 16 characters in length.
+ * description (varchar(80)) - A brief description of the asset, can be up to 80 characters.
+ */
 CREATE TABLE assets (
 	asset_pk		SERIAL PRIMARY KEY,
-	tag				varchar(16),
+	tag				varchar(16) NOT NULL,
 	description		varchar(80)
 );
 
-CREATE TABLE asset_status (
-	asset_status_pk		SERIAL PRIMARY KEY,
+
+/* This table holds data on assets stored at particular facilities. Each asset created must
+ * be stored at a facility on a given date. These two variables are required when we create
+ * an asset into the system. The departure date will be the date the asset is disposed of,
+ * or when it leaves that facility.
+ *
+ * asset_at_pk (PRIMARY KEY) - Primary key for the instance.
+ * asset_fk (integer) - Pointer to the asset being stored, from the assets table.
+ * facility_fk (integer) - Pointer to the facility the asset is stored at, from the facilities table.
+ * arrive_date (date) - The date the asset arrived at the facility.
+ * depart_date (date) - The date the asset was disposed from the facility.
+ */
+CREATE TABLE asset_at (
+	asset_at_pk		SERIAL PRIMARY KEY,
 	asset_fk		integer REFERENCES assets (asset_pk),
 	facility_fk		integer REFERENCES facilities (facility_pk),
 	arrive_date		date,

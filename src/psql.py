@@ -113,7 +113,7 @@ def facility_exists(name, code):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
         temp = (name, code,)
-        cur.execute("SELECT * FROM facilities WHERE common_name=%s OR fcode=%s", temp)
+        cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s", temp)
         conn.commit()
         return (cur.fetchone() != None)
 
@@ -133,6 +133,41 @@ def create_facility(name, code):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
         temp = (name, code,)
-        cur.execute("INSERT INTO facilities (common_name, fcode) VALUES (%s, %s)", temp)
+        cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", temp)
         conn.commit()
         return None
+
+
+"""
+Fetches and returns all the assets currently in the database in a list.
+
+Args:
+    None
+Returns:
+    A list of all the assets currently in the database.
+"""
+def get_assets():
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM assets")
+        conn.commit()
+        return (cur.fetchall())
+
+
+"""
+Checks to see of an asset currently exists within the database with the given
+asset tag.
+
+Args:
+    name - The asset's tag.
+Returns:
+    True if there exists an asset with the given tag, or false otherwise.
+"""
+def asset_exists(tag):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        temp = (tag,)
+        cur.execute("SELECT * FROM assets WHERE tag=%s", temp)
+        conn.commit()
+        return (cur.fetchone() != None)
+

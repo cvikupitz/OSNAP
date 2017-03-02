@@ -154,11 +154,8 @@ def add_asset():
     if (request.method == 'GET'):
         msg = session['message']
         session['message'] = ""
-        cur.execute("SELECT * FROM assets")
-        res = cur.fetchall()
-        cur.execute("SELECT * FROM facilities")
-        res2 = cur.fetchall()
-        return render_template('add_asset.html', message = msg, assets = res, facilities = res2)
+        return render_template('add_asset.html', message = msg, assets = get_assets(),
+                               facilities = get_facilities())
 
     # User enters an asset into the database.
     else:
@@ -166,8 +163,7 @@ def add_asset():
             entries = (request.form['tag'], request.form['desc'], request.form['facility'], request.form['date'])
 
             # The asset tag already exists, redirect with error message.
-            cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
-            if (cur.fetchone() != None):
+            if (asset_exists(entries[0])):
                 session['message'] = "Duplicate Entry: There's already an asset with that tag."
                 return redirect(url_for('add_asset'))
 
