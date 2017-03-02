@@ -86,7 +86,7 @@ def create_user():
             # Check to see if there already exists an account with the username.
             if (user_exists(entries[0])):
                 session['message'] = "Occupied User: That username already exists."
-                return redirect(url_for('create_user', message = ['message']))
+                return redirect(url_for('create_user', message = session['message']))
 
             # Creates the new account, goes to the dashboard.
             create_account(entries[0], entries[1], entries[3])
@@ -95,7 +95,8 @@ def create_user():
             return redirect(url_for('dashboard'))
 
         else:
-            abort(401)
+            session['message'] = "Occupied User: That username already exists."
+            return redirect(url_for('create_user', message = session['message']))
 
 
 """
@@ -139,7 +140,8 @@ def add_facility():
                 create_facility(entries[0], entries[1])
                 return redirect(url_for('add_facility'))
         else:
-            abort(401)
+            session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
+            return redirect(url_for('dashboard_redirect'))
 
 
 """
@@ -174,19 +176,11 @@ def add_asset():
 
             # Inserts the asset into the database.
             else:
-                cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", entries[:2])
-                conn.commit()
-                cur.execute("SELECT facility_pk FROM facilities WHERE common_name=%s", entries[2:3])
-                ffk = cur.fetchone()[0]
-                cur.execute("SELECT asset_pk FROM assets WHERE tag=%s", entries[:1])
-                afk = cur.fetchone()[0]
-                date = date_to_string(entries[3])
-                cur.execute("INSERT INTO asset_status (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
-                        (afk, ffk, date))
-                conn.commit()
+                add_asset(entries[0], entries[1], entries[2], entries[3])
                 return redirect(url_for('add_asset'))
         else:
-            abort(401)
+            session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
+            return redirect(url_for('dashboard_redirect'))
 
 
 """
@@ -210,20 +204,18 @@ def dispose_asset():
         if ('tag' in request.form and 'date' in request.form):
             entries = (request.form['tag'], request.form['date'])
 
-            # Check to see if the asset is in the system.
+            # Make sure the date is valid.
             if (not date_valid(entries[1])):
                 session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
                 return redirect(url_for('dispose_asset'))
-            cur.execute("SELECT * FROM assets WHERE tag=%s", entries[:1])
-            asset = cur.fetchone()
-            if (asset == None):
+
+            # Check to see if the asset is in the system.
+            if (asset_exists(entries[0])):
                 session['message'] = "Asset Not Found: The asset you entered does not exist."
                 return redirect(url_for('dispose_asset'))
 
             # Check to see if the asset is already disposed.
-            cur.execute("SELECT * FROM asset_status WHERE asset_fk=%s", asset[:1])
-            facility = cur.fetchone()
-            if (facility[4] != None):
+            if (asset_disposed(entries[0]))
                 session['message'] = "Disposed Asset: The asset you entered has already been disposed."
                 return redirect(url_for('dispose_asset'))
 
@@ -233,10 +225,13 @@ def dispose_asset():
             conn.commit()
             return redirect(url_for('dispose_asset'))
         else:
-            abort(401)
+            session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
+            return redirect(url_for('dashboard_redirect'))
 
 
-""""""
+"""
+
+"""
 @app.route('/asset_report', methods = ['GET', 'POST'])
 def asset_report():
 
@@ -287,7 +282,8 @@ def asset_report():
             return redirect(url_for('asset_report.html', message = '', facilities = facs, entries = report))
 
         else:
-            abort(401)
+            session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
+            return redirect(url_for('dashboard_redirect'))
 
 
 """

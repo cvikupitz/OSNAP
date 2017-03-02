@@ -2,8 +2,9 @@
 psql.py
 Author: Cole Vikupitz
 
-Contains functions that performs SQL commands used in the L.O.S.T web application.
+Contains functions that performs SQL commands used in the L.O.S.T. web application.
 """
+
 
 # Imports
 from config import dbname, dbhost, dbport
@@ -187,7 +188,31 @@ Returns:
     None
 """
 def add_asset(tag, desc, facility, date):
-    return None
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", (tag, desc,))
+        conn.commit()
+        cur.execute("SELECT facility_pk FROM facilities WHERE common_name=%s", (facility,))
+        ffk = cur.fetchone()[0]
+        cur.execute("SELECT asset_pk FROM assets WHERE tag=%s", (tag,))
+        afk = cur.fetchone()[0]
+        date = date_to_string(date)
+        cur.execute("INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
+                (afk, ffk, date,))
+        conn.commit()
+        return None
+
+
+"""
+FIXME
+"""
+def asset_disposed(tag):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT asset_at.depart_date FROM asset_at att JOIN assets a ON att.asset_fk=a.asset_pk WHERE a.tag=%s",
+                    (tag,))
+        conn.commit()
+        return (cur.fetchone()[4] != None)
 
 
 
