@@ -18,8 +18,10 @@ Returns:
 """
 def authenticate(uname, password):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
-        cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s",
-                    (uname, password))
+        cur = conn.cursor()
+        temp = (uname, password,)
+        cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", temp)
+        conn.commit()
         return (cur.fetchone() != None)
 
 
@@ -36,8 +38,9 @@ Returns:
 """
 def create_account(uname, password, role):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
-        cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
-                    (uname, password, role))
+        cur = conn.cursor()
+        temp = (uname, password, role,)
+        cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)", temp)
         conn.commit()
         return None
 
@@ -52,8 +55,10 @@ Returns:
 """
 def user_exists(uname):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
-        cur.execute("SELECT username FROM users WHERE username=%s",
-                    (uname))
+        cur = conn.cursor()
+        temp = (uname,)
+        cur.execute("SELECT username FROM users WHERE username=%s", temp)
+        conn.commit()
         return (cur.fetchone() != None)
 
 
@@ -66,8 +71,9 @@ Returns:
     The title of the role of the user.
 """
 def fetch_role(uname):
-    """"""
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
-        cur.execute("SELECT r.title FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s",
-                    (uname))
+        cur = conn.cursor()
+        temp = (uname,)
+        cur.execute("SELECT r.title FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s", temp)
+        conn.commit()
         return (cur.fetchone()[0])
