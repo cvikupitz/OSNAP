@@ -43,8 +43,10 @@ FIXME
 			<table style="width:50%">
 				<tr><th><b>Facility Name</b></th><th><b>Facility Code</b></th></tr>
 				{% for fac in facilities %}
-					<tr><th> {{ fac[1] }} </th>
-					<th> {{ fac[2] }} </th></tr>
+					<tr>
+						<th> {{ fac[2] }} </th>
+						<th> {{ fac[1] }} </th>
+					</tr>
 				{% endfor %}
 			</table><br>
 			<form method="post">

@@ -187,7 +187,7 @@ Args:
 Returns:
     None
 """
-def add_asset(tag, desc, facility, date):
+def create_asset(tag, desc, facility, date):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
         cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", (tag, desc,))

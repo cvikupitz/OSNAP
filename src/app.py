@@ -176,7 +176,7 @@ def add_asset():
 
             # Inserts the asset into the database.
             else:
-                add_asset(entries[0], entries[1], entries[2], entries[3])
+                create_asset(entries[0], entries[1], entries[2], entries[3])
                 return redirect(url_for('add_asset'))
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
