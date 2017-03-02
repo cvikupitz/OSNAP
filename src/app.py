@@ -36,7 +36,7 @@ def login():
         msg = session['message']
         session['message'] = ""
         return render_template('login.html', message = msg)
-    
+
     # User attempts login, get username and password, checks entries in database.
     else:
         if ('username' in request.form and 'password' in request.form):
@@ -71,7 +71,7 @@ def create_user():
         msg = session['message']
         session['message'] = ""
         return render_template('create_user.html', message = msg)
-    
+
     # User creates a new account, creates the account or rejects the request.
     else:
         if ('username' in request.form and 'password' in request.form and 'confirm' in request.form and 'role' in request.form):
@@ -122,9 +122,7 @@ def add_facility():
     if (request.method == 'GET'):
         msg = session['message']
         session['message'] = ""
-        cur.execute("SELECT * FROM facilities")
-        res = cur.fetchall()
-        return render_template('add_facility.html', message = msg, facilities = res)
+        return render_template('add_facility.html', message = msg, facilities = get_facilities())
 
     # User inserts a new facility into the database.
     else:
@@ -132,15 +130,13 @@ def add_facility():
             entries = (request.form['name'], request.form['code'])
 
             # If the facility entered has an existing name/code, notify user.
-            cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s", entries)
-            if (cur.fetchone() != None):
+            if (facility_exists(entries[0], entries[1])):
                 session['message'] = "Duplicate Entry: There's already a facility with that name/code."
                 return redirect(url_for('add_facility'))
 
             # Inserts the facility into the database.
             else:
-                cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", entries)
-                conn.commit()
+                create_facility(entries[0], entries[1])
                 return redirect(url_for('add_facility'))
         else:
             abort(401)
@@ -153,7 +149,7 @@ the database.
 """
 @app.route('/add_asset', methods = ['GET', 'POST'])
 def add_asset():
-    
+
     # Loads the assets page.
     if (request.method == 'GET'):
         msg = session['message']
@@ -266,7 +262,7 @@ def asset_report():
             temp2 = cur.fetchone()
             report.append((temp[1], temp[2], temp2[0], asset[3], asset[4]))
         return render_template('asset_report.html', message = msg, facilities = facs, entries = report)
-    
+
     else:
         if ('facility' in request.form and 'date' in request.form):
             entries = (request.form['facility'], request.form['date'])
@@ -281,7 +277,7 @@ def asset_report():
             assets = cur.fetchall()
             report = []
             filter_date = date_to_string(entries[1])
-            
+
             for asset in assets:
                 if (not asset[3] == filter_date):
                     continue

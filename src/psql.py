@@ -1,8 +1,11 @@
 """
 psql.py
 Author: Cole Vikupitz
+
+Contains functions that performs SQL commands used in the L.O.S.T web application.
 """
 
+# Imports
 from config import dbname, dbhost, dbport
 import psycopg2
 
@@ -77,3 +80,59 @@ def fetch_role(uname):
         cur.execute("SELECT r.title FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s", temp)
         conn.commit()
         return (cur.fetchone()[0])
+
+
+"""
+Fetches and returns all the facilities currently in the database in a list.
+
+Args:
+    None
+Returns:
+    A list of all the facilities currently in the database.
+"""
+def get_facilities():
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM facilities")
+        conn.commit()
+        return (cur.fetchall())
+
+
+"""
+Checks to see of a facility currently exists within the database with either the
+given name or facility code.
+
+Args:
+    name - The facility's common name.
+    code - The facility's identification code.
+Returns:
+    True if there exists a facility with the given name or code, or false if both
+    are unique.
+"""
+def facility_exists(name, code):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        temp = (name, code,)
+        cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s", temp)
+        conn.commit()
+        return (cur.fetchone() != None)
+
+
+"""
+Creates and inserts a new facility instance into the database given the facility
+common name and its 6-digit identification code. Changes are committed to the
+database.
+
+Args:
+    name - The facility's common name.
+    code - The facility's identification code.
+Returns:
+    None
+"""
+def create_facility(name, code):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        temp = (name, code,)
+        cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", temp)
+        conn.commit()
+        return None
