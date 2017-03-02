@@ -114,7 +114,7 @@ def facility_exists(name, code):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
         temp = (name, code,)
-        cur.execute("SELECT * FROM facilities WHERE common_name=%s OR code=%s", temp)
+        cur.execute("SELECT * FROM facilities WHERE common_name=%s OR fcode=%s", temp)
         conn.commit()
         return (cur.fetchone() != None)
 
@@ -134,7 +134,7 @@ def create_facility(name, code):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
         temp = (name, code,)
-        cur.execute("INSERT INTO facilities (common_name, code) VALUES (%s, %s)", temp)
+        cur.execute("INSERT INTO facilities (common_name, fcode) VALUES (%s, %s)", temp)
         conn.commit()
         return None
 

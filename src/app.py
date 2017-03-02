@@ -215,7 +215,7 @@ def dispose_asset():
                 return redirect(url_for('dispose_asset'))
 
             # Check to see if the asset is already disposed.
-            if (asset_disposed(entries[0]))
+            if (asset_disposed(entries[0])):
                 session['message'] = "Disposed Asset: The asset you entered has already been disposed."
                 return redirect(url_for('dispose_asset'))
 
@@ -230,7 +230,7 @@ def dispose_asset():
 
 
 """
-
+FIXME
 """
 @app.route('/asset_report', methods = ['GET', 'POST'])
 def asset_report():
