@@ -2,6 +2,8 @@
 app.py
 Author: Cole Vikupitz
 CIS 322
+
+Flask application that runs the L.O.S.T. website.
 """
 
 # Imports
@@ -299,18 +301,6 @@ def asset_report():
 
         else:
             abort(401)
-
-
-"""
-Send the user to a page containing a message. This message
-will be an error message describing the nature of the
-redirection (i.e. username and password incorrect). User will
-be able to redirect back to the login page.
-"""
-@app.route('/message', methods = ['GET', 'POST'])
-def message():
-    # Go to message screen with message.
-    return render_template('message.html', message = session['message'])
 
 
 """

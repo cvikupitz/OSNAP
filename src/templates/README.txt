@@ -2,19 +2,42 @@ This directory contains the HTML files for the web app.
 
 ...
 |
-|-- alien_icon.png
-|    * Icon used for the web page title icon and used at the login/logout screens.
+|-- add_asset.html
+|    * Page where users can add assets into the system.
+|
+|-- add_facility.html
+|    * Page where users can add facilities into the system.
+|
+|-- approve_req.html
+|    * Page where facility officers can approve transfer requests.
+|
+|-- asset_report.html
+|    * Page where users can view the system's current asset reports.
 |
 |-- create_user.html
-|    * HTML page where users can create new user accounts.
+|    * Page where users can create a new account.
 |
 |-- dashboard.html
-|    * HTML page that displays the currently logged in user and contains a link
-|      to the logout page.
+|    * Page of the dashboard, where users can sign out and access other pages.
+|
+|-- dashboard_redirect.html
+|    * Error page with message, redirects user back to dashboard.
+|
+|-- dispose_asset.html
+|    * Page where logistics officers can dispose assets from the system.
 |
 |-- login.html
-|    * HTML page where users can log in. Also contains a link to the create users page.
+|    * Page where users can log into the system.
 |
 |-- logout.html
-|    * HTML page that displays when the user logs out. Has a link back to the login page.
+|    * Page with link back to login page after the user signs out of the system.
+|
+|-- transfer_report.html
+|    * Page where users can view a report of all assets in motion/transit.
+|
+|-- transfer_req.html
+|    * Page where logistics officers can create transfer requests.
+|
+|-- update_transit.html
+|    * Page where logistics officers can update transit records.
 |

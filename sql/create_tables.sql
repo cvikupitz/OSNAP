@@ -1,56 +1,67 @@
 /*
-create_tables.sql
-Author: Cole Vikupitz
-CIS 322
-------------------------------------------------------------
-Creates the tables associated with the OSNAP data model.
-*/
+ * create_tables.sql
+ * Author: Cole Vikupitz
+ * CIS 322
+ *
+ * Creates the data tables associated with the OSNAP data model.
+ */
 
 
-/* This table holds information on user roles. Contains a key representing a role and a name for that role. */
+/* This table will hold all the possible roles a user can have. As of right now,
+ * only 2 roles are possible which are 'logistics officer' and 'facilities officer',
+ * each with different access levels to different components. This allows us to add
+ * more roles into the application easily if we wanted to in the future.
+ * 
+ * role_pk (PRIMARY KEY) - The primary key for the role instance.
+ * title (varchar(36)) - The title of the role (up to 36 characters in length), can
+ *						 be 'Logistics Officer' or 'Facilities Officer'.
+ */
 CREATE TABLE roles (
-	
-	/* 
-	The primary key for the role, used for sorting/accessing different roles from the table. The user will reference
-	this key for their role.
-	*/
 	role_pk			SERIAL PRIMARY KEY,
-
-	/* The name of the role. */
-	name			varchar(36)
-	
+	title			varchar(36)
 );
 
 
-/* This table will contain user information, which will include their user name, password, and role. */
+/* This table will hold information on facilities. Each facility in our database will 
+ * have a name and code for identification. The facilities will be used to keep track 
+ * of where our assets are located via their primary key.
+ *
+ * facility_pk (PRIMARY KEY) - Primary key for the facility instance.
+ * fcode (varchar(6)) - The code to identify the facility, can be up to 6 characters 
+ *					    in length.
+ * common_name (varchar(36)) - The name of the facility, can be up to 36 characters in
+ *							   length.
+ */
+CREATE TABLE facilities (
+	facility_pk		SERIAL PRIMARY KEY,
+	fcode			varchar(6),
+	common_name		varchar(32)
+);
+
+
+/* This table holds information on users that are in the system. All users have a username 
+ * and password stored in their account, used for signing into the web application. In
+ * addition, a role is also stored into each user, via by pointing to the key of one of
+ * the roles inside the roles table by using a primary key.
+ *
+ * user_pk (PRIMARY KEY) - Primary key for the user instance.
+ * username (varchar(16)) - The account username, up to 16 characters in length. 
+ * password (varchar(16)) - The password of the account, up to 16 characters in length.
+ * role (integer) - The role of the user. This points to the primary key of the role in
+ *					the roles table that this user has.
+ */
 CREATE TABLE users (
-
-	/* 
-	The primary key will be used to create an ordered list of all the users. Not used for the username, as the 
-	primary key may come in handy for other functions later. 
-	*/
 	user_pk			SERIAL PRIMARY KEY,
-	
-	/*
-	The username will not be longer than 16 characters, so a variable length string of 16 will be used for 
-	the username.
-	*/
 	username		varchar(16) NOT NULL,
-	
-	/*
-	The password will also not be longer than 16 characters, so again a variable length string of 16 will 
-	also be used for the password.
-	*/
 	password		varchar(16) NOT NULL,
-	
-	/*
-	The role of the user will be a number corresponding with the role primary key. We will just have a pre-set
-	table of roles and each user will point to one of the roles in the table. Should eliminate redundancy and make
-	it easy to add new roles if needed.
-	*/
 	role			integer REFERENCES roles (role_pk)
-
 );
+
+
+
+
+
+
 
 
 /* This table contains information on assets, including their tags and descriptions. */
@@ -65,20 +76,6 @@ CREATE TABLE assets (
 	/* A small description of the asset, can be up to 80 characters in length. */
 	description		varchar(80)
 
-);
-
-
-/* This table holds information on facilities. Includes data such as the facility common name and its 6-digit code. */
-CREATE TABLE facilities (
-
-	/* Primary key used for the facilities, used for accessing facilities from the table. */
-	facility_pk		SERIAL PRIMARY KEY,
-
-	/* The name of the facility, up to 32 characters in length. */
-	common_name		varchar(32),
-
-	/* A code, up to 6 characters, for the facility. */
-	code			varchar(6)
 );
 
 
@@ -105,7 +102,7 @@ CREATE TABLE asset_status (
 	depart_date		date
 );
 
+
 /* Inserts the 2 roles into the table. */
 INSERT INTO roles (name) VALUES ('Logistics Officer');
 INSERT INTO roles (name) VALUES ('Facilities Officer');
-
