@@ -1,7 +1,8 @@
 """
 util.py
 Author: Cole Vikupitz
-CIS 322
+
+File with helper functions used in the L.O.S.T. web application.
 """
 
 def date_valid(date):

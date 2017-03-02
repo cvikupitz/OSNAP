@@ -171,3 +171,24 @@ def asset_exists(tag):
         conn.commit()
         return (cur.fetchone() != None)
 
+
+"""
+Creates and inserts an asset into the database given the asset tag, description,
+facility of storage, and its intake date. The asset is inserted into the assets
+table as well as the asset_at table to keep track of the asset location and
+intake date. Changes are made then committed to the database.
+
+Args:
+    tag - The asset's tag.
+    desc - The asset's description.
+    facility - The name of the facility the asset is stored at.
+    date - The date the asset was stored at the facility.
+Returns:
+    None
+"""
+def add_asset(tag, desc, facility, date):
+    return None
+
+
+
+

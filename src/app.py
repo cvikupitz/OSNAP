@@ -1,7 +1,6 @@
 """
 app.py
 Author: Cole Vikupitz
-CIS 322
 
 Flask application that runs the L.O.S.T. website.
 """
@@ -54,7 +53,8 @@ def login():
                 session['role'] = fetch_role(entries[0])
                 return redirect(url_for('dashboard'))
         else:
-            abort(401)
+            session['message'] = "Unauthenticated User: Incorrect username/password."
+            return redirect(url_for('login', message = session['message']))
 
 
 """
