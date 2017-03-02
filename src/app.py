@@ -51,11 +51,11 @@ def login():
             # Successful login, go to dashboard.
             else:
                 session['username'] = entries[0]
-                cur.execute("SELECT r.name FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s", entries[:1])
+                cur.execute("SELECT r.title FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s", entries[:1])
                 session['role'] = cur.fetchone()[0]
                 return redirect(url_for('dashboard'))
         else:
-            abort(400)
+            abort(401)
 
 
 """
@@ -100,7 +100,7 @@ def create_user():
             return redirect(url_for('dashboard'))
 
         else:
-            abort(400)
+            abort(401)
 
 
 """
