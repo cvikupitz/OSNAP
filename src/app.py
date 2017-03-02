@@ -95,7 +95,7 @@ def create_user():
                         (entries[0], entries[1], entries[3]))
             conn.commit()
             session['username'] = entries[0]
-            cur.execute("SELECT name FROM roles WHERE role_pk=%s", entries[-1])
+            cur.execute("SELECT title FROM roles WHERE role_pk=%s", entries[-1])
             session['role'] = cur.fetchone()[0]
             return redirect(url_for('dashboard'))
 
