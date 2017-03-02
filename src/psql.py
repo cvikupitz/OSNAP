@@ -193,12 +193,14 @@ def create_asset(tag, desc, facility, date):
         cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", (tag, desc,))
         conn.commit()
         cur.execute("SELECT facility_pk FROM facilities WHERE common_name=%s", (facility,))
+        conn.commit()
         ffk = cur.fetchone()[0]
         cur.execute("SELECT asset_pk FROM assets WHERE tag=%s", (tag,))
+        conn.commit()
         afk = cur.fetchone()[0]
-        date = date_to_string(date)
+        new_date = date_to_string(date)
         cur.execute("INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
-                (afk, ffk, date,))
+                (afk, ffk, new_date,))
         conn.commit()
         return None
 
