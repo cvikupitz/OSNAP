@@ -45,8 +45,10 @@ FIXME
 			<table style="width:70%">
 				<tr><th><b>Asset Tag</b></th><th><b>Asset Description</b></th></tr>
 				{% for asset in assets %}
-					<tr><th> {{ asset[1] }} </th>
-					<th> {{ asset[2] }} </th></tr>
+					<tr>
+						<th> {{ asset[1] }} </th>
+						<th> {{ asset[2] }} </th>
+					</tr>
 				{% endfor %}
 			</table><br>
 			<form method="post">
