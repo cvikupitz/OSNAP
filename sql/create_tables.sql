@@ -104,5 +104,5 @@ CREATE TABLE asset_status (
 
 
 /* Inserts the 2 roles into the table. */
-INSERT INTO roles (name) VALUES ('Logistics Officer');
-INSERT INTO roles (name) VALUES ('Facilities Officer');
+INSERT INTO roles (title) VALUES ('Logistics Officer');
+INSERT INTO roles (title) VALUES ('Facilities Officer');
