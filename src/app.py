@@ -237,12 +237,20 @@ def asset_report():
     if (request.method == 'GET'):
         msg = session['message']
         session['message'] = ""
-        return render_template('asset_report.html', message = msg, facilities = get_facilities(), entries = [])
+        return render_template('asset_report.html', message = msg, facilities = get_facilities())
 
     else:
         if ('facility' in request.form and 'date' in request.form):
             entries = (request.form['facility'], request.form['date'])
-            return render_template('asset_report.html', message = msg, facilities = get_facilities(), entries = [])
+
+            # Make sure date is valid.
+            if (not date_valid(entries[1])):
+                session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
+                redirect(url_for('asset_report'))
+
+            # Generate the report.
+            report = generate_report(entries[0], entries[1])
+            return redirect(url_for('asset_report.html', facilities = get_facilities(), entries = report))
 
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."

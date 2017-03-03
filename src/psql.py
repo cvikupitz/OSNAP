@@ -239,3 +239,42 @@ def dispose(tag, date):
         cur.execute("UPDATE asset_at SET depart_date=%s WHERE asset_fk=%s", (new_date, ident,))
         conn.commit()
         return None
+
+
+"""
+Generates and returns an asset report in the form of a list. The list generated
+takes the form [(a1,b1,c1,d1,e1), (a2,b2,c2,d2,e2), ...] where a is the asset
+tag, b is the asset description, c is the facility, d is the arrival date, and
+e is the departure date. The list is generated filtered by the given facility
+name and the arrival date.
+
+Args:
+    facility - The name of the facility to filter by.
+    date - The date to filter by.
+Returns:
+    A list of tuplesthat represent the asset report.
+"""
+def generate_report(facility, date):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        arrive_date = date_to_string(date)
+        if (facility == "ALL"):
+            cur.execute("SELECT * FROM asset_at WHERE arrive_date=%s", (arrive_date,))
+            conn.commit()
+        else:
+            cur.execute("SELECT * FROM facilities WHERE facility_name=%s", (facility,))
+            conn.commit()
+            ffk = cur.fetchone()[0]
+            cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, arrive_date,))
+            conn.commit()
+        res = cur.fetchall()
+        report = []
+        for asset in res:
+            cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (asset[1],))
+            conn.commit()
+            a_temp = cur.fetchone()
+            cur.execute("SELECT * FROM facilities WHERE facility_pk=%s", (asset[2],))
+            conn.commit()
+            b_temp = cur.fetchone()[2]
+            report.append((a_temp[1], a_temp[2], b_temp, asset[3], asset[4],))
+        return report
