@@ -108,7 +108,10 @@ from here.
 def dashboard():
     # Sign in to the dashboard.
     session['message'] = ""
-    pending = get_pending_requests()
+    if (session['role'] == "Facilities Officer"):
+        pending = get_pending_requests()
+    else:
+        pending = get_approved_requests()
     return render_template('dashboard.html', name = session['username'], role = session['role'], requests = pending)
 
 

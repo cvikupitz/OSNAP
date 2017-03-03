@@ -49,18 +49,21 @@ Page of the dashboard, where users can sign out and access other pages.
 			</header>
 			<nav>
 				<b>Pending Transfers:</b><br>
-				{% for re in requests %}
 				<ul>
+					{% for re in requests %}
 					<li><a href=''> {{ re[1] }} </a></li>
+					{% endfor %}
 				</ul>
 			</nav>
 			<article>
-				<h3><a href="{{url_for('asset_report')}}">View Asset Report</a></h3>
-				<h3><a href="{{url_for('logout')}}">View Transfer Report</a></h3>
-				<h3><a href="{{url_for('add_asset')}}">Add an Asset</a></h3>
-				<h3><a href="{{url_for('add_facility')}}">Add a Facility</a></h3>
-				<h3><a href="{{url_for('dispose_asset')}}">Dispose an Asset</a></h3>
-				<h3><a href="{{url_for('transfer_req')}}">Make a Transfer Request</a></h3>
+				<ul>
+					<li><h3><a href="{{url_for('asset_report')}}">View Asset Report</a></h3></li>
+					<li><h3><a href="{{url_for('logout')}}">View Transfer Report</a></h3></li>
+					<li><h3><a href="{{url_for('add_asset')}}">Add an Asset</a></h3></li>
+					<li><h3><a href="{{url_for('add_facility')}}">Add a Facility</a></h3></li>
+					<li><h3><a href="{{url_for('dispose_asset')}}">Dispose an Asset</a></h3></li>
+					<li><h3><a href="{{url_for('transfer_req')}}">Make a Transfer Request</a></h3></li>
+				</ul>
 			</article>
 			
 	</div>	

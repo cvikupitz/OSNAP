@@ -353,7 +353,7 @@ def add_request(user, src, dest, tag):
 def get_pending_requests():
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM requests WHERE approver IS NOT NULL")
+        cur.execute("SELECT * FROM requests WHERE approver IS NULL")
         conn.commit()
         return (cur.fetchall())
 
@@ -362,7 +362,7 @@ def get_pending_requests():
 def get_approved_requests():
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM requests WHERE approver IS NOT NULL AND approved=TRUE")
+        cur.execute("SELECT * FROM requests WHERE approver IS NOT NULL")
         conn.commit()
         return (cur.fetchall())
 
