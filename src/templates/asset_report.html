@@ -43,7 +43,7 @@ Page where users can view the system's current asset reports.
 			<h1>Asset Report</h1>
 			<h3 style="color:red;"> {{ message }} </h3>
 			
-			<form>
+			<form method="post">
 				Facility: <select required name="facility">
 					<option value="ALL">All</option>
 					{% for fac in facilities %}
@@ -52,9 +52,8 @@ Page where users can view the system's current asset reports.
 				</select>&nbsp;&nbsp;&nbsp;&nbsp;
 				Arrival Date: <input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 />
 				&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Generate"/>
-			</form>
-			
-			<table style="width:100%">
+				
+				<table style="width:100%">
 				<tr>
 					<th><b>Asset Tag</b></th>
 					<th><b>Description</b></th>
@@ -72,6 +71,7 @@ Page where users can view the system's current asset reports.
 					</tr>
 				{% endfor %}
 			</table><br>
+			</form>
 		</center>
 	</body>
 </html>
