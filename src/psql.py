@@ -212,8 +212,10 @@ FIXME
 def asset_disposed(tag):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT asset_at.depart_date FROM asset_at att JOIN assets a ON att.asset_fk=a.asset_pk WHERE a.tag=%s",
-                    (tag,))
+        cur.execute("SELECT * FROM assets WHERE tag=%s", (tag,))
+        conn.commit()
+        ident = cur.fetchone[0]
+        cur.execute("SELECT * FROM asset_at WHERE aset_fk=%s", (ident,))
         conn.commit()
         return (cur.fetchone()[4] != None)
 
