@@ -102,7 +102,6 @@ CREATE TABLE requests (
 	id_stamp			varchar(20),
 	requester			integer REFERENCES users (user_pk),
 	approver			integer REFERENCES users (user_pk),
-	approved			boolean,
 	submit_date			timestamp,
 	approve_date		timestamp,
 	src_facility		integer REFERENCES facilities (facility_pk),

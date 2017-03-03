@@ -18,11 +18,49 @@ Page where facility officers can approve transfer requests.
 				font-family: verdana;
 				font-size: 100%;
 			}
+			input {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+			}
 		</style>
 	</head>
 	<body>
+		<title>L.O.S.T.</title>
+		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
-			
+			<h1>Approve/Decline the Request</h1><br>
+			<table style="width:70%">
+				<tr>
+					<th><b>ID Stamp</b></th>
+					<th> {{ request[0] }} </th>
+				</tr>
+				<tr>
+					<th><b>Asset Tag</b></th>
+					<th> {{ request[1] }} </th>
+				</tr>
+				<tr>
+					<th><b>Source Facility</b></th>
+					<th> {{ request[2] }} </th>
+				</tr>
+				<tr>
+					<th><b>Destination Facility</b></th>
+					<th> {{ request[3] }} </th>
+				</tr>
+				<tr>
+					<th><b>Requested by</b></th>
+					<th> {{ request[4] }} </th>
+				</tr>
+				<tr>
+					<th><b>Submitted at</b></th>
+					<th> {{ request[5] }} </th>
+				</tr>
+			</table><br><br>
+			<form method="post">
+				<input type="submit" value="Approve"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" value="Decline"/>
+			</form>
 		</center>
+		
 	</body>
 </html>
