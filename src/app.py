@@ -270,7 +270,8 @@ def transfer_req():
             return redirect(url_for('dashboard_redirect'))
         msg = session['message']
         session['message'] = ""
-        return render_template('transfer_req.html', message = msg)
+        return render_template('transfer_req.html', message = msg, src_facilities = get_facilities(),
+                dest_facilities = get_facilities())
     
     else:
         if ('source' in request.form and 'destination' in request.form and 'tag' in request.form):
@@ -282,7 +283,7 @@ def transfer_req():
                 return redirect(url_for('transfer_req'))
 
             # Adds the request into the database.
-            add_request(session['username'], entries['source'], entries['destination'], entries['tag'])
+            add_request(session['username'], entries[0], entries[1], entries[2])
             return redirect(url_for('transfer_req'))
         
         else:
