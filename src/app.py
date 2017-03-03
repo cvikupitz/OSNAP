@@ -24,7 +24,7 @@ Login page for the users. User can login with a username
 and password, and will link to dashboard if the login
 was successful, or notify user if unsuccessful.
 """
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 @app.route('/login', methods = ['GET','POST'])
 def login():
 
@@ -220,9 +220,7 @@ def dispose_asset():
                 return redirect(url_for('dispose_asset'))
 
             # Remove the asset from the system.
-            new_date = date_to_string(entries[1])
-            cur.execute("UPDATE asset_status SET depart_date=%s WHERE asset_fk=%s", (new_date, asset[0]))
-            conn.commit()
+            dispose(entries[0], entries[1])
             return redirect(url_for('dispose_asset'))
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."

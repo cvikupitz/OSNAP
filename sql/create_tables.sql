@@ -69,7 +69,7 @@ CREATE TABLE users (
  */
 CREATE TABLE assets (
 	asset_pk		SERIAL PRIMARY KEY,
-	tag				varchar(16) NOT NULL,
+	tag			varchar(16) NOT NULL,
 	description		varchar(80)
 );
 

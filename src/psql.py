@@ -24,8 +24,7 @@ Returns:
 def authenticate(uname, password):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        temp = (uname, password,)
-        cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", temp)
+        cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", (uname, password,))
         conn.commit()
         return (cur.fetchone() != None)
 
@@ -44,8 +43,7 @@ Returns:
 def create_account(uname, password, role):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        temp = (uname, password, role,)
-        cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)", temp)
+        cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)", (uname, password, role,))
         conn.commit()
         return None
 
@@ -61,8 +59,7 @@ Returns:
 def user_exists(uname):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        temp = (uname,)
-        cur.execute("SELECT username FROM users WHERE username=%s", temp)
+        cur.execute("SELECT username FROM users WHERE username=%s", (uname,))
         conn.commit()
         return (cur.fetchone() != None)
 
@@ -78,8 +75,7 @@ Returns:
 def fetch_role(uname):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        temp = (uname,)
-        cur.execute("SELECT r.title FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s", temp)
+        cur.execute("SELECT r.title FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s", (uname,))
         conn.commit()
         return (cur.fetchone()[0])
 
@@ -114,8 +110,7 @@ Returns:
 def facility_exists(name, code):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        temp = (name, code,)
-        cur.execute("SELECT * FROM facilities WHERE common_name=%s OR fcode=%s", temp)
+        cur.execute("SELECT * FROM facilities WHERE common_name=%s OR fcode=%s", (name, code,))
         conn.commit()
         return (cur.fetchone() != None)
 
@@ -134,8 +129,7 @@ Returns:
 def create_facility(name, code):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        temp = (name, code,)
-        cur.execute("INSERT INTO facilities (common_name, fcode) VALUES (%s, %s)", temp)
+        cur.execute("INSERT INTO facilities (common_name, fcode) VALUES (%s, %s)", (name, code,))
         conn.commit()
         return None
 
@@ -168,8 +162,7 @@ Returns:
 def asset_exists(tag):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        temp = (tag,)
-        cur.execute("SELECT * FROM assets WHERE tag=%s", temp)
+        cur.execute("SELECT * FROM assets WHERE tag=%s", (tag,))
         conn.commit()
         return (cur.fetchone() != None)
 
@@ -214,11 +207,22 @@ def asset_disposed(tag):
         cur = conn.cursor()
         cur.execute("SELECT * FROM assets WHERE tag=%s", (tag,))
         conn.commit()
-        ident = cur.fetchone[0]
-        cur.execute("SELECT * FROM asset_at WHERE aset_fk=%s", (ident,))
+        ident = cur.fetchone()[0]
+        cur.execute("SELECT * FROM asset_at WHERE asset_fk=%s", (ident,))
         conn.commit()
         return (cur.fetchone()[4] != None)
 
 
+""""""
+def dispose(tag, date):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM assets WHERE tag=%s", (tag,))
+        conn.commit()
+        ident = cur.fetchone()[0]
+        new_date = date_to_string(date)
+        cur.execute("UPDATE asset_at SET depart_date=%s WHERE asset_fk=%s", (new_date, ident,))
+        conn.commit()
+        return None
 
 
