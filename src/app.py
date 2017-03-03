@@ -250,7 +250,7 @@ def asset_report():
 
             # Generate the report.
             report = generate_report(entries[0], entries[1])
-            return redirect(url_for('asset_report.html', facilities = get_facilities(), entries = report))
+            return redirect(url_for('asset_report', facilities = get_facilities(), entries = report))
 
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."

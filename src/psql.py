@@ -262,13 +262,13 @@ def generate_report(facility, date):
             cur.execute("SELECT * FROM asset_at WHERE arrive_date=%s", (arrive_date,))
             conn.commit()
         else:
-            cur.execute("SELECT * FROM facilities WHERE facility_name=%s", (facility,))
+            cur.execute("SELECT * FROM facilities WHERE common_name=%s", (facility,))
             conn.commit()
             ffk = cur.fetchone()[0]
             cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, arrive_date,))
             conn.commit()
         res = cur.fetchall()
-        #report = [('A','B','C','D','E')]
+        report = [('a','b','c','d','e',)]
         for asset in res:
             cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (asset[1],))
             conn.commit()

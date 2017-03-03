@@ -69,7 +69,7 @@ CREATE TABLE users (
  */
 CREATE TABLE assets (
 	asset_pk			SERIAL PRIMARY KEY,
-	tag					varchar(16) NOT NULL,
+	tag				varchar(16) NOT NULL,
 	description			varchar(80)
 );
 
@@ -95,28 +95,28 @@ CREATE TABLE asset_at (
 
 
 /*
- *
+ * FIXME
  */
 CREATE TABLE requests (
 	request_pk			SERIAL PRIMARY KEY,
 	requester			integer REFERENCES users (user_pk),
 	approver			integer REFERENCES users (user_pk),
 	submit_date			timestamp,
-	approve_date		timestamp,
-	src_facility		integer REFERENCES facilities (facility_fk),
-	dest_facility		integer REFERENCES facilities (facility_fk),
+	approve_date			timestamp,
+	src_facility			integer REFERENCES facilities (facility_pk),
+	dest_facility			integer REFERENCES facilities (facility_pk),
 	asset_pk			integer REFERENCES assets (asset_pk)
 );
 
 
 /*
- *
+ * FIXME
  */
 CREATE TABLE in_transit (
-	in_transit_pk		SERIAL PRIMARY KEY,
-	asset_fk			integer REFERENCES assets (asset_fk),
-	src_facility		integer REFERENCES facilities (facility_fk),
-	dest_facility		integer REFERENCES facilities (facility_fk),
+	in_transit_pk			SERIAL PRIMARY KEY,
+	asset_fk			integer REFERENCES assets (asset_pk),
+	src_facility			integer REFERENCES facilities (facility_pk),
+	dest_facility			integer REFERENCES facilities (facility_pk),
 	load_time			timestamp,
 	unload_time			timestamp
 );
