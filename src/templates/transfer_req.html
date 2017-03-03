@@ -18,11 +18,36 @@ Page where logistics officers can create transfer requests.
 				font-family: verdana;
 				font-size: 100%;
 			}
+			input {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+			}
+			select { height: 23px; }
 		</style>
 	</head>
 	<body>
+		<title>L.O.S.T.</title>
+		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
-			
+			<h1>Transfer Request</h1>
+			<h3 style="color:red;"> {{ message }} </h3>
+			<form method="post">
+				Source Facility: <select required name="source">
+					<option value="">None</option>
+					{% for fac in src_facilities %}
+						<option value={{fac[2]}}> {{ fac[2] }} </option>
+					{% endfor %} 
+				</select><br><br>
+				Destination Facility: <select required name="destination">
+					<option value="">None</option>
+					{% for fac in dest_facilities %}
+						<option value={{fac[2]}}> {{ fac[2] }} </option>
+					{% endfor %} 
+				</select><br><br>
+				Asset Tag: <input type="text" name="tag" size=16 placeholder="Required" required maxlength=16 /><br><br>
+				<input type="submit" value="Submit Request"/>
+			</form>
 		</center>
 	</body>
 </html>

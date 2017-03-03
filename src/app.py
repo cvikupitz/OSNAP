@@ -258,6 +258,75 @@ def asset_report():
 
 
 """
+FIXME
+"""
+@app.route('/transfer_req', methods = ['GET', 'POST'])
+def transfer_req():
+
+    if (request.method == 'GET'):
+        if (session['role'] != 'Logistics Officer'):
+            session['message'] = "Page Restricted: Only logistics officers may access this page."
+            return redirect(url_for('dashboard_redirect'))
+        msg = session['message']
+        session['message'] = ""
+        return render_template('transfer_req.html', message = msg)
+    else:
+        #################
+        return render_template('transfer_req.html', message = msg)
+
+
+"""
+FIXME
+"""
+@app.route('/approve_req', methods = ['GET', 'POST'])
+def approve_req():
+
+    if (request.method == 'GET'):
+        if (session['role'] != 'Facilities Officer'):
+            session['message'] = "Page Restricted: Only facility officers may access this page."
+            return redirect(url_for('dashboard_redirect'))
+        msg = session['message']
+        session['message'] = ""
+        return render_template('approve_req.html', message = msg)
+    else:
+        #################
+        return render_template('approve_req.html', message = msg)
+
+
+"""
+FIXME
+"""
+@app.route('/update_transit', methods = ['GET', 'POST'])
+def update_transit():
+
+    if (request.method == 'GET'):
+        if (session['role'] != 'Logistics Officer'):
+            session['message'] = "Page Restricted: Only logistics officers may access this page."
+            return redirect(url_for('dashboard_redirect'))
+        msg = session['message']
+        session['message'] = ""
+        return render_template('update_transit.html', message = msg)
+    else:
+        #################
+        return render_template('update_transit.html', message = msg)
+
+
+"""
+FIXME
+"""
+@app.route('/transfer_report', methods = ['GET', 'POST'])
+def transfer_report():
+
+    if (request.method == 'GET'):
+        msg = session['message']
+        session['message'] = ""
+        return render_template('transfer_report.html', message = msg)
+    else:
+        #################
+        return render_template('transfer_report.html', message = msg)
+
+
+"""
 Send the user to a page containing a message. This message
 will be an error message describing the nature of the
 redirection (i.e. duplicate entries). User will
