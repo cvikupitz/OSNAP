@@ -268,7 +268,7 @@ def generate_report(facility, date):
             cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, arrive_date,))
             conn.commit()
         res = cur.fetchall()
-        report = []
+        report = [('A','B','C','D','E')]
         for asset in res:
             cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (asset[1],))
             conn.commit()
