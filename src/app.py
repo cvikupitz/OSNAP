@@ -263,6 +263,7 @@ FIXME
 @app.route('/transfer_req', methods = ['GET', 'POST'])
 def transfer_req():
 
+    # Loads the transfer request page.
     if (request.method == 'GET'):
         if (session['role'] != 'Logistics Officer'):
             session['message'] = "Page Restricted: Only logistics officers may access this page."
@@ -270,9 +271,23 @@ def transfer_req():
         msg = session['message']
         session['message'] = ""
         return render_template('transfer_req.html', message = msg)
+    
     else:
-        #################
-        return render_template('transfer_req.html', message = msg)
+        if ('source' in request.form and 'destination' in request.form and 'tag' in request.form):
+            entries = (request.form['source'], request.form['destination'], request.form['tag'])
+
+            # Check to see if the asset exists.
+            if (not asset_exists(entries[2])):
+                session['message'] = "Asset Not Found: The asset you entered does not exist."
+                return redirect(url_for('transfer_req'))
+
+            # Adds the request into the database.
+            add_request(session['username'], entries['source'], entries['destination'], entries['tag'])
+            return redirect(url_for('transfer_req'))
+        
+        else:
+            session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
+            return redirect(url_for('dashboard_redirect'))
 
 
 """

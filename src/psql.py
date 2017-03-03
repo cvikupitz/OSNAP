@@ -24,7 +24,8 @@ Returns:
 def authenticate(uname, password):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s", (uname, password,))
+        cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s",
+                    (uname, password,))
         conn.commit()
         return (cur.fetchone() != None)
 
@@ -43,7 +44,8 @@ Returns:
 def create_account(uname, password, role):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)", (uname, password, role,))
+        cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
+                    (uname, password, role,))
         conn.commit()
         return None
 
@@ -65,6 +67,22 @@ def user_exists(uname):
 
 
 """
+Returns the primary key associated with the user from the database given the username.
+
+Args:
+    uname - The user's username.
+Returns:
+    The primary key of the account, or None if the account does not exist.
+"""
+def get_user_pk(uname):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users WHERE username=%s", (uname,))
+        conn.commit()
+        return (cur.fetchone()[0])
+
+
+"""
 Fetches and returns the role title of the account given the username.
 
 Args:
@@ -75,7 +93,8 @@ Returns:
 def fetch_role(uname):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT r.title FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s", (uname,))
+        cur.execute("SELECT r.title FROM roles r JOIN users u ON r.role_pk=u.role WHERE u.username=%s",
+                    (uname,))
         conn.commit()
         return (cur.fetchone()[0])
 
@@ -116,6 +135,22 @@ def facility_exists(name, code):
 
 
 """
+Returns the primary key of the facility from the database given the common name.
+
+Args:
+    name - The common name of the facility.
+Returns:
+    The facility's primary key, or None if the facility does not exist.
+"""
+def get_facility_pk(name):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM facilities WHERE common_name=%s", (name,))
+        conn.commit()
+        return (cur.fetchone()[0])
+
+
+"""
 Creates and inserts a new facility instance into the database given the facility
 common name and its 6-digit identification code. Changes are committed to the
 database.
@@ -129,7 +164,8 @@ Returns:
 def create_facility(name, code):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO facilities (common_name, fcode) VALUES (%s, %s)", (name, code,))
+        cur.execute("INSERT INTO facilities (common_name, fcode) VALUES (%s, %s)",
+                    (name, code,))
         conn.commit()
         return None
 
@@ -165,6 +201,22 @@ def asset_exists(tag):
         cur.execute("SELECT * FROM assets WHERE tag=%s", (tag,))
         conn.commit()
         return (cur.fetchone() != None)
+
+
+"""
+Returns the primary key associated with the given asset tag.
+
+Args:
+    tag - The asset tag.
+Returns:
+    The primary key of the asset, or None if the asset does not exist.
+"""
+def get_asset_pk(tag):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM assets WHERE tag=%s", (tag,))
+        conn.commit()
+        return (cur.fetchone()[0])
 
 
 """
@@ -268,7 +320,7 @@ def generate_report(facility, date):
             cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, arrive_date,))
             conn.commit()
         res = cur.fetchall()
-        report = [('a','b','c','d','e',)]
+        report = [('a','b','c','d','e',)] #### STILL NEEDS FIXING...
         for asset in res:
             cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (asset[1],))
             conn.commit()
@@ -278,3 +330,26 @@ def generate_report(facility, date):
             b_temp = cur.fetchone()[2]
             report.append((a_temp[1], a_temp[2], b_temp, asset[3], asset[4],))
         return report
+
+
+"""
+FIXME
+"""
+def add_request(user, src, dest, tag):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        user_fk = get_user_pk(user)
+        src_fk = get_facility_pk(src)
+        dest_fk = get_facility_pk(dest)
+        asset_fk = get_asset_pk(tag)
+        cur.execute("INSERT INTO requests (requester, submit_date, src_facility, dest_facility, asset_pk)\
+                        VALUES (%s, NOW(), %s, %s, %s)", (user_fk, src_fk, dest_fk, asset_fk,))
+        conn.commit()
+        return None
+
+
+
+##############
+if __name__ == "__main__":
+    li = generate_report('Mays', '01/01/2000')
+    print(li)
