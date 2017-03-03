@@ -17,8 +17,8 @@
  *						 be 'Logistics Officer' or 'Facilities Officer'.
  */
 CREATE TABLE roles (
-	role_pk			SERIAL PRIMARY KEY,
-	title			varchar(36)
+	role_pk				SERIAL PRIMARY KEY,
+	title				varchar(36)
 );
 
 
@@ -33,9 +33,9 @@ CREATE TABLE roles (
  *							   length.
  */
 CREATE TABLE facilities (
-	facility_pk		SERIAL PRIMARY KEY,
-	fcode			varchar(6),
-	common_name		varchar(32)
+	facility_pk			SERIAL PRIMARY KEY,
+	fcode				varchar(6),
+	common_name			varchar(32)
 );
 
 
@@ -51,10 +51,10 @@ CREATE TABLE facilities (
  *					the roles table that this user has.
  */
 CREATE TABLE users (
-	user_pk			SERIAL PRIMARY KEY,
-	username		varchar(16) NOT NULL,
-	password		varchar(16) NOT NULL,
-	role			integer REFERENCES roles (role_pk)
+	user_pk				SERIAL PRIMARY KEY,
+	username			varchar(16) NOT NULL,
+	password			varchar(16) NOT NULL,
+	role				integer REFERENCES roles (role_pk)
 );
 
 
@@ -68,9 +68,9 @@ CREATE TABLE users (
  * description (varchar(80)) - A brief description of the asset, can be up to 80 characters.
  */
 CREATE TABLE assets (
-	asset_pk		SERIAL PRIMARY KEY,
-	tag			varchar(16) NOT NULL,
-	description		varchar(80)
+	asset_pk			SERIAL PRIMARY KEY,
+	tag					varchar(16) NOT NULL,
+	description			varchar(80)
 );
 
 
@@ -86,13 +86,40 @@ CREATE TABLE assets (
  * depart_date (date) - The date the asset was disposed from the facility.
  */
 CREATE TABLE asset_at (
-	asset_at_pk		SERIAL PRIMARY KEY,
-	asset_fk		integer REFERENCES assets (asset_pk),
-	facility_fk		integer REFERENCES facilities (facility_pk),
-	arrive_date		date,
-	depart_date		date
+	asset_at_pk			SERIAL PRIMARY KEY,
+	asset_fk			integer REFERENCES assets (asset_pk),
+	facility_fk			integer REFERENCES facilities (facility_pk),
+	arrive_date			date,
+	depart_date			date
 );
 
+
+/*
+ *
+ */
+CREATE TABLE requests (
+	request_pk			SERIAL PRIMARY KEY,
+	requester			integer REFERENCES users (user_pk),
+	approver			integer REFERENCES users (user_pk),
+	submit_date			timestamp,
+	approve_date		timestamp,
+	src_facility		integer REFERENCES facilities (facility_fk),
+	dest_facility		integer REFERENCES facilities (facility_fk),
+	asset_pk			integer REFERENCES assets (asset_pk)
+);
+
+
+/*
+ *
+ */
+CREATE TABLE in_transit (
+	in_transit_pk		SERIAL PRIMARY KEY,
+	asset_fk			integer REFERENCES assets (asset_fk),
+	src_facility		integer REFERENCES facilities (facility_fk),
+	dest_facility		integer REFERENCES facilities (facility_fk),
+	load_time			timestamp,
+	unload_time			timestamp
+);
 
 /* Inserts the 2 roles into the table. */
 INSERT INTO roles (title) VALUES ('Logistics Officer');
