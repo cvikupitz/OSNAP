@@ -64,4 +64,4 @@ Returns:
 """
 def generate_id():
     import os
-    return (os.urandom(16).hex())
+    return (os.urandom(10).hex())

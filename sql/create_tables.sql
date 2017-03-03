@@ -99,7 +99,7 @@ CREATE TABLE asset_at (
  */
 CREATE TABLE requests (
 	request_pk			SERIAL PRIMARY KEY,
-	id_stamp			varchar(16),
+	id_stamp			varchar(20),
 	requester			integer REFERENCES users (user_pk),
 	approver			integer REFERENCES users (user_pk),
 	approved			boolean,
@@ -116,13 +116,14 @@ CREATE TABLE requests (
  */
 CREATE TABLE in_transit (
 	in_transit_pk		SERIAL PRIMARY KEY,
-	id_stamp			varchar(16),
+	id_stamp			varchar(20),
 	asset_fk			integer REFERENCES assets (asset_pk),
 	src_facility		integer REFERENCES facilities (facility_pk),
 	dest_facility		integer REFERENCES facilities (facility_pk),
 	load_time			timestamp,
 	unload_time			timestamp
 );
+
 
 /* Inserts the 2 roles into the table. */
 INSERT INTO roles (title) VALUES ('Logistics Officer');
