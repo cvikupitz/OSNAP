@@ -95,7 +95,24 @@ CREATE TABLE asset_at (
 
 
 /*
- * FIXME
+ * This table holds information on transfer requests made by logistics officers. A request has
+ * a pointer to the asset being transferred, a source, and destination facility. This information
+ * is set manually by the officer when making the request. A stamp is randomly generated to
+ * identify each transfer, which will be a link on any facilities officer's dashboard to go and
+ * approve/decline that request. Also contains a column for the user who made the request and a
+ * timestamp of when it was made. When a facilities officer approves the request, they are
+ * inserted into the table as the approver, and the time the request was approved is added as well.
+ * If the request is declined, then it will be dropped from the database.
+ *
+ * request_pk (PRIMARY KEY) - Primary key for the request instance.
+ * id_stamp (varchar(20)) - A 20-character identification string for the request.
+ * requester (integer) - Pointer to the user who submitted the request.
+ * approver (integer) - Pointer to the user who approved the request.
+ * submit_date (timestamp) - Date & time the request was submitted.
+ * approve_date (timestamp) - Date & time the request was approved.
+ * src_facility (integer) - Pointer to the facility where the asset is transferred from.
+ * dest_facility (integer) - Pointer to the facility where the asset is transferred to.
+ * asset_fk (integer) - Pointer to the asset being transferred.
  */
 CREATE TABLE requests (
 	request_pk			SERIAL PRIMARY KEY,
@@ -106,12 +123,24 @@ CREATE TABLE requests (
 	approve_date		timestamp,
 	src_facility		integer REFERENCES facilities (facility_pk),
 	dest_facility		integer REFERENCES facilities (facility_pk),
-	asset_pk			integer REFERENCES assets (asset_pk)
+	asset_fk			integer REFERENCES assets (asset_pk)
 );
 
 
 /*
- * FIXME
+ * This table will hold information on assets currently being transferred. Columns in this table
+ * holds a pointer to the asset being transferred, a source, and destination facility. Also holds
+ * two timestamps, one for when the asset was loaded, and another for when the asset was unloaded.
+ * These times are set manually by logistics officers. These instances are generated when transit 
+ * requests are approved by facilities officers.
+ *
+ * in_transit_pk (PRIMARY KEY) - Primary key for the transit instance.
+ * id_stamp (varchar(20)) - A 20-character identification string for the transit.
+ * asset_fk (integer) - Pointer to the asset being transferred.
+ * src_facility (integer) - Pointer to the facility where the asset is transferred from.
+ * dest_facility (integer) - Pointer to the facility where the asset is transferred to.
+ * load_time (timestamp) - Date and time the asset was loaded.
+ * unload_time (timestamp) - Date and time the asset was unloaded.
  */
 CREATE TABLE in_transit (
 	in_transit_pk		SERIAL PRIMARY KEY,

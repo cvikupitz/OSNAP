@@ -343,7 +343,7 @@ def add_request(user, src, dest, tag):
         src_fk = int(get_facility_pk(src))
         dest_fk = int(get_facility_pk(dest))
         asset_fk = int(get_asset_pk(tag))
-        cur.execute("INSERT INTO requests (id_stamp, requester, submit_date, src_facility, dest_facility, asset_pk)\
+        cur.execute("INSERT INTO requests (id_stamp, requester, submit_date, src_facility, dest_facility, asset_fk)\
                         VALUES (%s, %s, NOW(), %s, %s, %s)", (stamp, user_fk, src_fk, dest_fk, asset_fk,))
         conn.commit()
         return None
