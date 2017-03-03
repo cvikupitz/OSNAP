@@ -99,6 +99,7 @@ CREATE TABLE asset_at (
  */
 CREATE TABLE requests (
 	request_pk			SERIAL PRIMARY KEY,
+	id_stamp			varchar(16),
 	requester			integer REFERENCES users (user_pk),
 	approver			integer REFERENCES users (user_pk),
 	submit_date			timestamp,

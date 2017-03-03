@@ -338,12 +338,13 @@ FIXME
 def add_request(user, src, dest, tag):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        user_fk = get_user_pk(user)
-        src_fk = get_facility_pk(src)
-        dest_fk = get_facility_pk(dest)
-        asset_fk = get_asset_pk(tag)
-        cur.execute("INSERT INTO requests (requester, submit_date, src_facility, dest_facility, asset_pk)\
-                        VALUES (%s, NOW(), %s, %s, %s)", (user_fk, src_fk, dest_fk, asset_fk,))
+        stamp = generate_id()
+        user_fk = int(get_user_pk(user))
+        src_fk = int(get_facility_pk(src))
+        dest_fk = int(get_facility_pk(dest))
+        asset_fk = int(get_asset_pk(tag))
+        cur.execute("INSERT INTO requests (id_stamp, requester, submit_date, src_facility, dest_facility, asset_pk)\
+                        VALUES (%s, NOW(), %s, %s, %s)", (stamp, user_fk, src_fk, dest_fk, asset_fk,))
         conn.commit()
         return None
 

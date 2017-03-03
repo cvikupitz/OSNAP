@@ -5,6 +5,17 @@ Author: Cole Vikupitz
 File with helper functions used in the L.O.S.T. web application.
 """
 
+
+"""
+Scans the given date and returns true/false if the date is in the correct format.
+The correct format is MM/DD/YYYY, where months/days with single digits are not
+allowed (i.e. January usually would be 1, but it must be 01).
+
+Args:
+    date - The date string to scan.
+Returns:
+    True if the date is in the format MM/DD/YYYY, false if not.
+"""
 def date_valid(date):
 
     import re
@@ -22,6 +33,18 @@ def date_valid(date):
         return True
     return False
 
+
+"""
+Converts the given date string into a different format to be passed into
+the SQL server as a Date object. The given date is expected to be in the
+format MM/DD/YYYY. The string returned is the date in the format
+'YYYY-MM-DD 00:00:00'.
+
+Args:
+    date - The date string to convert.
+Returns:
+    A new date string in the format 'YYYY-MM-DD 00:00:00'.
+"""
 def date_to_string(date):
 
     temp = date[6:]
@@ -30,3 +53,15 @@ def date_to_string(date):
     temp += ' 00:00:00'
     return temp
 
+
+"""
+Generates a random 16-character string used for the ID's of transfer requests.
+
+Args:
+    None
+Returns:
+    A random 16-character hex string.
+"""
+def generate_id():
+    import os
+    return (os.urandom(16).hex())
