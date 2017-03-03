@@ -228,7 +228,7 @@ def dispose_asset():
 
 
 """
-FIXME
+FIXME ----------------------------------------------
 """
 @app.route('/asset_report', methods = ['GET', 'POST'])
 def asset_report():
@@ -284,7 +284,8 @@ def transfer_req():
 
             # Adds the request into the database.
             add_request(session['username'], entries[0], entries[1], entries[2])
-            return redirect(url_for('transfer_req'))
+            session['message'] = "Your request has been submitted. A facility officer will accept/decline your request."
+            return redirect(url_for('dashboard_redirect'))
         
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."

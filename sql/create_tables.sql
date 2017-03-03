@@ -102,6 +102,7 @@ CREATE TABLE requests (
 	id_stamp			varchar(16),
 	requester			integer REFERENCES users (user_pk),
 	approver			integer REFERENCES users (user_pk),
+	approved			boolean,
 	submit_date			timestamp,
 	approve_date		timestamp,
 	src_facility		integer REFERENCES facilities (facility_pk),
@@ -115,6 +116,7 @@ CREATE TABLE requests (
  */
 CREATE TABLE in_transit (
 	in_transit_pk		SERIAL PRIMARY KEY,
+	id_stamp			varchar(16),
 	asset_fk			integer REFERENCES assets (asset_pk),
 	src_facility		integer REFERENCES facilities (facility_pk),
 	dest_facility		integer REFERENCES facilities (facility_pk),
