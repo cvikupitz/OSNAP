@@ -55,13 +55,16 @@ def date_to_string(date):
 
 
 """
-Generates a random 16-character string used for the ID's of transfer requests.
+Generates a random 20-character string used for the ID's of transfer requests.
 
 Args:
     None
 Returns:
-    A random 16-character hex string.
+    A random 20-character hex string.
 """
 def generate_id():
     import os
     return (os.urandom(10).hex())
+
+
+

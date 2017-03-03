@@ -141,7 +141,7 @@ def add_facility():
                 return redirect(url_for('add_facility'))
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
-            return redirect(url_for('dashboard_redirect', color = 'red'))
+            return redirect(url_for('error'))
 
 
 """
@@ -180,7 +180,7 @@ def add_asset():
                 return redirect(url_for('add_asset'))
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
-            return redirect(url_for('dashboard_redirect', color = 'red'))
+            return redirect(url_for('error'))
 
 
 """
@@ -194,7 +194,7 @@ def dispose_asset():
     if (request.method == 'GET'):
         if (session['role'] != 'Logistics Officer'):
             session['message'] = "Page Restricted: Only logistics officers may access this page."
-            return redirect(url_for('dashboard_redirect', color = 'green'))
+            return redirect(url_for('error'))
         msg = session['message']
         session['message'] = ""
         return render_template('dispose_asset.html', message = msg)
@@ -224,7 +224,7 @@ def dispose_asset():
             return redirect(url_for('dispose_asset'))
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
-            return redirect(url_for('dashboard_redirect', color = 'red'))
+            return redirect(url_for('error'))
 
 
 """
@@ -254,7 +254,7 @@ def asset_report():
 
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
-            return redirect(url_for('dashboard_redirect', color = 'red'))
+            return redirect(url_for('error'))
 
 
 """
@@ -267,7 +267,7 @@ def transfer_req():
     if (request.method == 'GET'):
         if (session['role'] != 'Logistics Officer'):
             session['message'] = "Page Restricted: Only logistics officers may access this page."
-            return redirect(url_for('dashboard_redirect'))
+            return redirect(url_for('error'))
         msg = session['message']
         session['message'] = ""
         return render_template('transfer_req.html', message = msg, src_facilities = get_facilities(),
@@ -285,12 +285,15 @@ def transfer_req():
             # Adds the request into the database.
             add_request(session['username'], entries[0], entries[1], entries[2])
             session['message'] = "Your request has been submitted. A facility officer will accept/decline your request."
-            return redirect(url_for('dashboard_redirect', color = 'green'))
+            return redirect(url_for('message'))
         
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
-            return redirect(url_for('dashboard_redirect', color = 'red'))
+            return redirect(url_for('error'))
 
+
+
+######################################################################
 
 """
 FIXME
@@ -301,7 +304,7 @@ def approve_req():
     if (request.method == 'GET'):
         if (session['role'] != 'Facilities Officer'):
             session['message'] = "Page Restricted: Only facility officers may access this page."
-            return redirect(url_for('dashboard_redirect'))
+            return redirect(url_for('error'))
         msg = session['message']
         session['message'] = ""
         return render_template('approve_req.html', message = msg)
@@ -319,7 +322,7 @@ def update_transit():
     if (request.method == 'GET'):
         if (session['role'] != 'Logistics Officer'):
             session['message'] = "Page Restricted: Only logistics officers may access this page."
-            return redirect(url_for('dashboard_redirect'))
+            return redirect(url_for('error'))
         msg = session['message']
         session['message'] = ""
         return render_template('update_transit.html', message = msg)
@@ -349,10 +352,22 @@ will be an error message describing the nature of the
 redirection (i.e. duplicate entries). User will
 be able to redirect back to the dashboard.
 """
-@app.route('/dashboard_redirect', methods = ['GET', 'POST'])
-def dashboard_redirect():
+@app.route('/message', methods = ['GET', 'POST'])
+def message():
     # Go to message screen with message.
-    return render_template('dashboard_redirect.html', message = session['message'])
+    return render_template('message.html', message = session['message'])
+
+
+"""
+Send the user to a page containing a message. This message
+will be an error message describing the nature of the
+redirection (i.e. duplicate entries). User will
+be able to redirect back to the dashboard.
+"""
+@app.route('/error', methods = ['GET', 'POST'])
+def error():
+    # Go to message screen with message.
+    return render_template('error.html', message = session['message'])
 
 
 """
