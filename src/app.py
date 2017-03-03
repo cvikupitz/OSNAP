@@ -108,7 +108,8 @@ from here.
 def dashboard():
     # Sign in to the dashboard.
     session['message'] = ""
-    return render_template('dashboard.html', name = session['username'], role = session['role'])
+    pending = get_pending_requests()
+    return render_template('dashboard.html', name = session['username'], role = session['role'], requests = pending)
 
 
 """

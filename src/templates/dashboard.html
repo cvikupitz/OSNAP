@@ -23,23 +23,46 @@ Page of the dashboard, where users can sign out and access other pages.
 				font-size: 100%;
 				margin-bottom: 10px;
 			}
+			article {
+				margin-left: 300px;
+				border-left: 1px solid gray;
+				padding: 1em;
+				overflow: hidden;
+			}
+			nav {
+				float: left;
+				max-width: 300px;
+				margin: 0;
+				padding: 1em;
+			}
 		</style>
 	</head>
 	<body>
 		<title>L.O.S.T.</title>
-		<left>
-		Currently logged in as <b>{{ name }}, {{ role }}.</b><br>
-		Click <a href="{{url_for('logout')}}">here</a> to logout.
-		</left>
-		<center>
-			<h1>L.O.S.T. Dashboard</h1><br><br>
-			<h3><a href="{{url_for('asset_report')}}">View Asset Report</a></h3>
-			<h3><a href="{{url_for('logout')}}">View Transfer Report</a></h3>
-			<h3><a href="{{url_for('add_asset')}}">Add an Asset</a></h3>
-			<h3><a href="{{url_for('add_facility')}}">Add a Facility</a></h3>
-			<h3><a href="{{url_for('dispose_asset')}}">Dispose an Asset</a></h3>
-			<h3><a href="{{url_for('transfer_req')}}">Make a Transfer Request</a></h3>
+		<p align=left>
+			Currently logged in as <b>{{ name }}, {{ role }}.</b><br>
+			Click <a href="{{url_for('logout')}}">here</a> to logout.
+		</p>
+		<div class="container">
+			<header>
+				<center><h1>L.O.S.T. Dashboard</center></h1>
+			</header>
+			<nav>
+				<b>Pending Transfers:</b><br>
+				{% for re in requests %}
+				<ul>
+					<li><a href=''> {{ re[1] }} </a></li>
+				</ul>
+			</nav>
+			<article>
+				<h3><a href="{{url_for('asset_report')}}">View Asset Report</a></h3>
+				<h3><a href="{{url_for('logout')}}">View Transfer Report</a></h3>
+				<h3><a href="{{url_for('add_asset')}}">Add an Asset</a></h3>
+				<h3><a href="{{url_for('add_facility')}}">Add a Facility</a></h3>
+				<h3><a href="{{url_for('dispose_asset')}}">Dispose an Asset</a></h3>
+				<h3><a href="{{url_for('transfer_req')}}">Make a Transfer Request</a></h3>
+			</article>
 			
-		</center>
+	</div>	
 	</body>
 </html>
