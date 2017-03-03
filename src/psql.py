@@ -7,6 +7,7 @@ Contains functions that performs SQL commands used in the L.O.S.T. web applicati
 
 
 # Imports
+from util import *
 from config import dbname, dbhost, dbport
 import psycopg2
 

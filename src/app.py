@@ -37,7 +37,7 @@ def login():
         return render_template('login.html', message = msg)
 
     # User attempts login, get username and password, checks entries in database.
-    else:
+    elif (request.method == 'POST'):
         if ('username' in request.form and 'password' in request.form):
             # Obtain the account from the database.
             entries = (request.form['username'], request.form['password'])
@@ -52,9 +52,9 @@ def login():
                 session['username'] = entries[0]
                 session['role'] = fetch_role(entries[0])
                 return redirect(url_for('dashboard'))
-        else:
-            session['message'] = "Unauthenticated User: Incorrect username/password."
-            return redirect(url_for('login', message = session['message']))
+    else:
+        session['message'] = "Unauthenticated User: Incorrect username/password."
+        return redirect(url_for('login', message = session['message']))
 
 
 """
@@ -210,7 +210,7 @@ def dispose_asset():
                 return redirect(url_for('dispose_asset'))
 
             # Check to see if the asset is in the system.
-            if (asset_exists(entries[0])):
+            if (not asset_exists(entries[0])):
                 session['message'] = "Asset Not Found: The asset you entered does not exist."
                 return redirect(url_for('dispose_asset'))
 

@@ -25,7 +25,8 @@ def date_valid(date):
 def date_to_string(date):
 
     temp = date[6:]
-    temp += "-" + date[3:5]
-    temp += "-" + date[:2] + ' 00:00:00'
+    temp += '-' + date[:2]
+    temp += '-' + date[3:5]
+    temp += ' 00:00:00'
     return temp
 
