@@ -237,47 +237,12 @@ def asset_report():
     if (request.method == 'GET'):
         msg = session['message']
         session['message'] = ""
-        cur.execute("SELECT * FROM facilities")
-        facs = cur.fetchall()
-
-        # Fetches the report, organizes into the list.
-        cur.execute("SELECT * FROM asset_status")
-        assets = cur.fetchall()
-        report = []
-        for asset in assets:
-            cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (str(asset[1])))
-            temp = cur.fetchone()
-            cur.execute("SELECT common_name FROM facilities WHERE facility_pk=%s", (str(asset[2])))
-            temp2 = cur.fetchone()
-            report.append((temp[1], temp[2], temp2[0], asset[3], asset[4]))
-        return render_template('asset_report.html', message = msg, facilities = facs, entries = report)
+        return render_template('asset_report.html', message = msg, facilities = get_facilities(), entries = [])
 
     else:
         if ('facility' in request.form and 'date' in request.form):
             entries = (request.form['facility'], request.form['date'])
-            if (not date_valid(entries[1])):
-                session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
-                return redirect(url_for('asset_report'))
-
-            if (entries[0] == 'All'):
-                cur.execute("SELECT * FROM asset_status")
-            else:
-                cur.execute("SELECT * FROM asset_status a JOIN facilities f ON a.facility_fk=f.facility_pk WHERE f.common_name=%s", (entries[0]))
-            assets = cur.fetchall()
-            report = []
-            filter_date = date_to_string(entries[1])
-
-            for asset in assets:
-                if (not asset[3] == filter_date):
-                    continue
-                cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (str(asset[1])))
-                temp = cur.fetchone()
-                cur.execute("SELECT common_name FROM facilities WHERE facility_pk=%s", (str(asset[2])))
-                temp2 = cur.fetchone()
-                report.append((temp[1], temp[2], temp2[0], asset[3], asset[4]))
-            cur.execute("SELECT * FROM facilities")
-            facs = cur.fetchall()
-            return redirect(url_for('asset_report.html', message = '', facilities = facs, entries = report))
+            return render_template('asset_report.html', message = msg, facilities = get_facilities(), entries = [])
 
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."

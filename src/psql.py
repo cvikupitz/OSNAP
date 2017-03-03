@@ -188,7 +188,7 @@ def create_asset(tag, desc, facility, date):
         conn.commit()
         cur.execute("SELECT facility_pk FROM facilities WHERE common_name=%s", (facility,))
         conn.commit()
-        ffk = cur.fetchone()[0]
+        ffk = cur.fetchone()[0] #### TypeError: 'NoneType' object is not subscriptable
         cur.execute("SELECT asset_pk FROM assets WHERE tag=%s", (tag,))
         conn.commit()
         afk = cur.fetchone()[0]
@@ -200,7 +200,13 @@ def create_asset(tag, desc, facility, date):
 
 
 """
-FIXME
+Checks the database to see if an asset was disposed given its tag. An asset is considered
+disposed if it contains a departure date.
+
+Args:
+    tag - The tag of the asset to check.
+Returns:
+    True if the asset was disposed already, false if not.
 """
 def asset_disposed(tag):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
@@ -213,7 +219,16 @@ def asset_disposed(tag):
         return (cur.fetchone()[4] != None)
 
 
-""""""
+"""
+Disposes the asset from the system given the tag and the date the asset was disposed. The
+changes are made and committed to the database.
+
+Args:
+    tag - The tag of the asset to dispose of.
+    date - The date the asset will be disposed.
+Returns:
+    None
+"""
 def dispose(tag, date):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
@@ -224,5 +239,3 @@ def dispose(tag, date):
         cur.execute("UPDATE asset_at SET depart_date=%s WHERE asset_fk=%s", (new_date, ident,))
         conn.commit()
         return None
-
-
