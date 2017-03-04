@@ -232,16 +232,23 @@ def dispose_asset():
 
 
 """
-FIXME ----------------------------------------------
+Sends the user to the asset report screen. users can view
+a summary of all assets contained at a facility on a given
+date.
 """
 @app.route('/asset_report', methods = ['GET', 'POST'])
 def asset_report():
 
     # Loads the asset report page.
+    if (session.get('report') == None):
+        session['report'] = list()
     if (request.method == 'GET'):
         msg = session['message']
         session['message'] = ""
-        return render_template('asset_report.html', message = msg, facilities = get_facilities())
+        rprt = session['report']
+        session['report'] = list()
+        return render_template('asset_report.html', message = msg, facilities = get_facilities(),
+                               report = rprt)
 
     else:
         if ('facility' in request.form and 'date' in request.form):
@@ -253,8 +260,8 @@ def asset_report():
                 redirect(url_for('asset_report'))
 
             # Generate the report.
-            res = generate_report(entries[0], entries[1])
-            return redirect(url_for('asset_report', facilities = get_facilities(), report = res))
+            session['report'] = generate_report(entries[0], entries[1])
+            return redirect(url_for('asset_report'))
 
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
@@ -262,7 +269,9 @@ def asset_report():
 
 
 """
-FIXME
+Sends the user to the transfer request page. Here, logistics
+officers can submit transfer requests to other facility
+officers to approve.
 """
 @app.route('/transfer_req', methods = ['GET', 'POST'])
 def transfer_req():
@@ -276,7 +285,7 @@ def transfer_req():
         session['message'] = ""
         return render_template('transfer_req.html', message = msg, src_facilities = get_facilities(),
                 dest_facilities = get_facilities())
-    
+
     else:
         if ('source' in request.form and 'destination' in request.form and 'tag' in request.form):
             entries = (request.form['source'], request.form['destination'], request.form['tag'])
@@ -290,14 +299,14 @@ def transfer_req():
             add_request(session['username'], entries[0], entries[1], entries[2])
             session['message'] = "Your request has been submitted. A facility officer will accept/decline your request."
             return redirect(url_for('message'))
-        
+
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
             return redirect(url_for('error'))
 
 
 
-######################################################################
+#####################  FIXME  ###########################
 
 """
 FIXME

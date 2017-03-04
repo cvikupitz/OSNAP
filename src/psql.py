@@ -316,7 +316,6 @@ def generate_report(facility, date):
             cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, arrive_date,))
             conn.commit()
         res = cur.fetchall()
-        print(res)
         report = [('a','b','c','d','e',)] #### STILL NEEDS FIXING...
         for asset in res:
             cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (asset[1],))
@@ -330,7 +329,18 @@ def generate_report(facility, date):
 
 
 """
-FIXME
+Inserts a request into the database. A request submission contains the asset
+tag, a source and destination facility, and the user submitting the request.
+The request is then sent and committed into the database for facility officers
+to approve/decline.
+
+Args:
+    user - The user submitting the request.
+    src - The source facility.
+    dest - The destination facility.
+    tag - The asset tag.
+Returns:
+    None
 """
 def add_request(user, src, dest, tag):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
