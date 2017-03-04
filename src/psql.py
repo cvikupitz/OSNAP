@@ -349,7 +349,17 @@ def add_request(user, src, dest, tag):
         return None
 
 
-""""""
+"""
+Returns a list of all the pending transfer requests currently in the database. A pending request
+is a request that has been made by a logistics officer, but has not yet been approved by a
+facility officer.
+
+Args:
+    None
+Returns:
+    A list of all the pending transfer requests from the requests table that need approval from
+    a facility officer.
+"""
 def get_pending_requests():
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
@@ -358,11 +368,19 @@ def get_pending_requests():
         return (cur.fetchall())
 
 
-""""""
+"""
+Returns a list of all the approved requests from the database that need loading and unloading
+timestamps set by a logistics officer.
+
+Args:
+    None
+Returns:
+    A list of all the transfer requests approved, but not yet completed.
+"""
 def get_approved_requests():
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM requests WHERE approver IS NOT NULL")
+        cur.execute("SELECT * FROM requests WHERE approver IS NOT NULL") ### FIXME - NOT INCLUDE COMPLETED
         conn.commit()
         return (cur.fetchall())
 
@@ -370,5 +388,5 @@ def get_approved_requests():
 
 ##############
 if __name__ == "__main__":
-    li = generate_report('Mays', '01/01/2000')
+    li = generate_report('Mays', '01/01/2000') ## TESTING
     print(li)
