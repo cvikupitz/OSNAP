@@ -51,7 +51,7 @@ Page of the dashboard, where users can sign out and access other pages.
 				<b>Pending Transfers:</b><br>
 				<ul>
 					{% for re in requests %}
-					<li><a href=""> {{ re[1] }} </a></li>
+					<li><a href="{{url_for('approve_req')}}"> {{ re[1] }} </a></li>
 					{% endfor %}
 				</ul>
 			</nav>
