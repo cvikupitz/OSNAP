@@ -156,16 +156,16 @@ common name and its 6-digit identification code. Changes are committed to the
 database.
 
 Args:
-    name - The facility's common name.
     code - The facility's identification code.
+    name - The facility's common name.
 Returns:
     None
 """
-def create_facility(name, code):
+def create_facility(code, name):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO facilities (common_name, fcode) VALUES (%s, %s)",
-                    (name, code,))
+        cur.execute("INSERT INTO facilities (fcode, common_name) VALUES (%s, %s)",
+                    (code, name,))
         conn.commit()
         return None
 
@@ -228,7 +228,7 @@ intake date. Changes are made then committed to the database.
 Args:
     tag - The asset's tag.
     desc - The asset's description.
-    facility - The name of the facility the asset is stored at.
+    facility - The common name of the facility the asset is stored at.
     date - The date the asset was stored at the facility.
 Returns:
     None
@@ -238,12 +238,8 @@ def create_asset(tag, desc, facility, date):
         cur = conn.cursor()
         cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", (tag, desc,))
         conn.commit()
-        cur.execute("SELECT facility_pk FROM facilities WHERE common_name=%s", (facility,))
-        conn.commit()
-        ffk = cur.fetchone()[0] #### TypeError: 'NoneType' object is not subscriptable
-        cur.execute("SELECT asset_pk FROM assets WHERE tag=%s", (tag,))
-        conn.commit()
-        afk = cur.fetchone()[0]
+        ffk = get_facility_pk(facility)
+        afk = get_asset_pk(tag)
         new_date = date_to_string(date)
         cur.execute("INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
                 (afk, ffk, new_date,))
@@ -339,10 +335,10 @@ def add_request(user, src, dest, tag):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
         stamp = generate_id()
-        user_fk = int(get_user_pk(user))
-        src_fk = int(get_facility_pk(src))
-        dest_fk = int(get_facility_pk(dest))
-        asset_fk = int(get_asset_pk(tag))
+        user_fk = get_user_pk(user)
+        src_fk = get_facility_pk(src)
+        dest_fk = get_facility_pk(dest)
+        asset_fk = get_asset_pk(tag)
         cur.execute("INSERT INTO requests (id_stamp, requester, submit_date, src_facility, dest_facility, asset_fk)\
                         VALUES (%s, %s, NOW(), %s, %s, %s)", (stamp, user_fk, src_fk, dest_fk, asset_fk,))
         conn.commit()
