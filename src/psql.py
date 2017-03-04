@@ -312,7 +312,7 @@ def generate_report(facility, date):
         else:
             cur.execute("SELECT * FROM facilities WHERE common_name=%s", (facility,))
             conn.commit()
-            ffk = cur.fetchone()[0]
+            ffk = cur.fetchone()[0]     # NoneType Error
             cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, arrive_date,))
             conn.commit()
         res = cur.fetchall()
