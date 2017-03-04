@@ -307,9 +307,7 @@ def generate_report(facility, date):
             cur.execute("SELECT * FROM asset_at WHERE arrive_date=%s", (date,))
             conn.commit()
         else:
-            cur.execute("SELECT * FROM facilities WHERE common_name=%s", (facility,))
-            conn.commit()
-            ffk = cur.fetchone()[0]     # NoneType Error
+            ffk = get_facility_pk(facility)     # NoneType Error
             cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, date,))
             conn.commit()
         res = cur.fetchall()
@@ -389,9 +387,3 @@ def get_approved_requests():
         return (cur.fetchall())
 
 
-
-##############
-if __name__ == "__main__":
-    li = generate_report('ALL', '01/02/2000') ## TESTING
-    print("----")
-    print(li)
