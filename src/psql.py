@@ -238,7 +238,7 @@ def create_asset(tag, desc, facility, date):
         cur = conn.cursor()
         cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", (tag, desc,))
         conn.commit()
-        ffk = get_facility_pk(facility)
+        ffk = get_facility_pk(facility) # NoneType Error Here.......
         afk = get_asset_pk(tag)
         new_date = date_to_string(date)
         cur.execute("INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
@@ -316,6 +316,7 @@ def generate_report(facility, date):
             cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, arrive_date,))
             conn.commit()
         res = cur.fetchall()
+        print(res)
         report = [('a','b','c','d','e',)] #### STILL NEEDS FIXING...
         for asset in res:
             cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (asset[1],))
@@ -384,5 +385,6 @@ def get_approved_requests():
 
 ##############
 if __name__ == "__main__":
-    li = generate_report('Mays', '01/01/2000') ## TESTING
+    li = generate_report('ALL', '01/02/2000') ## TESTING
+    print("----")
     print(li)

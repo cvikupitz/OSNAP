@@ -51,26 +51,25 @@ Page where users can view the system's current asset reports.
 					{% endfor %} 
 				</select>&nbsp;&nbsp;&nbsp;&nbsp;
 				Arrival Date: <input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 />
-				&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Generate"/>
-				
+				&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Generate"/>	
 				<table style="width:100%">
-				<tr>
-					<th><b>Asset Tag</b></th>
-					<th><b>Description</b></th>
-					<th><b>Facility</b></th>
-					<th><b>Arrival Date</b></th>
-					<th><b>Departure Date</b></th>
-				</tr>
-				{% for entry in entries %}
 					<tr>
-					<th> {{ entry[0] }} </th>
-					<th> {{ entry[1] }} </th>
-					<th> {{ entry[2] }} </th>
-					<th> {{ entry[3] }} </th>
-					<th> {{ entry[4] }} </th>
+						<th><b>Asset Tag</b></th>
+						<th><b>Description</b></th>
+						<th><b>Facility</b></th>
+						<th><b>Arrival Date</b></th>
+						<th><b>Departure Date</b></th>
 					</tr>
-				{% endfor %}
-			</table><br>
+					{% for re in report %}
+						<tr>
+						<th> {{ re[0] }} </th>
+						<th> {{ re[1] }} </th>
+						<th> {{ re[2] }} </th>
+						<th> {{ re[3] }} </th>
+						<th> {{ re[4] }} </th>
+						</tr>
+					{% endfor %}
+				</table><br>
 			</form>
 		</center>
 	</body>

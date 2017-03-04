@@ -141,7 +141,7 @@ def add_facility():
 
             # Inserts the facility into the database.
             else:
-                create_facility(entries[0], entries[1])
+                create_facility(entries[1], entries[0])
                 return redirect(url_for('add_facility'))
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
@@ -253,8 +253,8 @@ def asset_report():
                 redirect(url_for('asset_report'))
 
             # Generate the report.
-            report = generate_report(entries[0], entries[1])
-            return redirect(url_for('asset_report', facilities = get_facilities(), entries = report))
+            res = generate_report(entries[0], entries[1])
+            return redirect(url_for('asset_report', facilities = get_facilities(), report = res))
 
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
