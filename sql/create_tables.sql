@@ -82,15 +82,15 @@ CREATE TABLE assets (
  * asset_at_pk (PRIMARY KEY) - Primary key for the instance.
  * asset_fk (integer) - Pointer to the asset being stored, from the assets table.
  * facility_fk (integer) - Pointer to the facility the asset is stored at, from the facilities table.
- * arrive_date (date) - The date the asset arrived at the facility.
- * depart_date (date) - The date the asset was disposed from the facility.
+ * arrive_date (varchar(10)) - The date the asset arrived at the facility.
+ * depart_date (varchar(10)) - The date the asset was disposed from the facility.
  */
 CREATE TABLE asset_at (
 	asset_at_pk			SERIAL PRIMARY KEY,
 	asset_fk			integer REFERENCES assets (asset_pk),
 	facility_fk			integer REFERENCES facilities (facility_pk),
-	arrive_date			date,
-	depart_date			date
+	arrive_date			varchar(10),
+	depart_date			varchar(10)
 );
 
 
@@ -165,19 +165,19 @@ INSERT INTO assets (tag, description) VALUES ('DD1', 'Mercedes C230.');
 INSERT INTO assets (tag, description) VALUES ('DD2', 'Engine V3.');
 INSERT INTO assets (tag, description) VALUES ('DD3', 'Car seats.');
 INSERT INTO assets (tag, description) VALUES ('DD4', 'Fluffy dice.');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('1','1','2000-01-01');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('2','1','2000-01-01');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('3','1','2000-01-02');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('4','1','2000-01-02');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('5','2','2000-02-01');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('6','2','2000-02-01');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('7','2','2000-02-02');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('8','2','2000-02-02');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('9','3','2000-01-02');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('10','3','2000-01-02');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('11','3','2000-01-03');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('12','3','2000-01-03');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('13','4','2000-01-01');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('14','4','2000-01-02');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('15','4','2000-01-03');
-INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('16','4','2000-01-04');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('1','1','01/01/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('2','1','01/01/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('3','1','01/02/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('4','1','01/02/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('5','2','02/01/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('6','2','02/01/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('7','2','02/02/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('8','2','02/02/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('9','3','01/02/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('10','3','01/02/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('11','3','01/03/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('12','3','01/03/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('13','4','01/01/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('14','4','01/02/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('15','4','01/03/2000');
+INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('16','4','01/04/2000');

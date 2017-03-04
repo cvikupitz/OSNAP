@@ -240,9 +240,8 @@ def create_asset(tag, desc, facility, date):
         conn.commit()
         ffk = get_facility_pk(facility) # NoneType Error Here.......
         afk = get_asset_pk(tag)
-        new_date = date_to_string(date)
         cur.execute("INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
-                (afk, ffk, new_date,))
+                (afk, ffk, date,))
         conn.commit()
         return None
 
@@ -283,8 +282,7 @@ def dispose(tag, date):
         cur.execute("SELECT * FROM assets WHERE tag=%s", (tag,))
         conn.commit()
         ident = cur.fetchone()[0]
-        new_date = date_to_string(date)
-        cur.execute("UPDATE asset_at SET depart_date=%s WHERE asset_fk=%s", (new_date, ident,))
+        cur.execute("UPDATE asset_at SET depart_date=%s WHERE asset_fk=%s", (date, ident,))
         conn.commit()
         return None
 
@@ -305,18 +303,17 @@ Returns:
 def generate_report(facility, date):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        arrive_date = date_to_string(date)
         if (facility == "ALL"):
-            cur.execute("SELECT * FROM asset_at WHERE arrive_date=%s", (arrive_date,))
+            cur.execute("SELECT * FROM asset_at WHERE arrive_date=%s", (date,))
             conn.commit()
         else:
             cur.execute("SELECT * FROM facilities WHERE common_name=%s", (facility,))
             conn.commit()
             ffk = cur.fetchone()[0]     # NoneType Error
-            cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, arrive_date,))
+            cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, date,))
             conn.commit()
         res = cur.fetchall()
-        report = [('a','b','c','d','e',)] #### STILL NEEDS FIXING...
+        report = list() #### STILL NEEDS FIXING...
         for asset in res:
             cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (asset[1],))
             conn.commit()

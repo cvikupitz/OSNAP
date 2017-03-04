@@ -35,26 +35,6 @@ def date_valid(date):
 
 
 """
-Converts the given date string into a different format to be passed into
-the SQL server as a Date object. The given date is expected to be in the
-format MM/DD/YYYY. The string returned is the date in the format
-'YYYY-MM-DD 00:00:00'.
-
-Args:
-    date - The date string to convert.
-Returns:
-    A new date string in the format 'YYYY-MM-DD 00:00:00'.
-"""
-def date_to_string(date):
-
-    temp = date[6:]
-    temp += '-' + date[:2]
-    temp += '-' + date[3:5]
-    temp += ' 00:00:00'
-    return temp
-
-
-"""
 Generates a random 20-character string used for the ID's of transfer requests.
 
 Args:
