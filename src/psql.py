@@ -388,3 +388,27 @@ def get_approved_requests():
         return (cur.fetchall())
 
 
+"""
+FIXME **************************************
+"""
+def approve_request(user):
+    return None
+
+
+"""
+Deletes a transfer requet from the database given the ID stamp. Changes made are committed to
+the database.
+
+Args:
+    ident - The ID stamp of the transfer request to be dropped.
+Returns:
+    None
+"""
+def delete_request(ident):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("DELETE FROM requests WHERE id_stamp=%s", (ident,))
+        conn.commit()
+        return None
+
+
