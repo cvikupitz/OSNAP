@@ -110,7 +110,7 @@ Returns:
 def get_facilities():
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM facilities")
+        cur.execute("SELECT * FROM facilities ORDER BY common_name")
         conn.commit()
         return (cur.fetchall())
 
@@ -145,7 +145,8 @@ Returns:
 def get_facility_pk(name):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM facilities WHERE common_name=%s", (name,))
+        temp = '%' + name + '%'
+        cur.execute("SELECT * FROM facilities WHERE common_name LIKE %s", (temp,))
         conn.commit()
         return (cur.fetchone()[0])
 
@@ -181,7 +182,7 @@ Returns:
 def get_assets():
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM assets")
+        cur.execute("SELECT * FROM assets ORDER BY tag")
         conn.commit()
         return (cur.fetchall())
 
@@ -238,7 +239,7 @@ def create_asset(tag, desc, facility, date):
         cur = conn.cursor()
         cur.execute("INSERT INTO assets (tag, description) VALUES (%s, %s)", (tag, desc,))
         conn.commit()
-        ffk = get_facility_pk(facility) # NoneType Error Here.......
+        ffk = get_facility_pk(facility)
         afk = get_asset_pk(tag)
         cur.execute("INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES (%s, %s, %s)",
                 (afk, ffk, date,))
@@ -307,11 +308,11 @@ def generate_report(facility, date):
             cur.execute("SELECT * FROM asset_at WHERE arrive_date=%s", (date,))
             conn.commit()
         else:
-            ffk = get_facility_pk(facility)     # NoneType Error
+            ffk = get_facility_pk(facility)
             cur.execute("SELECT * FROM asset_at WHERE facility_fk=%s AND arrive_date=%s", (ffk, date,))
             conn.commit()
         res = cur.fetchall()
-        report = list() #### STILL NEEDS FIXING...
+        report = list()
         for asset in res:
             cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (asset[1],))
             conn.commit()

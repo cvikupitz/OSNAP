@@ -134,6 +134,11 @@ def add_facility():
         if ('name' in request.form and 'code' in request.form):
             entries = (request.form['name'], request.form['code'])
 
+            # Facility codes may not contain whitespace
+            if (' ' in entries[1]):
+                session['message'] = "Invalid Code: Facility codes may not contain any spaces."
+                return redirect(url_for('add_facility'))
+
             # If the facility entered has an existing name/code, notify user.
             if (facility_exists(entries[0], entries[1])):
                 session['message'] = "Duplicate Entry: There's already a facility with that name/code."
@@ -176,6 +181,11 @@ def add_asset():
             # Check the date for validity
             if (not date_valid(entries[3])):
                 session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
+                return redirect(url_for('add_asset'))
+
+            # Check for white space in the asset tag, not allowed.
+            if (' ' in entries[0]):
+                session['message'] = "Invalid Tag: Asset tags may not contain any spaces."
                 return redirect(url_for('add_asset'))
 
             # Inserts the asset into the database.
