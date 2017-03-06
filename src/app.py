@@ -331,10 +331,11 @@ def approve_req():
         msg = session['message']
         session['message'] = ""
         res = get_request(session['stamp'])
+        user = get_user(res[2])
         src = get_facility(res[6])
         dest = get_facility(res[7])
         asset = get_asset(res[8])
-        req = (res[0], asset[1], src[2], dest[2], res[2], res[4])
+        req = (res[1], asset[1], src[2], dest[2], user[1], res[4],)
         return render_template('approve_req.html', message = msg, request = req)
     else:
         #################

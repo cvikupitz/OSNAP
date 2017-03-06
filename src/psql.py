@@ -83,6 +83,17 @@ def get_user_pk(uname):
 
 
 """
+FIXME
+"""
+def get_user(pk):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users WHERE user_pk=%s", (pk,))
+        conn.commit()
+        return (cur.fetchone())
+
+
+"""
 Fetches and returns the role title of the account given the username.
 
 Args:
@@ -159,7 +170,7 @@ Args:
 Returns:
     The facility with the matching primary key, or None if no match occured.
 """
-def get_asset(pk):
+def get_facility(pk):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
         cur.execute("SELECT * FROM facilities WHERE facility_pk=%s", (pk,))
@@ -237,7 +248,7 @@ def get_asset_pk(tag):
 
 
 """
-Returns the asset from th database given its primary key.
+Returns the asset from the database given its primary key.
 
 Args:
     pk - The primary key of the asset to fetch.
@@ -443,8 +454,8 @@ FIXME **************************************
 """
 def approve_request(user):
     return None
-
-
+    
+    
 """
 Deletes a transfer requet from the database given the ID stamp. Changes made are committed to
 the database.
