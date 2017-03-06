@@ -221,6 +221,18 @@ def get_asset_pk(tag):
 
 
 """
+Returns the asset from th database given its primary key.
+
+Args:
+    pk - The primary key of the asset to fetch.
+Returns:
+    The asset with the matching primary key, or None if no match occured.
+"""
+def get_asset(pk):
+
+
+
+"""
 Creates and inserts an asset into the database given the asset tag, description,
 facility of storage, and its intake date. The asset is inserted into the assets
 table as well as the asset_at table to keep track of the asset location and
@@ -350,6 +362,24 @@ def add_request(user, src, dest, tag):
                         VALUES (%s, %s, NOW(), %s, %s, %s)", (stamp, user_fk, src_fk, dest_fk, asset_fk,))
         conn.commit()
         return None
+
+
+"""
+Fetches and returns the request from the database given its identification tag. Returns None if
+the request does not exist.
+
+Args:
+    ident - The request's identification tag.
+Returns:
+    The request with the matching identification tag, or None if there was no match.
+"""
+def get_request(ident):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM requests WHERE id_stamp=%s", (ident,))
+        conn.commit()
+        return (cur.fetchone())
+
 
 
 """

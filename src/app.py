@@ -315,8 +315,8 @@ def transfer_req():
             return redirect(url_for('error'))
 
 
-
 #####################  FIXME  ###########################
+
 
 """
 FIXME
@@ -325,12 +325,13 @@ FIXME
 def approve_req():
 
     if (request.method == 'GET'):
+        session['stamp'] = request.args['ident']
         if (session['role'] != 'Facilities Officer'):
-            session['message'] = "Page Restricted: Only facility officers may access this page."
-            return redirect(url_for('error'))
+            return redirect(url_for('update_transit'))
         msg = session['message']
         session['message'] = ""
-        return render_template('approve_req.html', message = msg)
+        req = get_request(session['stamp'])
+        return render_template('approve_req.html', message = msg, request = req)
     else:
         #################
         return render_template('approve_req.html', message = msg)
