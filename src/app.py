@@ -408,13 +408,35 @@ date, loading, and unloading times.
 @app.route('/transfer_report', methods = ['GET', 'POST'])
 def transfer_report():
 
+    # Loads the transfer request page.
+    if (session.get('report') == None):
+        session['report'] = list()
     if (request.method == 'GET'):
         msg = session['message']
         session['message'] = ""
-        return render_template('transfer_report.html', message = msg)
+        rprt = session['report']
+        session['report'] = list()
+        return render_template('transfer_report.html', message = msg, report = rprt)
     else:
-        ### FIXME
-        return render_template('transfer_report.html', message = msg)
+        if ('load' in request.form and 'unload' in request.form):
+            entries = (request.form['load'], request.form['unload'])
+
+            # Make sure the times are valid.
+            if (entries[0] != ''):
+                if (not time_valid(entries[1])):
+                    session['message'] = "Invalid Time: Times must be valid and in the format HH:MM:SS."
+                    redirect(url_for('transfer_report'))
+            if (entries[1] != ''):
+                if (not time_valid(entries[1])):
+                    session['message'] = "Invalid Time: Times must be valid and in the format HH:MM:SS."
+                    redirect(url_for('transfer_report'))
+
+            # Generates the report, poopulate the table.
+            #session['report'] = transfer_report(entries[0], entries[1], entries[2])
+            return render_template('transfer_report.html', message = msg)
+        else:
+            session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
+            return redirect(url_for('error'))
 
 
 """

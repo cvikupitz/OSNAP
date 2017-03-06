@@ -41,11 +41,9 @@ Page where users can view a report of all assets in motion/transit.
 		<center>
 			<h1>Transfer Report</h1>
 			<h3 style="color:red;"> {{ message }} </h3>
-			Date: <input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 />
+			Load Time: <input type="text" name="load" size=8 placeholder="HH:MM:SS" maxlength=8 />
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			Load Time: <input type="text" name="load" size=8 placeholder="HH:MM:SS" required maxlength=8 />
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			Unload Time: <input type="text" name="unload" size=8 placeholder="HH:MM:SS" required maxlength=8 />
+			Unload Time: <input type="text" name="unload" size=8 placeholder="HH:MM:SS" maxlength=8 />
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="submit" value="Generate"/>	
 				<table style="width:60%">
@@ -54,6 +52,13 @@ Page where users can view a report of all assets in motion/transit.
 						<th><b>Load Time</b></th>
 						<th><b>Unload Time</b></th>
 					</tr>
+					{% for re in report %}
+						<tr>
+						<th> {{ re[0] }} </th>
+						<th> {{ re[1] }} </th>
+						<th> {{ re[2] }} </th>
+						</tr>
+					{% endfor %}
 			    </table>
 		</center>
 	</body>

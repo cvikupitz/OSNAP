@@ -143,7 +143,7 @@ INSERT INTO roles (title) VALUES ('Facilities Officer');
 
 -------------------------------------------------
 /* TESTING - COMMENT OUT WHEN COMPLETE */
-
+/*
 INSERT INTO users (username, password, role) VALUES ('user1', 'p1', '1');
 INSERT INTO users (username, password, role) VALUES ('user2', 'p2', '2');
 INSERT INTO facilities (fcode, common_name) VALUES ('WLGRNS', 'Wallgreens');
@@ -182,4 +182,4 @@ INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('13','4','01/0
 INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('14','4','01/02/2000');
 INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('15','4','01/03/2000');
 INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('16','4','01/04/2000');
-
+*/
