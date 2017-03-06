@@ -472,7 +472,14 @@ def get_complete_requests():
 
 
 """
-FIXME **************************************
+Approves the request in the database given the identification tag. The user is also
+passed in and added as the 'approver' of the request.
+
+Args:
+    ident - The identification tag of the request to approve.
+    user - The user approving the request.
+Returns:
+    None
 """
 def approve_request(ident, user):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
@@ -483,15 +490,25 @@ def approve_request(ident, user):
         return None
 
 
-""""""
+"""
+Updates a request in the database by inserting the loading and unloading times. Changes
+are made and committed into the database.
+
+Args:
+    ident - The identification tag of the request to update.
+    load - The loading time to add.
+    unload - The unloading time to add.
+Returns:
+    None
+"""
 def update_request(ident, load, unload):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
         cur.execute("UPDATE requests SET load_time=%s, unload_time=%s WHERE id_stamp=%s", (load, unload, ident,))
         conn.commit()
         return None
-    
-    
+
+
 """
 Deletes a transfer requet from the database given the ID stamp. Changes made are committed to
 

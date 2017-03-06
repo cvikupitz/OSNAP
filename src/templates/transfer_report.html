@@ -18,6 +18,21 @@ Page where users can view a report of all assets in motion/transit.
 				font-family: verdana;
 				font-size: 100%;
 			}
+			input {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+			}
+			select { height: 23px; }
+			table, th, td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			th, td { padding: 5px; }
+			th { 
+				font-weight: normal;
+				text-align: left; 
+			}
 		</style>
 	</head>
 	<body>
@@ -25,6 +40,21 @@ Page where users can view a report of all assets in motion/transit.
 		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
 			<h1>Transfer Report</h1>
+			<h3 style="color:red;"> {{ message }} </h3>
+			Date: <input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 />
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			Load Time: <input type="text" name="load" size=8 placeholder="HH:MM:SS" required maxlength=8 />
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			Unload Time: <input type="text" name="unload" size=8 placeholder="HH:MM:SS" required maxlength=8 />
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="submit" value="Generate"/>	
+				<table style="width:60%">
+					<tr>
+						<th><b>Asset Tag</b></th>
+						<th><b>Load Time</b></th>
+						<th><b>Unload Time</b></th>
+					</tr>
+			    </table>
 		</center>
 	</body>
 </html>

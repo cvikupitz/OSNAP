@@ -34,7 +34,13 @@ def date_valid(date):
 
 
 """
-FIXME -------------------
+Scans the given time and returns true/false if the time is in the correct format.
+The correct format is HH:MM:SS.
+
+Args:
+    date - The time string to scan.
+Returns:
+    True if the time is in the format HH:MM:SS, false if not.
 """
 def time_valid(time):
     import re
