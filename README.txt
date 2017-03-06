@@ -6,19 +6,7 @@ Repository for the LOST Web Application - Designed for CIS 322.
 |
 |-- doc/
 |    |
-|    |-- assignment1.pdf
-|    |-- assignment2.pdf
-|    |-- assignment3.pdf
-|    |-- assignment4.pdf
-|    |-- assignment5.pdf
-|    |-- assignment6.pdf
-|    |-- assignment7.pdf
-|    |-- assignment8.pdf
-|    |-- assignment9.pdf
-|    |-- assignment10.pdf
-|    |-- derp_req.pdf
-|    |-- lost_req.pdf
-|    |-- who_req.pdf
+|    |-- < Doc files on assignment details and the L.O.S.T. application are here. >
 |
 |-- lectures/
 |    |
@@ -30,14 +18,19 @@ Repository for the LOST Web Application - Designed for CIS 322.
 |
 |-- src/
 |    |
+|    |-- static/
+|    |    |
+|    |    |-- < Static files/images (i.e. .png, .jpeg, etc.) used in the app are here. >
+|    |
 |    |-- templates/
 |    |    |
-|    |    |-- create_user.html
-|    |    |-- dashboard.html
-|    |    |-- login.html
+|    |    |-- < Templates (.html files) used in the app are here. >
 |    |
 |    |-- app.py
 |    |-- config.py
+|    |-- lost_config.json
+|    |-- psql.py
+|    |-- util.py
 |
 |-- preflight.sh
 |

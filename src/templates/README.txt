@@ -20,17 +20,20 @@ This directory contains the HTML files for the web app.
 |-- dashboard.html
 |    * Page of the dashboard, where users can sign out and access other pages.
 |
-|-- dashboard_redirect.html
-|    * Error page with message, redirects user back to dashboard.
-|
 |-- dispose_asset.html
 |    * Page where logistics officers can dispose assets from the system.
+|
+|-- error.html
+|    * Page that displays an error message to user, redirects back to dashboard.
 |
 |-- login.html
 |    * Page where users can log into the system.
 |
 |-- logout.html
 |    * Page with link back to login page after the user signs out of the system.
+|
+|-- message.html
+|    * Page that displays a message to user, redirects back to dashboard.
 |
 |-- transfer_report.html
 |    * Page where users can view a report of all assets in motion/transit.
