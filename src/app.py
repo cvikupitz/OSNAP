@@ -343,7 +343,7 @@ def approve_req():
         return render_template('approve_req.html', message = msg, request = req)
 
     else:
-        if (if 'button' in request.form):
+        if ('button' in request.form):
 
             # User clicked approve, approve the request.
             if (request.form['button'] == 'Approve'):

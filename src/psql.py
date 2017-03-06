@@ -457,8 +457,13 @@ def get_approved_requests():
 """
 FIXME **************************************
 """
-def approve_request(user):
-    return None
+def approve_request(ident, user):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        user_pk = get_user_pk(user)
+        cur.execute("UPDATE requests SET approver=%s, approve_date=NOW() WHERE id_stamp=%s", (user_pk, ident,))
+        conn.commit()
+        return None
     
     
 """
