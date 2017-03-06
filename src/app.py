@@ -7,10 +7,8 @@ Flask application that runs the L.O.S.T. website.
 
 # Imports
 from flask import *
-#from config import dbname, dbhost, dbport
 from util import *
 from psql import *
-#import psycopg2
 
 # Set up flask application
 app = Flask(__name__, template_folder = 'templates')
@@ -362,14 +360,11 @@ def approve_req():
             return redirect(url_for('error'))
 
 
-#####################  FIXME  ###########################
 
-"""
-
-"""
 @app.route('/update_transit', methods = ['GET', 'POST'])
 def update_transit():
 
+    # Loads the update transit page.
     if (request.method == 'GET'):
         if (session['role'] != 'Logistics Officer'):
             session['message'] = "Page Restricted: Only logistics officers may access this page."
@@ -377,6 +372,7 @@ def update_transit():
         msg = session['message']
         session['message'] = ""
 
+        # Grabs the transfer request information for display.
         res = get_request(session['stamp'])
         user = get_user(res[2])
         app = get_user(res[3])
@@ -385,12 +381,17 @@ def update_transit():
         asset = get_asset(res[8])
         req = (res[1], asset[1], src[2], dest[2], user[1], res[4], app[1], res[5],)
         return render_template('update_transit.html', message = msg, request = req)
+
     else:
         if ('load' in request.form and 'unload' in request.form and 'update' in request.form):
             entries = (request.form['load'], request.form['unload'])
+
+            # Check to see if the entered times are in a valid format.
             if (not time_valid(entries[0]) or not time_valid(entries[1])):
                 session['message'] = "Invalid Time: Times must be valid and in the format HH:MM:SS."
                 return redirect(url_for('update_transit'))
+
+            # Adds the times into the database.
             update_request(session['stamp'], entries[0], entries[1])
             session['message'] = "Loading and unloading times have been successfully set."
             return redirect(url_for('message'))
@@ -400,7 +401,9 @@ def update_transit():
 
 
 """
-FIXME
+Takes the user to a webpage where they can view
+a list of transit reports by filtering by the
+date, loading, and unloading times.
 """
 @app.route('/transfer_report', methods = ['GET', 'POST'])
 def transfer_report():
@@ -410,7 +413,7 @@ def transfer_report():
         session['message'] = ""
         return render_template('transfer_report.html', message = msg)
     else:
-        #################
+        ### FIXME
         return render_template('transfer_report.html', message = msg)
 
 
