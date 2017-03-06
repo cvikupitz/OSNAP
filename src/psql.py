@@ -83,7 +83,12 @@ def get_user_pk(uname):
 
 
 """
-FIXME
+Returns the user from the database given its primary key.
+
+Args:
+    pk - The primary key of the user to fetch.
+Returns:
+    The user with the matching primary key, or None if no match occured.
 """
 def get_user(pk):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:

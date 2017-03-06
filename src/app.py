@@ -7,10 +7,10 @@ Flask application that runs the L.O.S.T. website.
 
 # Imports
 from flask import *
-from config import dbname, dbhost, dbport
+#from config import dbname, dbhost, dbport
 from util import *
 from psql import *
-import psycopg2
+#import psycopg2
 
 # Set up flask application
 app = Flask(__name__, template_folder = 'templates')
@@ -315,21 +315,25 @@ def transfer_req():
             return redirect(url_for('error'))
 
 
-#####################  FIXME  ###########################
-
-
 """
-FIXME
+Takes the user to a webpage that displays information
+on a transfer request a logistics officer had made.
+also has a approve and a decline button for the
+facility officer to click. Inaccessible by logistic
+officers.
 """
 @app.route('/approve_req', methods = ['GET', 'POST'])
 def approve_req():
 
+    # Loads the approve request page.
     if (request.method == 'GET'):
         session['stamp'] = request.args['ident']
         if (session['role'] != 'Facilities Officer'):
             return redirect(url_for('update_transit'))
         msg = session['message']
         session['message'] = ""
+
+        # Grabs the transfer request information for display.
         res = get_request(session['stamp'])
         user = get_user(res[2])
         src = get_facility(res[6])
@@ -337,10 +341,32 @@ def approve_req():
         asset = get_asset(res[8])
         req = (res[1], asset[1], src[2], dest[2], user[1], res[4],)
         return render_template('approve_req.html', message = msg, request = req)
-    else:
-        #################
-        return render_template('approve_req.html', message = msg)
 
+    else:
+        if (if 'button' in request.form):
+
+            # User clicked approve, approve the request.
+            if (request.form['button'] == 'Approve'):
+                approve_request(session['stamp'], session['username'])
+                session['message'] = "You have approved the request. A logistics officer will submit the load/unload times."
+                return redirect(url_for('message'))
+
+            # User clicked decline, delete the request.
+            else:
+                delete_request(session['stamp'])
+                session['message'] = "You have declined the request. The report has been removed from the database."
+                return redirect(url_for('message'))
+
+        else:
+            session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
+            return redirect(url_for('error'))
+
+
+
+
+
+
+#####################  FIXME  ###########################
 
 """
 FIXME
