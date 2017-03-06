@@ -17,7 +17,6 @@ Returns:
     True if the date is in the format MM/DD/YYYY, false if not.
 """
 def date_valid(date):
-
     import re
     regex = re.compile('[0-9]{2}/[0-9]{2}/[0-9]{4}')
     if (regex.match(date)):
@@ -29,6 +28,26 @@ def date_valid(date):
         if (day < 1 or day > 31):
             return False
         if (year < 1 or year > 9999):
+            return False
+        return True
+    return False
+
+
+"""
+FIXME -------------------
+"""
+def time_valid(time):
+    import re
+    regex = re.compile('[0-9]{2}:[0-9]{2}:[0-9]{2}')
+    if (regex.match(time)):
+        hour = int(time[:2])
+        minute = int(time[3:5])
+        sec = int(time[6:])
+        if (hour < 0 or hour > 23):
+            return False
+        if (minute < 0 or minute > 59):
+            return False
+        if (sec < 0 or sec > 59):
             return False
         return True
     return False

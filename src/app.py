@@ -362,10 +362,6 @@ def approve_req():
             return redirect(url_for('error'))
 
 
-
-
-
-
 #####################  FIXME  ###########################
 
 """
@@ -380,10 +376,21 @@ def update_transit():
             return redirect(url_for('error'))
         msg = session['message']
         session['message'] = ""
-        return render_template('update_transit.html', message = msg)
+
+        res = get_request(session['stamp'])
+        user = get_user(res[2])
+        app = get_user(res[3])
+        src = get_facility(res[6])
+        dest = get_facility(res[7])
+        asset = get_asset(res[8])
+        req = (res[1], asset[1], src[2], dest[2], user[1], res[4], app[1], res[5])
+        return render_template('update_transit.html', request = req)
     else:
-        #################
-        return render_template('update_transit.html', message = msg)
+        if ('button' in request.form):
+            return render_template('update_transit.html', message = msg)
+        else:
+            session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
+            return redirect(url_for('error'))
 
 
 """

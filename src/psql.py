@@ -449,7 +449,24 @@ Returns:
 def get_approved_requests():
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM requests WHERE approver IS NOT NULL") ### FIXME - NOT INCLUDE COMPLETED
+        cur.execute("SELECT * FROM requests WHERE approver IS NOT NULL AND unload_time IS NULL")
+        conn.commit()
+        return (cur.fetchall())
+
+
+"""
+Returns a list of all completed requests from the database. A completed request has an approval
+from a facility officer and has a load and unload time stamp.
+
+Args:
+    None
+Returns:
+    A list of all the completed requests.
+"""
+def get_complete_requests():
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM requests WHERE unload_time IS NOT NULL")
         conn.commit()
         return (cur.fetchall())
 
