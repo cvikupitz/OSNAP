@@ -152,6 +152,22 @@ def get_facility_pk(name):
 
 
 """
+Returns the facility from the database given its primary key.
+
+Args:
+    pk - The primary key of the facility to fetch.
+Returns:
+    The facility with the matching primary key, or None if no match occured.
+"""
+def get_asset(pk):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM facilities WHERE facility_pk=%s", (pk,))
+        conn.commit()
+        return (cur.fetchone())
+
+
+"""
 Creates and inserts a new facility instance into the database given the facility
 common name and its 6-digit identification code. Changes are committed to the
 database.
@@ -229,7 +245,11 @@ Returns:
     The asset with the matching primary key, or None if no match occured.
 """
 def get_asset(pk):
-
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM assets WHERE asset_pk=%s", (pk,))
+        conn.commit()
+        return (cur.fetchone())
 
 
 """

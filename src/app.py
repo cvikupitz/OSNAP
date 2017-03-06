@@ -330,7 +330,11 @@ def approve_req():
             return redirect(url_for('update_transit'))
         msg = session['message']
         session['message'] = ""
-        req = get_request(session['stamp'])
+        res = get_request(session['stamp'])
+        src = get_facility(res[6])
+        dest = get_facility(res[7])
+        asset = get_asset(res[8])
+        req = (res[0], asset[1], src[2], dest[2], res[2], res[4])
         return render_template('approve_req.html', message = msg, request = req)
     else:
         #################
