@@ -481,10 +481,20 @@ def approve_request(ident, user):
         cur.execute("UPDATE requests SET approver=%s, approve_date=NOW() WHERE id_stamp=%s", (user_pk, ident,))
         conn.commit()
         return None
+
+
+""""""
+def update_request(ident, load, unload):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("UPDATE requests SET load_time=%s, unload_time=%s WHERE id_stamp=%s", (load, unload, ident,))
+        conn.commit()
+        return None
     
     
 """
 Deletes a transfer requet from the database given the ID stamp. Changes made are committed to
+
 the database.
 
 Args:

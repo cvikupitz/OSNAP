@@ -365,7 +365,7 @@ def approve_req():
 #####################  FIXME  ###########################
 
 """
-FIXME
+
 """
 @app.route('/update_transit', methods = ['GET', 'POST'])
 def update_transit():
@@ -383,11 +383,17 @@ def update_transit():
         src = get_facility(res[6])
         dest = get_facility(res[7])
         asset = get_asset(res[8])
-        req = (res[1], asset[1], src[2], dest[2], user[1], res[4], app[1], res[5])
-        return render_template('update_transit.html', request = req)
+        req = (res[1], asset[1], src[2], dest[2], user[1], res[4], app[1], res[5],)
+        return render_template('update_transit.html', message = msg, request = req)
     else:
-        if ('button' in request.form):
-            return render_template('update_transit.html', message = msg)
+        if ('load' in request.form and 'unload' in request.form and 'update' in request.form):
+            entries = (request.form['load'], request.form['unload'])
+            if (not time_valid(entries[0]) or not time_valid(entries[1])):
+                session['message'] = "Invalid Time: Times must be valid and in the format HH:MM:SS."
+                return redirect(url_for('update_transit'))
+            update_request(session['stamp'], entries[0], entries[1])
+            session['message'] = "Loading and unloading times have been successfully set."
+            return redirect(url_for('message'))
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."
             return redirect(url_for('error'))

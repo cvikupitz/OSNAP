@@ -123,13 +123,13 @@ CREATE TABLE requests (
 	id_stamp			varchar(20),
 	requester			integer REFERENCES users (user_pk),
 	approver			integer REFERENCES users (user_pk),
-	submit_date			datetime,
-	approve_date		datetime,
+	submit_date			timestamp,
+	approve_date		timestamp,
 	src_facility		integer REFERENCES facilities (facility_pk),
 	dest_facility		integer REFERENCES facilities (facility_pk),
 	asset_fk			integer REFERENCES assets (asset_pk),
-	load_time			timestamp,
-	unload_time			timestamp
+	load_time			time,
+	unload_time			time
 );
 
 
