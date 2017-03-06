@@ -132,6 +132,11 @@ def add_facility():
         if ('name' in request.form and 'code' in request.form):
             entries = (request.form['name'], request.form['code'])
 
+            # Facility name cannot be only whitespace
+            if (entries[0].isspace()):
+                session['message'] = "Invalid Name: Facility names must contain characters."
+                return redirect(url_for('add_facility'))
+
             # Facility codes may not contain whitespace
             if (' ' in entries[1]):
                 session['message'] = "Invalid Code: Facility codes may not contain any spaces."
