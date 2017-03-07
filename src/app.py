@@ -342,7 +342,7 @@ def approve_req():
         src = get_facility(res[6])
         dest = get_facility(res[7])
         asset = get_asset(res[8])
-        req = (res[1], asset[1], src[2], dest[2], user[1], res[4],)
+        req = (res[1], asset[1], src[2], dest[2], user[1], time_to_string(res[4]),)
         return render_template('approve_req.html', message = msg, request = req)
 
     else:
@@ -384,7 +384,7 @@ def update_transit():
         src = get_facility(res[6])
         dest = get_facility(res[7])
         asset = get_asset(res[8])
-        req = (res[1], asset[1], src[2], dest[2], user[1], res[4], app[1], res[5],)
+        req = (res[1], asset[1], src[2], dest[2], user[1], time_to_string(res[4]), app[1], time_to_string(res[5]),)
         return render_template('update_transit.html', message = msg, request = req)
 
     else:

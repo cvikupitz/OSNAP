@@ -60,6 +60,20 @@ def time_valid(time):
 
 
 """
+Scans a datetime object and returns a string representation of the given time
+in the format MM/DD/YYYY  HH:MM A.M./P.M.
+Used for displaying the date/time in the web application.
+
+Args:
+    time - The datetime object to convert.
+Returns:
+    A string representation of the given datetime object.
+"""
+def time_to_string(time):
+    return time.strftime('%m/%d/%Y  %I:%M %p')
+
+
+"""
 Generates a random 20-character string used for the ID's of transfer requests.
 
 Args:
