@@ -138,9 +138,6 @@ INSERT INTO roles (title) VALUES ('Logistics Officer');
 INSERT INTO roles (title) VALUES ('Facilities Officer');
 
 
-
-
-
 -------------------------------------------------
 /* TESTING - COMMENT OUT WHEN COMPLETE */
 
