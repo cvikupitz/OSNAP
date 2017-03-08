@@ -18,10 +18,33 @@ Page where users can log into the system.
 				font-size: 100%;
 				margin: 30px;
 			}
-			input {
+			input[type=text] {
 				font-family: verdana;
 				font-size: 100%;
 				margin-bottom: 10px;
+			}
+			input[type=password] {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+			}
+			input[type=submit] {
+				background-color: #4CAF50;
+				border: none;
+				color: white;
+				padding: 1px 78px;
+				text-decoration: none;
+				font-size: 16px;
+				cursor: pointer;
+				height: 27px;
+				margin-bottom: 10px;
+			}
+			div {
+				background-color: lightgrey;
+				width: 375px;
+				border: 1px solid black;
+				padding: 20px;
+				margin: 5px;
 			}
 		</style>
 	</head>
@@ -30,14 +53,16 @@ Page where users can log into the system.
 			<title>L.O.S.T. (Login)</title>
 			<h1>Authenticate User</h1>
 			<h3 style="color:red;"> {{ message }} </h3>
-			<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br>
-			<h4>Please login to continue.</h4>
-				<form method="post">
-					Username: <input type="text" name="username" placeholder="Username" required/><br>
-					Password: <input type="password" name="password" placeholder="Password" required/><br>
-					<input type="submit" value="Submit"/><br><br>
-				</form>
-			<a href="{{url_for('create_user', message='')}}">Create New User</a>
+			<div>
+				<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br>
+					<form method="post">
+						<h4>Please login to continue.</h4>
+						<input type="text" name="username" placeholder="Username" required/><br>
+						<input type="password" name="password" placeholder="Password" required/><br>
+						<input type="submit" value="Submit"/><br>
+						<a href="{{url_for('create_user', message='')}}">Create New User</a>
+					</form>
+			</div>
 		</center>
 	</body>
 </html>

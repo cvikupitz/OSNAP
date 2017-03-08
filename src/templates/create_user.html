@@ -18,12 +18,44 @@ Page where users can create a new account.
 				font-size: 100%;
 				margin: 30px;
 			}
-			input {
+			div {
+				background-color: lightgrey;
+				width: 375px;
+				border: 1px solid black;
+				padding: 20px;
+				margin: 5px;
+			}
+			input[type=text] {
 				font-family: verdana;
 				font-size: 100%;
 				margin-bottom: 10px;
 			}
-			select { height: 23px; }
+			input[type=password] {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+			}
+			input[type=select] {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+				height: 23px;
+			}
+			input[type=submit] {
+				background-color: #4CAF50;
+				border: none;
+				color: white;
+				padding: 1px 78px;
+				text-decoration: none;
+				font-size: 16px;
+				cursor: pointer;
+				height: 27px;
+				margin-bottom: 10px;
+			}
+			select { 
+				height: 23px;
+				margin-bottom: 10px;
+			}
 		</style>
 	</head>
 	<body>
@@ -31,20 +63,24 @@ Page where users can create a new account.
 			<title>L.O.S.T. (New User)</title>
 			<h1>New Account</h1>
 			<h3 style="color:red;"> {{ message }} </h3>
-			<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br>
-			<h4>Enter a new username and password.</h4>
-			<form method="post">
-				Username: <input type="text" name="username" placeholder="Username" required maxlength=16 /><br>
-				Password: <input type="password" name="password" placeholder="Password" required maxlength=16 /><br>
-				Confirm Password: <input type="password" name="confirm" placeholder="Confirm Password" required maxlength=16 /><br>
-				<select required name="role">
-					<option value="">None</option>
-					<option value="1">Logistics Officer</option>
-					<option value="2">Facilities Officer</option>
-				</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="submit" value="Submit"/><br><br>
-			</form>
-			<a href="{{url_for('login', message='')}}">Return to login page</a>
+			<div>
+				<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br>
+				<form method="post">
+					<h4>Enter a new username and password.</h4>
+					<input type="text" name="username" placeholder="Username" required maxlength=16 /><br>
+					<input type="password" name="password" placeholder="Password" required maxlength=16 /><br>
+					<input type="password" name="confirm" placeholder="Confirm Password" required maxlength=16 /><br>
+					<select required name="role">
+						<option value="">Select a Role
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+						<option value="1">Logistics Officer</option>
+						<option value="2">Facilities Officer</option>
+					</select><br>
+					<input type="submit" value="Submit"/><br>
+				</form>
+				<a href="{{url_for('login', message='')}}">Return to login page</a>
+			</div>
 		</center>
 	</body>
 </html>
