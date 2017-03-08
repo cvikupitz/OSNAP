@@ -1,0 +1,25 @@
+Additional Notes Following Lecture:
+Thank you for attending lecture today.
+
+The assignments this week and next week are intended to have less coding associated with them than the other assignments this term. You should use the extra time to implement features that were unfinished or you wanted to implement differently in earlier weeks. The rubric for the final project has been posted. If all of the assignments have been completed and integrated correctly there should be no work in additional development work needed.
+
+The final project is 40% of your grade. If you turn in code that does not run (syntax errors, hardcoded DB, etc) you will not be able to pass this class. If you are concerned about your preflight working, make time to come to office hours before the end of week 10 and work with Andy or I to develop a way for you to test.
+
+There was an ask to delay the final project submission date. I am strongly resistant to this... Of course everything is a negotiation but I don't think there is a way to extend that wouldn't be bad for you as the student or me as the instructor.
+
+
+The first half of class content was spent watching some videos. These were comedic videos but they highlight real problems. For the youtube content, links are in the slides.
+
+There are two take aways that are important to me... even though there really isn't a way to put them on the test.
+
+1 - Time is really hard. If you weren't in lecture, I strongly suggest you watch the two Tom Scott youtube videos on time. Time has been extremely important for all of systems I worked on in industry however the time accounting people want is most kindly described as a f*%#!ng mess. Even the easy cases end up being hard (I'm looking at you leap year...and state of Arizona).
+
+I have a strong design preference to having systems only use UTC internally. UTC isn't perfect but it is so much better than the nightmare of the other timezone choices. Times should only be represented in localtime at the very edge of the user interface. Mixing timezones in your systems internal logic is always a bad idea.
+
+
+2 - Customers are crazy and emotional. As a STEM discipline we focus a lot on the hard constraints provided by math and physical relaties of our universe. Most of the people we will build systems for live in a very different kind of reality. This leads to a lot of misunderstandings.
+
+The customer is never wrong, which is very different than the customer being right. It is important to be understanding with our customers and try very hard not to escalate the situtation. Ideally, we will be able to turn the discussion from an attack into a collaborative problem solving activity. Listen and try not to get defensive (understand why they feel like they do about the system), acknowledge and help explain how these problems entered into the system, and try to open a discussion about how things could be or could have been done better.
+
+
+The remainder of class was spent on a design exercise. You should be able to read and write process/workflow diagrams for the final.
