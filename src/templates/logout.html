@@ -18,14 +18,23 @@ Page with link back to login page after the user signs out of the system.
 				font-family: verdana;
 				font-size: 100%;
 			}
+			div {
+				background-color: lightgrey;
+				width: 375px;
+				border: 1px solid black;
+				padding: 20px;
+				margin: 5px;
+			}
 		</style>
 	</head>
 	<body>
 		<center>
 			<title>L.O.S.T. (Logout)</title>
 			<h1>Session Expired</h1>
-			<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br><br><br>
-			<a href="{{url_for('login')}}">Return to login page</a>
+			<div>
+				<img src="{{url_for('static', filename='alien_icon.png')}}" style="width:209px;height:246px;"/><br><br><br>
+				<a href="{{url_for('login')}}">Return to login page</a>
+			</div>
 		</center>
 	</body>
 </html>

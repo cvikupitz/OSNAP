@@ -18,13 +18,22 @@ Error page with message, redirects user back to dashboard.
 				font-family: verdana;
 				font-size: 100%;
 			}
+			div {
+				background-color: lightgrey;
+				width: 375px;
+				border: 1px solid black;
+				padding: 20px;
+				margin: 5px;
+			}
 		</style>
 	</head>
 	<body>
 		<center>
 			<title>L.O.S.T.</title>
-			<h3 style="color:green;"> {{ message }} </h3>
-			<a href="{{url_for('dashboard')}}">Return to dashboard</a>
+			<div>
+				<h3 style="color:green;"> {{ message }} </h3>
+				<a href="{{url_for('dashboard')}}">Return to dashboard</a>
+			</div>
 		</center>
 	</body>
 </html>
