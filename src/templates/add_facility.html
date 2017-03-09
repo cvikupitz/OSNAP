@@ -23,7 +23,19 @@ Page where users can add facilities into the system.
 				font-size: 100%;
 				margin-bottom: 10px;
 			}
+			input[type=submit] {
+				background-color: #4CAF50;
+				border: 1px solid black;
+				color: white;
+				padding: 1px 40px;
+				text-decoration: none;
+				font-size: 16px;
+				cursor: pointer;
+				height: 27px;
+				margin-bottom: 10px;
+			}
 			table, th, td {
+				background-color: lightgrey;
 				border: 1px solid black;
 				border-collapse: collapse;
 			}
@@ -31,6 +43,19 @@ Page where users can add facilities into the system.
 			th { 
 				text-align: left;
 				font-weight: normal;	
+			}
+			article {
+				margin-left: 400px;
+				padding: 1em;
+				overflow: hidden;
+			}
+			nav {
+				border: 1px solid black;
+				background-color: lightgrey;
+				float: left;
+				max-width: 350px;
+				margin: 15px;
+				padding: 1em;
 			}
 		</style>
 	</head>
@@ -40,20 +65,36 @@ Page where users can add facilities into the system.
 		<center>
 			<h1>Add a Facility</h1>
 			<h3 style="color:red;"> {{ message }} </h3>
-			<table style="width:50%">
-				<tr><th><b>Facility Name</b></th><th><b>Facility Code</b></th></tr>
-				{% for fac in facilities %}
-					<tr>
-						<th> {{ fac[2] }} </th>
-						<th> {{ fac[1] }} </th>
-					</tr>
-				{% endfor %}
-			</table><br>
-			<form method="post">
-				Name: <input type="text" name="name" size=32 placeholder="Facility Name" required maxlength=32 /><br>
-				Code: <input type="text" name="code" size=6 placeholder="Code" required maxlength=6 />&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="submit" value="Insert"/>
-			</form>
 		</center>
+		<div>
+			<nav>
+				<form method="post">
+					<ul>
+						<li>Insert new facilities into the database.</li>
+						<li>Facility names must contain characters.</li>
+						<li>Facility names may be up to 32 characters in length.</li>
+						<li>Facility codes cannot contain white space.</li>
+						<li>Facility names may be up to 6 characters in length.</li>
+						<li>A facility name and code are required for entry.</li>
+					</ul>
+					Facility Name:<br>
+					<input type="text" name="name" size=32 placeholder="Required" required maxlength=32 /><br>
+					Facility Code:<br>
+					<input type="text" name="code" size=6 placeholder="Required" required maxlength=6 /><br><br>
+					<input type="submit" value="Insert Facility"/>
+				</form>
+			</nav>
+			<article>
+				<table style="width:90%">
+					<tr><th><b>Facility Name</b></th><th><b>Facility Code</b></th></tr>
+					{% for fac in facilities %}
+						<tr>
+							<th> {{ fac[2] }} </th>
+							<th> {{ fac[1] }} </th>
+						</tr>
+					{% endfor %}
+				</table><br>
+			</article>
+		</div>
 	</body>
 </html>
