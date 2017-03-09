@@ -23,6 +23,17 @@ Page where users can add assets into the system.
 				font-size: 100%;
 				margin-bottom: 10px;
 			}
+			input[type=submit] {
+				background-color: #4CAF50;
+				border: 1px solid black;
+				color: white;
+				padding: 1px 40px;
+				text-decoration: none;
+				font-size: 16px;
+				cursor: pointer;
+				height: 27px;
+				margin-bottom: 10px;
+			}
 			select { 
 				height: 23px;
 			}
@@ -38,6 +49,19 @@ Page where users can add assets into the system.
 			select {
 				margin-bottom: 10px;
 			}
+			article {
+				margin-left: 400px;
+				padding: 1em;
+				overflow: hidden;
+			}
+			nav {
+				border: 1px solid black;
+				background-color: lightgrey;
+				float: left;
+				max-width: 350px;
+				margin: 15px;
+				padding: 1em;
+			}
 		</style>
 	</head>
 	<body>
@@ -46,27 +70,46 @@ Page where users can add assets into the system.
 		<center>
 			<h1>Add an Asset</h1>
 			<h3 style="color:red;"> {{ message }} </h3>
-			<table style="width:70%">
-				<tr><th><b>Asset Tag</b></th><th><b>Asset Description</b></th></tr>
-				{% for asset in assets %}
-					<tr>
-						<th> {{ asset[1] }} </th>
-						<th> {{ asset[2] }} </th>
-					</tr>
-				{% endfor %}
-			</table><br>
-			<form method="post">
-				Tag: <input type="text" name="tag" size=16 placeholder="Asset Tag" required maxlength=16 /><br>
-				Description: <input type="text" name="desc" size=36 placeholder="Asset Description" maxlength=80/></br>
-				Facility: <select required name="facility">
-					<option value="">None</option>
-					{% for fac in facilities %}
-						<option value={{fac[2]}}> {{ fac[2] }} </option>
-					{% endfor %} 
-				</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrival Date: 
-				<input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 />&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="submit" value="Insert"/>
-			</form>
-		</center>
+		</center>	
+		<div>
+			<nav>
+				<form method="post">
+					<ul>
+						<li>Insert new assets into the database.</li>
+						<li>Asset tags must contain characters.</li>
+						<li>Asset tags may be up to 16 characters in length.</li>
+						<li>A facility of storage is required for entry.</li>
+						<li>A date of arrival is required for entry.</li>
+						<li>Dates must be entered in the format MM/DD/YYYY.</li>
+					</ul>
+					Asset Tag:<br>
+					<input type="text" name="tag" size=16 placeholder="Required" required maxlength=16 /><br>
+					Asset Description:<br>
+					<input type="text" name="desc" size=32 placeholder="*Optional" maxlength=80/></br>
+					Facility:<br>
+					<select required name="facility">
+						<option value="">None</option>
+						{% for fac in facilities %}
+							<option value={{fac[2]}}> {{ fac[2] }} </option>
+						{% endfor %} 
+					</select><br>
+					Arrival Date:<br>
+					<input type="text" name="date" size=10 placeholder="MM/DD/YYYY" required maxlength=10 />
+					<br><br>
+					<input type="submit" value="Insert Asset"/>
+				</form>
+			</nav>
+			<article>
+				<table style="width:90%">
+					<tr><th><b>Asset Tag</b></th><th><b>Asset Description</b></th></tr>
+					{% for asset in assets %}
+						<tr>
+							<th> {{ asset[1] }} </th>
+							<th> {{ asset[2] }} </th>
+						</tr>
+					{% endfor %}
+				</table><br>
+			</article>			
+		</div>
 	</body>
 </html>
