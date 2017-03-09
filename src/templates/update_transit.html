@@ -23,6 +23,40 @@ Page where logistics officers can update transit records.
 				font-size: 100%;
 				margin-bottom: 10px;
 			}
+			input[type=submit] {
+				background-color: #4CAF50;
+				border: 1px solid black;
+				color: white;
+				padding: 1px 40px;
+				text-decoration: none;
+				font-size: 16px;
+				cursor: pointer;
+				height: 27px;
+				margin-bottom: 10px;
+			}
+			table, th, td {
+				background-color: lightgrey;
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			th, td { padding: 5px; }
+			th { 
+				text-align: left;
+				font-weight: normal;	
+			}
+			article {
+				margin-left: 400px;
+				padding: 1em;
+				overflow: hidden;
+			}
+			nav {
+				border: 1px solid black;
+				background-color: lightgrey;
+				float: left;
+				max-width: 350px;
+				margin: 15px;
+				padding: 1em;
+			}
 		</style>
 	</head>
 	<body>
@@ -31,46 +65,65 @@ Page where logistics officers can update transit records.
 		<center>
 			<h1>Update the Report</h1>
 			<h3 style="color:red;"> {{ message }} </h3>
-			<table style="width:50%">
-				<tr>
-					<th><b>ID Stamp:</b></th>
-					<th> {{ request[0] }} </th>
-				</tr>
-				<tr>
-					<th><b>Asset Tag:</b></th>
-					<th> {{ request[1] }} </th>
-				</tr>
-				<tr>
-					<th><b>Source Facility:</b></th>
-					<th> {{ request[2] }} </th>
-				</tr>
-				<tr>
-					<th><b>Destination Facility:</b></th>
-					<th> {{ request[3] }} </th>
-				</tr>
-				<tr>
-					<th><b>Requested by:</b></th>
-					<th> {{ request[4] }} </th>
-				</tr>
-				<tr>
-					<th><b>Submitted at:</b></th>
-					<th> {{ request[5] }} </th>
-				</tr>
-				<tr>
-					<th><b>Approved by:</b></th>
-					<th> {{ request[6] }} </th>
-				</tr>
-				<tr>
-					<th><b>Approved at:</b></th>
-					<th> {{ request[7] }} </th>
-				</tr>
-			</table><br><br>
-			
-			<form method="post">
-				Load Time: <input type="text" name="load" size=8 placeholder="HH:MM:SS" required maxlength=8 /><br>
-				Unload Time: <input type="text" name="unload" size=8 placeholder="HH:MM:SS" required maxlength=8 /><br>
-				<input type="submit" name="update" value="Update"/>
-			</form>
 		</center>
+		<div>
+			<nav>
+				<form method="post">
+					<ul>
+						<li>Update the approved request by entering loading and unloading times.</li>
+						<li>A load date and time are required.</li>
+						<li>An unload date and time are required.</li>
+						<li>Dates must be entered in the format MM/DD/YYYY.</li>
+						<li>Times must be entered in the format HH:MM:SS.</li>
+						<li>Times must be entered in military time (24-hour).</li>
+					</ul>
+					Load Date:<br>
+					<input type="text" name="loaddate" size=10 placeholder="MM/DD/YYYY" required maxlength=10 /><br>
+					Load Time:<br>
+					<input type="text" name="loadtime" size=8 placeholder="HH:MM:SS" required maxlength=8 /><br>
+					Unload Date:<br>
+					<input type="text" name="unloaddate" size=10 placeholder="MM/DD/YYYY" required maxlength=10 /><br>
+					Unload Time:<br>
+					<input type="text" name="unloadtime" size=8 placeholder="HH:MM:SS" required maxlength=8 /><br>
+					<input type="submit" name="update" value="Update"/>
+				</form>
+			</nav>
+			<article>
+				<table style="width:70%">
+					<tr>
+						<th><b>ID Stamp:</b></th>
+						<th> {{ request[0] }} </th>
+					</tr>
+					<tr>
+						<th><b>Asset Tag:</b></th>
+						<th> {{ request[1] }} </th>
+					</tr>
+					<tr>
+						<th><b>Source Facility:</b></th>
+						<th> {{ request[2] }} </th>
+					</tr>
+					<tr>
+						<th><b>Destination Facility:</b></th>
+						<th> {{ request[3] }} </th>
+					</tr>
+					<tr>
+						<th><b>Requested by:</b></th>
+						<th> {{ request[4] }} </th>
+					</tr>
+					<tr>
+						<th><b>Submitted at:</b></th>
+						<th> {{ request[5] }} </th>
+					</tr>
+					<tr>
+						<th><b>Approved by:</b></th>
+						<th> {{ request[6] }} </th>
+					</tr>
+					<tr>
+						<th><b>Approved at:</b></th>
+						<th> {{ request[7] }} </th>
+					</tr>
+				</table>
+			</article>
+		</div>
 	</body>
 </html>
