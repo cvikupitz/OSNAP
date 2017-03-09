@@ -11,33 +11,37 @@ Page where users can add assets into the system.
 <html>
 	<head>
 		<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
-			<style>
-				body {
-					background-color: #ccccff;
-					margin: 30px;
-					font-family: verdana;
-					font-size: 100%;
-				}
-				input {
-					font-family: verdana;
-					font-size: 100%;
-					margin-bottom: 10px;
-				}
-				select { height: 23px; }
-				table, th, td {
-					border: 1px solid black;
-					border-collapse: collapse;
-				}
-				th, td { padding: 5px; }
-				th { 
-					font-weight: normal;
-					text-align: left; 
-				}
-				select { margin-bottom: 10px; }
-			</style>
+		<style>
+			body {
+				background-color: #ccccff;
+				margin: 30px;
+				font-family: verdana;
+				font-size: 100%;
+			}
+			input {
+				font-family: verdana;
+				font-size: 100%;
+				margin-bottom: 10px;
+			}
+			select { 
+				height: 23px;
+			}
+			table, th, td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			th, td { padding: 5px; }
+			th { 
+				font-weight: normal;
+				text-align: left; 
+			}
+			select {
+				margin-bottom: 10px;
+			}
+		</style>
 	</head>
 	<body>
-		<title>L.O.S.T.</title>
+		<title>L.O.S.T. (Add Asset)</title>
 		<left><a href="{{url_for('dashboard')}}">Return to the dashboard</a></left>
 		<center>
 			<h1>Add an Asset</h1>
