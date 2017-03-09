@@ -12,6 +12,13 @@ Page of the dashboard, where users can sign out and access other pages.
 	<head>
 	<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
 		<style>
+			header, footer {
+				padding: 1em;
+				color: black;
+				background-color: white;
+				clear: left;
+				text-align: center;
+			}
 			body {
 				background-color: #ccccff;
 				font-family: verdana;
@@ -39,14 +46,20 @@ Page of the dashboard, where users can sign out and access other pages.
 	</head>
 	<body>
 		<title>L.O.S.T. (Dashboard)</title>
+		<header>
 		<p align=left>
+			<img src="{{url_for('static', filename='dashboard_icon.png')}}" style="width:187px;height:186px;"/>
+
 			Currently logged in as <b>{{ name }}, {{ role }}.</b><br>
 			Click <a href="{{url_for('logout')}}">here</a> to logout.
 		</p>
+		
+		L.O.S.T. Dashboard
+		</header>
+		
+		
 		<div class="container">
-			<header>
-				<center><h1>L.O.S.T. Dashboard</center></h1>
-			</header>
+			
 			<nav>
 				<b>Pending Transfers:</b><br>
 				<ul>
