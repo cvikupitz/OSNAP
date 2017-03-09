@@ -349,7 +349,7 @@ def approve_req():
         if ('button' in request.form):
 
             # User clicked approve, approve the request.
-            if (request.form['button'] == 'Approve'):
+            if (request.form['button'] == 'Approve Request'):
                 approve_request(session['stamp'], session['username'])
                 session['message'] = "You have approved the request. A logistics officer will submit the load/unload times."
                 return redirect(url_for('message'))
