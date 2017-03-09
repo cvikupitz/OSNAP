@@ -12,12 +12,13 @@ Page of the dashboard, where users can sign out and access other pages.
 	<head>
 	<link rel="icon" href="{{url_for('static', filename='alien_icon.png')}}"/>
 		<style>
-			header, footer {
+			header {
 				padding: 1em;
 				color: black;
-				background-color: white;
+				background-color: #a9b3bc;
 				clear: left;
 				text-align: center;
+				height: 185px;
 			}
 			body {
 				background-color: #ccccff;
@@ -47,15 +48,30 @@ Page of the dashboard, where users can sign out and access other pages.
 	<body>
 		<title>L.O.S.T. (Dashboard)</title>
 		<header>
-		<p align=left>
-			<img src="{{url_for('static', filename='dashboard_icon.png')}}" style="width:187px;height:186px;"/>
-
-			Currently logged in as <b>{{ name }}, {{ role }}.</b><br>
-			Click <a href="{{url_for('logout')}}">here</a> to logout.
-		</p>
+			<div style="height:200px;width:200px;float:left;">
+				<img src="{{url_for('static', filename='dashboard_icon.png')}}" style="width:187px;height:186px;"/>
+			</div>
 		
-		L.O.S.T. Dashboard
+			<div style="height:200px;width:510px;float:left;">
+				<center><h1><br>L.O.S.T. Dashboard</h1></center>
+			</div>
+			
+			<div style="height:50px;width:550px;float:right;">
+				<p align=right>
+					Currently logged in as <b>{{ name }}<br>{{ role }}</b><br>
+					Click <a href="{{url_for('logout')}}">here</a> to logout.
+				</p>
+			</div>
 		</header>
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		<div class="container">
@@ -68,14 +84,39 @@ Page of the dashboard, where users can sign out and access other pages.
 					{% endfor %}
 				</ul>
 			</nav>
+			
 			<article>
 				<ul>
-					<li><h3><a href="{{url_for('asset_report')}}">View Asset Report</a></h3></li>
-					<li><h3><a href="{{url_for('transfer_report')}}">View Transfer Report</a></h3></li>
-					<li><h3><a href="{{url_for('add_asset')}}">Add an Asset</a></h3></li>
-					<li><h3><a href="{{url_for('add_facility')}}">Add a Facility</a></h3></li>
-					<li><h3><a href="{{url_for('dispose_asset')}}">Dispose an Asset</a></h3></li>
-					<li><h3><a href="{{url_for('transfer_req')}}">Make a Transfer Request</a></h3></li>
+					<li>
+						<img src="{{url_for('static', filename='asset_report_icon.png')}}" style="width:16px;height:16px;"/>
+						&nbsp;&nbsp;
+						<a href="{{url_for('asset_report')}}"><b>View Asset Report</b></a>
+					</li><br>
+					<li>
+						<img src="{{url_for('static', filename='transfer_report_icon.png')}}" style="width:16px;height:16px;"/>
+						&nbsp;&nbsp;
+						<a href="{{url_for('transfer_report')}}"><b>View Transfer Report</b></a>
+					</li><br>
+					<li>
+						<img src="{{url_for('static', filename='add_asset_icon.png')}}" style="width:16px;height:16px;"/>
+						&nbsp;&nbsp;
+						<a href="{{url_for('add_asset')}}"><b>Add an Asset</b></a>
+					</li><br>
+					<li>
+						<img src="{{url_for('static', filename='add_facility_icon.png')}}" style="width:16px;height:16px;"/>
+						&nbsp;&nbsp;
+						<a href="{{url_for('add_facility')}}"><b>Add a Facility</b></a>
+					</li><br>
+					<li>
+						<img src="{{url_for('static', filename='dispose_asset_icon.png')}}" style="width:16px;height:16px;"/>
+						&nbsp;&nbsp;
+						<a href="{{url_for('dispose_asset')}}"><b>Dispose an Asset</b></a>
+					</li><br>
+					<li>
+						<img src="{{url_for('static', filename='transfer_request_icon.png')}}" style="width:16px;height:16px;"/>
+						&nbsp;&nbsp;
+						<a href="{{url_for('transfer_req')}}"><b>Make a Transfer Request</b></a>
+					</li><br>
 				</ul>
 			</article>		
 		</div>	
