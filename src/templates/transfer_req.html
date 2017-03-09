@@ -23,7 +23,36 @@ Page where logistics officers can create transfer requests.
 				font-size: 100%;
 				margin-bottom: 10px;
 			}
-			select { height: 23px; }
+			input[type=submit] {
+				background-color: #4CAF50;
+				border: 1px solid black;
+				color: white;
+				padding: 1px 40px;
+				text-decoration: none;
+				font-size: 16px;
+				cursor: pointer;
+				height: 27px;
+				margin-bottom: 10px;
+			}
+			select { 
+				height: 23px; 
+			}
+			article {
+				border: 1px solid black;
+				background-color: lightgrey;
+				margin-left: 400px;
+				padding: 1em;
+				overflow: hidden;
+				max-width: 450px;
+			}
+			nav {
+				border: 1px solid black;
+				background-color: lightgrey;
+				float: left;
+				max-width: 350px;
+				margin: 15px;
+				padding: 1em;
+			}
 		</style>
 	</head>
 	<body>
@@ -32,22 +61,36 @@ Page where logistics officers can create transfer requests.
 		<center>
 			<h1>Transfer Request</h1>
 			<h3 style="color:red;"> {{ message }} </h3>
-			<form method="post">
-				Source Facility: <select required name="source">
-					<option value="">None</option>
-					{% for fac in src_facilities %}
-						<option value={{fac[2]}}> {{ fac[2] }} </option>
-					{% endfor %} 
-				</select><br><br>
-				Destination Facility: <select required name="destination">
-					<option value="">None</option>
-					{% for fac in dest_facilities %}
-						<option value={{fac[2]}}> {{ fac[2] }} </option>
-					{% endfor %} 
-				</select><br><br>
-				Asset Tag: <input type="text" name="tag" size=16 placeholder="Required" required maxlength=16 /><br><br>
-				<input type="submit" value="Submit Request"/>
-			</form>
 		</center>
+		<div>
+			<nav>
+				<ul>
+					<li>Make a transfer request to transport an asset between facilities.</li>
+					<li>Both a source and destination facility are required.</li>
+					<li>An asset tag for the asset to be transferred is required.</li>
+				</ul>
+			</nav>
+			
+			<article>
+				<form method="post">
+					Source Facility:<br><select required name="source">
+						<option value="">None</option>
+						{% for fac in src_facilities %}
+							<option value={{fac[2]}}> {{ fac[2] }} </option>
+						{% endfor %} 
+					</select><br><br>
+					Destination Facility:<br>
+					<select required name="destination">
+						<option value="">None</option>
+						{% for fac in dest_facilities %}
+							<option value={{fac[2]}}> {{ fac[2] }} </option>
+						{% endfor %} 
+					</select><br><br>
+					Asset Tag:<br><input type="text" name="tag" size=16 placeholder="Required" required maxlength=16 /><br><br>
+					<input type="submit" value="Submit Request"/>
+				</form>
+			</article>
+			
+			<div>
 	</body>
 </html>
