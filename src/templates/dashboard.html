@@ -15,6 +15,7 @@ Page of the dashboard, where users can sign out and access other pages.
 			header {
 				padding: 1em;
 				color: black;
+				border: 1px solid black;
 				background-color: #a9b3bc;
 				clear: left;
 				text-align: center;
@@ -38,9 +39,11 @@ Page of the dashboard, where users can sign out and access other pages.
 				overflow: hidden;
 			}
 			nav {
+				border: 1px solid black;
+				background-color: lightgrey;
 				float: left;
-				max-width: 300px;
-				margin: 0;
+				max-width: 400px;
+				margin: 15px;
 				padding: 1em;
 			}
 		</style>
@@ -63,19 +66,7 @@ Page of the dashboard, where users can sign out and access other pages.
 				</p>
 			</div>
 		</header>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<div class="container">
-			
+		<div>
 			<nav>
 				<b>Pending Transfers:</b><br>
 				<ul>
@@ -84,7 +75,6 @@ Page of the dashboard, where users can sign out and access other pages.
 					{% endfor %}
 				</ul>
 			</nav>
-			
 			<article>
 				<ul>
 					<li>
