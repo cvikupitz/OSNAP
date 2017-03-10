@@ -11,7 +11,9 @@ Contains product requirements and design documents on different incrementals of 
 |-- assignment7.pdf
 |-- assignment8.pdf
 |-- assignment9.pdf
+|-- assignment10.pdf
 |-- derp_req.pdf
 |-- lost_req.pdf
+|-- rubric.pdf
 |-- who_req.pdf
 |
