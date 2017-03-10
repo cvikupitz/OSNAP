@@ -402,7 +402,7 @@ def update_transit():
                 return redirect(url_for('update_transit'))
 
             # Adds the times into the database.
-            update_request(session['stamp'], entries[0], entries[1])
+            update_request(session['stamp'], entries[0]+entries[1], entries[2]+entries[3])
             session['message'] = "Loading and unloading times have been successfully set."
             return redirect(url_for('message'))
         else:

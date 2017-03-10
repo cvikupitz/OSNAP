@@ -85,5 +85,3 @@ def generate_id():
     import os
     return (os.urandom(10).hex())
 
-
-

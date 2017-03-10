@@ -496,15 +496,17 @@ are made and committed into the database.
 
 Args:
     ident - The identification tag of the request to update.
-    load - The loading time to add.
-    unload - The unloading time to add.
+    ldate - The loading date to add.
+    ltime - The loading time to add.
+    udate - The unloading date to add.
+    utime - The unloading time to add.
 Returns:
     None
 """
-def update_request(ident, load, unload):
+def update_request(ident, ldate, udate):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("UPDATE requests SET load_time=%s, unload_time=%s WHERE id_stamp=%s", (load, unload, ident,))
+        cur.execute("UPDATE requests SET load_time=%s, unload_time=%s WHERE id_stamp=%s", (ldate, udate, ident,))
         conn.commit()
         return None
 

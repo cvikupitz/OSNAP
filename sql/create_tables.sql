@@ -128,8 +128,8 @@ CREATE TABLE requests (
 	src_facility		integer REFERENCES facilities (facility_pk),
 	dest_facility		integer REFERENCES facilities (facility_pk),
 	asset_fk			integer REFERENCES assets (asset_pk),
-	load_time			time,
-	unload_time			time
+	load_time			timestamp,
+	unload_time			timestamp
 );
 
 
