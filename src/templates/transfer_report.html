@@ -72,18 +72,22 @@ Page where users can view a report of all assets in motion/transit.
 			<nav>
 				<form method="post">
 					<ul>
-						<li>View a transport report given a date, loading, and unloading time.</li>
-						<li>A date, load, and unload time are required to view a report.</li>
+						<li>View a transport report given a date range.</li>
+						<li>Enter a floor date to see completed transfers after that date.</li>
+						<li>Enter a ceiling date to see completed transfers before that date.</li>
+						<li>Leaving a bounded date and time blank removes that limit.</li>
 						<li>Dates must be entered in the format MM/DD/YYYY.</li>
 						<li>Times must be entered in the format HH:MM:SS.</li>
 						<li>Times must be entered in military time (24-hour).</li>
 					</ul>
-					Date:<br>
-					<input type="text" name="date" size=10 placeholder="MM/DD/YYYY" maxlength=10 /><br>
-					Load Time:<br>
-					<input type="text" name="load" size=8 placeholder="HH:MM:SS" maxlength=8 /><br>
-					Unload Time:<br>
-					<input type="text" name="unload" size=8 placeholder="HH:MM:SS" maxlength=8 /><br>
+					Floor Date:<br>
+					<input type="text" name="fdate" size=10 placeholder="MM/DD/YYYY" maxlength=10 /><br>
+					Floor Time:<br>
+					<input type="text" name="ftime" size=8 placeholder="HH:MM:SS" maxlength=8 /><br>
+					Ceiling Date:<br>
+					<input type="text" name="cdate" size=10 placeholder="MM/DD/YYYY" maxlength=10 /><br>
+					Ceiling Time:<br>
+					<input type="text" name="ctime" size=8 placeholder="HH:MM:SS" maxlength=8 /><br>
 					<input type="submit" value="Generate"/>
 				</form>
 			</nav>

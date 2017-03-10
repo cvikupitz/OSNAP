@@ -428,21 +428,39 @@ def transfer_report():
         session['report'] = list()
         return render_template('transfer_report.html', message = msg, report = rprt)
     else:
-        if ('date' in request.form and 'load' in request.form and 'unload' in request.form):
-            entries = (request.form['load'], request.form['unload'])
+        if ('fdate' in request.form and 'ftime' in request.form and 'cdate' in request.form and 'ctime' in request.form):
+            entries = (request.form['fdate'], request.form['ftime'], request.form['cdate'], request.form['ctime'])
+
+            # Make sure dates and times are entered together, one may not be left blank
+            if (not ((entries[0] != '' and entries[1] != '') or (entries[0] == '' and entries[1] == ''))):
+                session['message'] = "Error: You must enter both a date and a time on one of the bounds."
+                return redirect(url_for('update_transit'))
+            if (not ((entries[2] != '' and entries[3] != '') or (entries[2] == '' and entries[3] == ''))):
+                session['message'] = "Error: You must enter both a date and a time on one of the bounds."
+                return redirect(url_for('update_transit'))
+
+            # Make sure the dates are valid.
+            if (entries[0] != ''):
+                if (not date_valid(entries[0])):
+                    session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
+                    return redirect(url_for('update_transit'))
+            if (entries[2] != ''):
+                if (not date_valid(entries[2])):
+                    session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
+                    return redirect(url_for('update_transit'))
 
             # Make sure the times are valid.
-            if (entries[0] != ''):
-                if (not time_valid(entries[1])):
-                    session['message'] = "Invalid Time: Times must be valid and in the format HH:MM:SS."
-                    redirect(url_for('transfer_report'))
             if (entries[1] != ''):
                 if (not time_valid(entries[1])):
                     session['message'] = "Invalid Time: Times must be valid and in the format HH:MM:SS."
-                    redirect(url_for('transfer_report'))
+                    return redirect(url_for('update_transit'))
+            if (entries[3] != ''):
+                if (not time_valid(entries[3])):
+                    session['message'] = "Invalid Time: Times must be valid and in the format HH:MM:SS."
+                    return redirect(url_for('update_transit'))
 
             # Generates the report, poopulate the table.
-            #session['report'] = transfer_report(entries[0], entries[1], entries[2])
+            session['report'] = transfer_report(entries[0] + ' ' + entries[1], entries[2] + ' ' + entries[3])
             return render_template('transfer_report.html', message = msg)
         else:
             session['message'] = "Unknown Error: Something went wrong, return to the dashboard."

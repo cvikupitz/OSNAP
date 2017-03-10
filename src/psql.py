@@ -512,6 +512,24 @@ def update_request(ident, ldate, udate):
 
 
 """
+FIXME
+"""
+def transfer_report(lower, upper):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        if (lower == '' and upper == ''):
+            cur.execute("SELECT * FROM requests")
+        elif (lower != '' and upper == ''):
+            cur.execute("SELECT * FROM requests WHERE unload_time >= %s", (lower,))
+        elif (lower == '' and upper != ''):
+            cur.execute("SELECT * FROM requests WHERE unload_time <= %s", (upper,))
+        else:
+            cur.execute("SELECT * FROM requests WHERE unload_time >= %s AND unload_time <= %s", (lower, upper,))
+        conn.commit()
+        return (cur.fetchall())
+
+
+"""
 Deletes a transfer requet from the database given the ID stamp. Changes made are committed to
 
 the database.
