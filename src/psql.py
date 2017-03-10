@@ -512,21 +512,33 @@ def update_request(ident, ldate, udate):
 
 
 """
-FIXME
+Generates a list of all the completed transfers given a date range. If one of the dates
+is not given, that lower/upper bound is left out.
+
+Args:
+    lower - A datetime that represents the lower bound.
+    upper - A datetime that represents the upper bound.
+Returns:
+    A list of the completed transfers in the given date range.
 """
-def transfer_report(lower, upper):
+def transfers_report(lower, upper):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        if (lower == '' and upper == ''):
-            cur.execute("SELECT * FROM requests")
-        elif (lower != '' and upper == ''):
-            cur.execute("SELECT * FROM requests WHERE unload_time >= %s", (lower,))
-        elif (lower == '' and upper != ''):
-            cur.execute("SELECT * FROM requests WHERE unload_time <= %s", (upper,))
+        if ((lower == '' or lower.isspace()) and (upper == '' or upper.isspace())):
+            cur.execute("SELECT * FROM requests WHERE unload_time IS NOT NULL")
+        elif ((lower != '' or not lower.isspace()) and (upper == '' or upper.isspace())):
+            cur.execute("SELECT * FROM requests WHERE unload_time IS NOT NULL AND unload_time >= %s", (lower,))
+        elif ((lower == '' or lower.isspace()) and (upper != '' or not upper.isspace())):
+            cur.execute("SELECT * FROM requests WHERE unload_time IS NOT NULL AND unload_time <= %s", (upper,))
         else:
-            cur.execute("SELECT * FROM requests WHERE unload_time >= %s AND unload_time <= %s", (lower, upper,))
+            cur.execute("SELECT * FROM requests WHERE unload_time IS NOT NULL AND unload_time >= %s AND unload_time <= %s", (lower, upper,))
         conn.commit()
-        return (cur.fetchall())
+        res = cur.fetchall()
+        report = list()
+        for tr in res:
+            tag = get_asset(tr[8])[1]
+            report.append((tag, time_to_string(tr[9]), time_to_string(tr[10])))
+        return report
 
 
 """
