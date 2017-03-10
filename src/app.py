@@ -434,10 +434,10 @@ def transfer_report():
             # Make sure dates and times are entered together, one may not be left blank
             if (not ((entries[0] != '' and entries[1] != '') or (entries[0] == '' and entries[1] == ''))):
                 session['message'] = "Error: You must enter both a date and a time on one of the bounds."
-                return redirect(url_for('update_transit'))
+                return redirect(url_for('transfer_report'))
             if (not ((entries[2] != '' and entries[3] != '') or (entries[2] == '' and entries[3] == ''))):
                 session['message'] = "Error: You must enter both a date and a time on one of the bounds."
-                return redirect(url_for('update_transit'))
+                return redirect(url_for('transfer_report'))
 
             # Make sure the dates are valid.
             if (entries[0] != ''):
