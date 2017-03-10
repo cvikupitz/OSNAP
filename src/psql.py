@@ -24,10 +24,15 @@ Returns:
 def authenticate(uname, password):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("SELECT username FROM USERS WHERE username=%s AND password=%s",
+        cur.execute("SELECT * FROM USERS WHERE username=%s AND password=%s",
                     (uname, password,))
         conn.commit()
-        return (cur.fetchone() != None)
+        res = cur.fetchone()
+        if (res == None):
+            return False
+        if (not res[4]):
+            return False
+        return True
 
 
 """
@@ -44,7 +49,7 @@ Returns:
 def create_account(uname, password, role):
     with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
+        cur.execute("INSERT INTO users (username, password, role, active) VALUES (%s, %s, %s, TRUE)",
                     (uname, password, role,))
         conn.commit()
         return None
@@ -64,6 +69,27 @@ def user_exists(uname):
         cur.execute("SELECT username FROM users WHERE username=%s", (uname,))
         conn.commit()
         return (cur.fetchone() != None)
+
+
+"""
+Checks to see if the user is active given the username. If active, returns true, or false
+if otherwise. If a user is active, this means that the user can currently log onto the
+system.
+
+Args:
+    uname - The username of the user to check for activity.
+Returns:
+    True if the user is currently active, false if not.
+"""
+def user_active(uname):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users WHERE username=%s", (uname,))
+        conn.commit()
+        res = cur.fetchone()[4]
+        if (res == 'TRUE'):
+            return True
+        return False
 
 
 """

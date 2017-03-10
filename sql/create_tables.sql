@@ -49,12 +49,14 @@ CREATE TABLE facilities (
  * password (varchar(16)) - The password of the account, up to 16 characters in length.
  * role (integer) - The role of the user. This points to the primary key of the role in
  *					the roles table that this user has.
+ * active - True if the user can sign in, false if not.
  */
 CREATE TABLE users (
 	user_pk				SERIAL PRIMARY KEY,
 	username			varchar(16) NOT NULL,
 	password			varchar(16) NOT NULL,
-	role				integer REFERENCES roles (role_pk)
+	role				integer REFERENCES roles (role_pk),
+	active				boolean
 );
 
 
@@ -141,8 +143,9 @@ INSERT INTO roles (title) VALUES ('Facilities Officer');
 -------------------------------------------------
 /* TESTING - COMMENT OUT WHEN COMPLETE */
 
-INSERT INTO users (username, password, role) VALUES ('user1', 'p1', '1');
-INSERT INTO users (username, password, role) VALUES ('user2', 'p2', '2');
+INSERT INTO users (username, password, role, active) VALUES ('user1', 'p1', '1', 'TRUE');
+INSERT INTO users (username, password, role, active) VALUES ('user2', 'p2', '2', 'TRUE');
+INSERT INTO users (username, password, role, active) VALUES ('user3', 'p3', '1', 'FALSE');
 INSERT INTO facilities (fcode, common_name) VALUES ('WLGRNS', 'Wallgreens');
 INSERT INTO facilities (fcode, common_name) VALUES ('TARGET', 'Target');
 INSERT INTO facilities (fcode, common_name) VALUES ('NRDSTM', 'Nordstrom');
