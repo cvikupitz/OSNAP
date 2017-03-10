@@ -1,12 +1,20 @@
 Repository for the LOST Web Application - Designed for CIS 322.
 
------------------ Repository Directories/Contents ------------------------
+=============== Repository Directories/Contents ===============
 
 ...
 |
 |-- doc/
 |    |
 |    |-- < Doc files on assignment details and the L.O.S.T. application are here. >
+|
+|-- export/
+|    |
+|    |-- < Files on exporting data from the database are here. >
+|
+|-- import/
+|    |
+|    |-- < Files on importing data into the database are here. >
 |
 |-- lectures/
 |    |
