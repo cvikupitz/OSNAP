@@ -402,7 +402,7 @@ def update_transit():
                 return redirect(url_for('update_transit'))
 
             # Adds the times into the database.
-            update_request(session['stamp'], entries[0]+entries[1], entries[2]+entries[3])
+            update_request(session['stamp'], entries[0] + ' ' + entries[1], entries[2] + ' ' + entries[3])
             session['message'] = "Loading and unloading times have been successfully set."
             return redirect(url_for('message'))
         else:
@@ -428,7 +428,7 @@ def transfer_report():
         session['report'] = list()
         return render_template('transfer_report.html', message = msg, report = rprt)
     else:
-        if ('load' in request.form and 'unload' in request.form):
+        if ('date' in request.form and 'load' in request.form and 'unload' in request.form):
             entries = (request.form['load'], request.form['unload'])
 
             # Make sure the times are valid.

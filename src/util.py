@@ -19,13 +19,14 @@ Returns:
 def date_valid(date):
     import re
     regex = re.compile('[0-9]{2}/[0-9]{2}/[0-9]{4}')
+    limit = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     if (regex.match(date)):
         month = int(date[:2])
         day = int(date[3:5])
         year = int(date[6:])
         if (month < 1 or month > 12):
             return False
-        if (day < 1 or day > 31):
+        if (day < 1 or day > limit[month]):
             return False
         if (year < 1 or year > 9999):
             return False
