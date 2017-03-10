@@ -388,11 +388,16 @@ def update_transit():
         return render_template('update_transit.html', message = msg, request = req)
 
     else:
-        if ('load' in request.form and 'unload' in request.form and 'update' in request.form):
-            entries = (request.form['load'], request.form['unload'])
+        if ('loaddate' in request.form and 'loadtime' in request.form and 'unloaddate' in request.form and 'unloadtime' in request.form):
+            entries = (request.form['loaddate'], request.form['loadtime'], request.form['unloaddate'], request.form['unloadtime'])
+
+            # Check to see if the entered dates are in a valid format.
+            if (not date_valid(entries[0]) or not date_valid(entries[2])):
+                session['message'] = "Invalid Date: Dates must be valid and in the format MM/DD/YYYY."
+                return redirect(url_for('update_transit'))
 
             # Check to see if the entered times are in a valid format.
-            if (not time_valid(entries[0]) or not time_valid(entries[1])):
+            if (not time_valid(entries[1]) or not time_valid(entries[3])):
                 session['message'] = "Invalid Time: Times must be valid and in the format HH:MM:SS."
                 return redirect(url_for('update_transit'))
 
