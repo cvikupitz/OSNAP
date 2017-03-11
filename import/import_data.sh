@@ -8,3 +8,6 @@ if [ "$#" -ne 1 ]; then
 	echo "Usage: ./import_data.sh <dbname> <input_dir>"
 	exit;
 fi
+
+# Create the database
+

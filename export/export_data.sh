@@ -10,7 +10,6 @@ if [ "$#" -ne 2 ]; then
 fi
 
 # Creates the output directory
-cd ~
 mkdir $2
 
 # Executes the exports
