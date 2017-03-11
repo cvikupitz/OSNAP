@@ -9,8 +9,8 @@ if [ "$#" -ne 2 ]; then
 	exit;
 fi
 
-# Creates the output directory
-mkdir $2
+# Creates the directory, or clears it if it exists.
+python3 directory.py $2
 
 # Executes the exports
 python3 export_users.py $1 $2
