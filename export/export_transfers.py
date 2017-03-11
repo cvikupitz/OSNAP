@@ -19,12 +19,31 @@ from csv import *
 FIXME
 """
 def transfer_export(name, output):
+
+    # Gets all transfers form database.
     with psycopg2.connect(dbname = name, host = '127.0.0.1', port = 5432) as conn:
         cur = conn.cursor()
         cur.execute("SELECT * FROM requests")
         conn.commit()
-        users = cur.fetchall()
-        #######
+        transfers = cur.fetchall()
+
+    # Opens the file for writing.
+    outputfile = open(os.path.join(output, 'transfers.csv'), 'w', newline = '')
+    writer = csv.writer(outputfile)
+    writer.writerow(['asset_tag', 'request_by', 'request_dt', 'approve_by', 'approve_dt', 'source',
+                     'destination', 'load_dt', 'unload_dt'])
+
+    # Add each transfer into row.
+    k = 0
+    for transfer in transfers:
+
+        ###################
+        # FIXME ###########
+        ###################
+        pass
+
+    outputfile.close()
+    print("-- Exported", k, "transfers to", os.path.join(output, 'transfers.csv'))
 
 
 if __name__ == "__main__":

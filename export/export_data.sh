@@ -15,5 +15,5 @@ python3 directory.py $2
 # Executes the exports
 python3 export_users.py $1 $2
 python3 export_facilities.py $1 $2
-#python3 export_assets.py $1 $2
-#python3 export_transfers.py $1 $2
+python3 export_assets.py $1 $2
+python3 export_transfers.py $1 $2

@@ -29,16 +29,21 @@ def asset_export(name, output):
         assets = cur.fetchall()
 
     # Opens the file for writing.
-        outputfile = open(os.path.join(output, 'assets.csv'), 'w', newline = '')
-        writer = csv.writer(outputfile)
-        writer.writerow(['asset_tag', 'description', 'facility', 'acquired', 'disposed'])
+    outputfile = open(os.path.join(output, 'assets.csv'), 'w', newline = '')
+    writer = csv.writer(outputfile)
+    writer.writerow(['asset_tag', 'description', 'facility', 'acquired', 'disposed'])
 
     # Add each asset into row.
+    k = 0
     for asset in assets:
-        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (asset[],))
-        facility = cur.fetchone()[0]
-        writer.writerow([])
+
+        ###################
+        # FIXME ###########
+        ###################
+        pass
+
     outputfile.close()
+    print("-- Exported", k, "assets to", os.path.join(output, 'assets.csv'))
 
 
 if __name__ == "__main__":
