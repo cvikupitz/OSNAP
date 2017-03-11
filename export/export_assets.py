@@ -37,10 +37,14 @@ def asset_export(name, output):
     k = 0
     for asset in assets:
 
-        ###################
-        # FIXME ###########
-        ###################
-        pass
+        cur.execute("SELECT * FROM asset_at WHERE asset_fk=%s", (asset[0],))
+        conn.commit()
+        asset_at = cur.fetchone()
+        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (asset_at[2],))
+        conn.commit()
+        fcode = cur.fetchone()
+        writer.writerow([asset[1], asset[2], fcode, asset_at[3], asset_at[4]])
+        k += 1
 
     outputfile.close()
     print("-- Exported", k, "assets to", os.path.join(output, 'assets.csv'))
