@@ -14,8 +14,9 @@ Output:
 
 # Imports
 import sys
+import os
+import csv
 import psycopg2
-from csv import *
 
 
 """
@@ -27,8 +28,14 @@ def user_export(name, output):
         cur.execute("SELECT * FROM users")
         conn.commit()
         users = cur.fetchall()
-        #######
-            
+
+        outputfile = open(os.path.join(output, 'users.csv'))
+        writer = csv.writer(outputfile)
+        writer.writerow(['username', 'password', 'role', 'active'])
+
+        for user in users:
+            writer.writerow([user[1], user[2], user[3], user[4]])
+        outputfile.close()
 
 
 if __name__ == "__main__":
