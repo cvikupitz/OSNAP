@@ -20,21 +20,28 @@ import psycopg2
 
 
 """
-FIXME
+Exports all the users from the users table into the file 'users.csv'.
 """
 def user_export(name, output):
     with psycopg2.connect(dbname = name, host = '127.0.0.1', port = 5432) as conn:
+        
+        # Gets all users form database.
         cur = conn.cursor()
         cur.execute("SELECT * FROM users")
         conn.commit()
         users = cur.fetchall()
 
-        outputfile = open(os.path.join(output, 'users.csv'))
+        # Opens the file for writing.
+        outputfile = open(os.path.join(output, 'users.csv'), 'w', newline = '')
         writer = csv.writer(outputfile)
         writer.writerow(['username', 'password', 'role', 'active'])
 
+        # Add each user into row.
         for user in users:
-            writer.writerow([user[1], user[2], user[3], user[4]])
+            cur.execute("SELECT title FROM roles WHERE role_pk=%s", (user[3],))
+            conn.commit()
+            role = cur.fetchone()[0]
+            writer.writerow([user[1], user[2], role, user[4]])
         outputfile.close()
 
 
@@ -50,3 +57,5 @@ if __name__ == "__main__":
     dbname = sys.argv[1]
     output = sys.argv[2]
     user_export(dbname, output)
+
+
