@@ -12,8 +12,8 @@ Usage:
 # Imports
 import sys
 import os
+import csv
 import psycopg2
-from csv import *
 
 
 """
@@ -39,7 +39,7 @@ def facility_export(name, output):
             writer.writerow([facl[1], facl[2]])
             k += 1
         outputfile.close()
-        print("Exported", k, "facilities to", os.path.join(output, 'facilities.csv'))
+        print("-- Exported", k, "facilities to", os.path.join(output, 'facilities.csv'))
 
 
 if __name__ == "__main__":

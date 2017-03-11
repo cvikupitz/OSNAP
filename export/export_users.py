@@ -45,7 +45,7 @@ def user_export(name, output):
             writer.writerow([user[1], user[2], role, user[4]])
             k += 1
         outputfile.close()
-        print("Exported", k, "users to", os.path.join(output, 'users.csv'))
+        print("-- Exported", k, "users to", os.path.join(output, 'users.csv'))
 
 
 if __name__ == "__main__":
