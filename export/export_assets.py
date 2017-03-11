@@ -12,8 +12,8 @@ Usage:
 # Imports
 import sys
 import os
+import csv
 import psycopg2
-from csv import *
 
 
 """
@@ -42,7 +42,7 @@ def asset_export(name, output):
         asset_at = cur.fetchone()
         cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (asset_at[2],))
         conn.commit()
-        fcode = cur.fetchone()
+        fcode = cur.fetchone()[0]
         writer.writerow([asset[1], asset[2], fcode, asset_at[3], asset_at[4]])
         k += 1
 

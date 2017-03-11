@@ -11,8 +11,9 @@ Usage:
 
 # Imports
 import sys
+import os
+import csv
 import psycopg2
-from csv import *
 
 
 """
