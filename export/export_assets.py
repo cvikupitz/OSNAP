@@ -11,20 +11,34 @@ Usage:
 
 # Imports
 import sys
+import os
 import psycopg2
 from csv import *
 
 
 """
-FIXME
+Exports all the assets from the users table into the file 'assets.csv'.
 """
 def asset_export(name, output):
+
+    # Gets all assets form database.
     with psycopg2.connect(dbname = name, host = '127.0.0.1', port = 5432) as conn:
         cur = conn.cursor()
         cur.execute("SELECT * FROM assets")
         conn.commit()
-        users = cur.fetchall()
-        #######
+        assets = cur.fetchall()
+
+    # Opens the file for writing.
+        outputfile = open(os.path.join(output, 'assets.csv'), 'w', newline = '')
+        writer = csv.writer(outputfile)
+        writer.writerow(['asset_tag', 'description', 'facility', 'acquired', 'disposed'])
+
+    # Add each asset into row.
+    for asset in assets:
+        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (asset[],))
+        facility = cur.fetchone()[0]
+        writer.writerow([])
+    outputfile.close()
 
 
 if __name__ == "__main__":

@@ -11,20 +11,35 @@ Usage:
 
 # Imports
 import sys
+import os
 import psycopg2
 from csv import *
 
 
 """
-FIXME
+Exports all the facilities from the users table into the file 'facilities.csv'.
 """
 def facility_export(name, output):
     with psycopg2.connect(dbname = name, host = '127.0.0.1', port = 5432) as conn:
+
+        # Gets all facilities form database.
         cur = conn.cursor()
         cur.execute("SELECT * FROM facilities")
         conn.commit()
-        users = cur.fetchall()
-        #######
+        facilities = cur.fetchall()
+
+        # Opens the file for writing.
+        outputfile = open(os.path.join(output, 'facilities.csv'), 'w', newline = '')
+        writer = csv.writer(outputfile)
+        writer.writerow(['fcode', 'common_name'])
+
+        # Add each user into row.
+        k = 0
+        for facl in facilities:
+            writer.writerow([facl[1], facl[2]])
+            k += 1
+        outputfile.close()
+        print("Exported", k, "facilities to", os.path.join(output, 'facilities.csv'))
 
 
 if __name__ == "__main__":
