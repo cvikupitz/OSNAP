@@ -142,7 +142,7 @@ INSERT INTO roles (title) VALUES ('Facilities Officer');
 
 -------------------------------------------------
 /* TESTING - COMMENT OUT WHEN COMPLETE */
-
+/*
 INSERT INTO users (username, password, role, active) VALUES ('user1', 'p1', '1', 'TRUE');
 INSERT INTO users (username, password, role, active) VALUES ('user2', 'p2', '2', 'TRUE');
 INSERT INTO users (username, password, role, active) VALUES ('user3', 'p3', '1', 'FALSE');
@@ -188,5 +188,6 @@ INSERT INTO requests (id_stamp, requester, approver, submit_date, approve_date, 
 INSERT INTO requests (id_stamp, requester, approver, submit_date, approve_date, src_facility, dest_facility, asset_fk, load_time, unload_time) VALUES ('95aec9bd166d78216134','1','2','03/14/2014','03/14/2014','2','3','10','02/08/2002 15:00:00','02/19/2002 11:35:00');
 INSERT INTO requests (id_stamp, requester, approver, submit_date, approve_date, src_facility, dest_facility, asset_fk, load_time, unload_time) VALUES ('6944e3d472f7e3564a65','1','2','03/15/2014','03/16/2014','4','3','12','02/12/2002 17:00:00','03/03/2002 12:30:00');
 INSERT INTO requests (id_stamp, requester, approver, submit_date, approve_date, src_facility, dest_facility, asset_fk, load_time, unload_time) VALUES ('0435a71d628677fd4dca','1','2','03/15/2014','03/17/2014','4','1','15','03/01/2002 10:20:00','04/01/2002	016:45:00');
+*/
 
 

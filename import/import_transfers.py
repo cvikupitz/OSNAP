@@ -46,12 +46,12 @@ def transfer_import(name, directory):
             approver = cur.fetchone()[0]
 
             # Facility pk of the source
-            cur.execute("SELECT facility_pk FROM facility WHERE fcode=%s", (transfer[5],))
+            cur.execute("SELECT facility_pk FROM facilities WHERE fcode=%s", (transfer[5],))
             conn.commit()
             src = cur.fetchone()[0]
 
             # Facility pk of the destination
-            cur.execute("SELECT facility_pk FROM facility WHERE fcode=%s", (transfer[6],))
+            cur.execute("SELECT facility_pk FROM facilities WHERE fcode=%s", (transfer[6],))
             conn.commit()
             dest = cur.fetchone()[0]
 
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # Execute the import
     dbname = sys.argv[1]
     directory = sys.argv[2]
-    asset_import(dbname, directory)
+    transfer_import(dbname, directory)
 
 
 
