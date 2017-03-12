@@ -17,7 +17,7 @@ import psycopg2
 
 
 """
-FIXME
+Exports all the transfers from the requests table into the file 'assets.csv'.
 """
 def transfer_export(name, output):
 
@@ -35,16 +35,36 @@ def transfer_export(name, output):
                      'destination', 'load_dt', 'unload_dt'])
 
     # Add each transfer into row.
-    k = 0
     for transfer in transfers:
 
-        ###################
-        # FIXME ###########
-        ###################
-        pass
+        # The asset tag.
+        cur.execute("SELECT tag FROM assets WHERE asset_pk=%s", (transfer[8],))
+        conn.commit()
+        tag = cur.fetchone()[0]
 
+        # Username of the requester.
+        cur.execute("SELECT username FROM users WHERE user_pk=%s", (transfer[2],))
+        conn.commit()
+        requester = cur.fetchone()[0]
+
+        # Username of the approver.
+        cur.execute("SELECT username FROM users WHERE user_pk=%s", (transfer[3],))
+        conn.commit()
+        approver = cur.fetchone()[0]
+
+        # Source facility.
+        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (transfers[6],))
+        conn.commit()
+        src = cur.fetchone()[0]
+
+        # Destination facility.
+        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (transfers[7],))
+        conn.commit()
+        dest = cur.fetchone()[0]
+
+        writer.writerow([tag, requester, transfer[4], approver, transfer[5], src, dest, transfer[9], transfer[10]])
     outputfile.close()
-    print("-- Exported", k, "transfers to", os.path.join(output, 'transfers.csv'))
+    print("-- Exported", len(transfers), "transfers to", os.path.join(output, 'transfers.csv'))
 
 
 if __name__ == "__main__":

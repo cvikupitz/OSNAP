@@ -37,15 +37,13 @@ def user_export(name, output):
         writer.writerow(['username', 'password', 'role', 'active'])
 
         # Add each user into row.
-        k = 0
         for user in users:
             cur.execute("SELECT title FROM roles WHERE role_pk=%s", (user[3],))
             conn.commit()
             role = cur.fetchone()[0]
             writer.writerow([user[1], user[2], role, user[4]])
-            k += 1
         outputfile.close()
-        print("-- Exported", k, "users to", os.path.join(output, 'users.csv'))
+        print("-- Exported", len(users), "users to", os.path.join(output, 'users.csv'))
 
 
 if __name__ == "__main__":

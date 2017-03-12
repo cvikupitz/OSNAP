@@ -17,7 +17,7 @@ import psycopg2
 
 
 """
-Exports all the facilities from the users table into the file 'facilities.csv'.
+Exports all the facilities from the facilities table into the file 'facilities.csv'.
 """
 def facility_export(name, output):
     with psycopg2.connect(dbname = name, host = '127.0.0.1', port = 5432) as conn:
@@ -34,12 +34,10 @@ def facility_export(name, output):
         writer.writerow(['fcode', 'common_name'])
 
         # Add each user into row.
-        k = 0
-        for facl in facilities:
-            writer.writerow([facl[1], facl[2]])
-            k += 1
+        for facility in facilities:
+            writer.writerow([facility[1], facility[2]])
         outputfile.close()
-        print("-- Exported", k, "facilities to", os.path.join(output, 'facilities.csv'))
+        print("-- Exported", len(facilities), "facilities to", os.path.join(output, 'facilities.csv'))
 
 
 if __name__ == "__main__":

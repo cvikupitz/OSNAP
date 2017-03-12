@@ -17,7 +17,7 @@ import psycopg2
 
 
 """
-Exports all the assets from the users table into the file 'assets.csv'.
+Exports all the assets from the assets table into the file 'assets.csv'.
 """
 def asset_export(name, output):
 
@@ -34,7 +34,6 @@ def asset_export(name, output):
     writer.writerow(['asset_tag', 'description', 'facility', 'acquired', 'disposed'])
 
     # Add each asset into row.
-    k = 0
     for asset in assets:
 
         cur.execute("SELECT * FROM asset_at WHERE asset_fk=%s", (asset[0],))
@@ -44,10 +43,9 @@ def asset_export(name, output):
         conn.commit()
         fcode = cur.fetchone()[0]
         writer.writerow([asset[1], asset[2], fcode, asset_at[3], asset_at[4]])
-        k += 1
 
     outputfile.close()
-    print("-- Exported", k, "assets to", os.path.join(output, 'assets.csv'))
+    print("-- Exported", len(assets), "assets to", os.path.join(output, 'assets.csv'))
 
 
 if __name__ == "__main__":
