@@ -11,4 +11,7 @@ This directory contains static files used by the web application.
 |-- dispose_asset_icon.png
 |-- password_icon.png
 |-- stop.png
+|-- transfer_report_icon.png
+|-- transfer_request_icon.png
+|-- user_icon.png
 |
