@@ -18,7 +18,7 @@ import psycopg2
 
 
 """
-FIXME
+Imports the data from 'users.csv' into the database.
 """
 def user_import(name, directory):
     with psycopg2.connect(dbname = name, host = '127.0.0.1', port = 5432) as conn:
@@ -35,6 +35,7 @@ def user_import(name, directory):
             cur.execute("INSERT INTO users (username, password, role, active) VALUES (%s, %s, %s, %s)",
                         (user[0], user[1], role, user[3]))
             conn.commit()
+        print("-- Imported", len(users)-1, "users from", os.path.join(directory, 'users.csv'))
         inputfile.close()
         
 

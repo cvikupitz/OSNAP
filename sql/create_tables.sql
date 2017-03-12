@@ -183,3 +183,4 @@ INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('14','4','01/0
 INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('15','4','01/03/2000');
 INSERT INTO asset_at (asset_fk, facility_fk, arrive_date) VALUES ('16','4','01/04/2000');
 
+
