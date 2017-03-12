@@ -1,4 +1,5 @@
-Contains product requirements and design documents on different incrementals of the OSNAP project.
+This directory contains product requirements and design documents on different 
+incrementals of the OSNAP project.
 
 ...
 |
