@@ -40,7 +40,7 @@ def user_import(name, directory):
             conn.commit()
         print("-- Imported", len(users)-1, "users from", os.path.join(directory, 'users.csv'))
         inputfile.close()
-        
+
 
 
 if __name__ == "__main__":
@@ -57,4 +57,4 @@ if __name__ == "__main__":
     user_import(dbname, directory)
 
 
-    
+
