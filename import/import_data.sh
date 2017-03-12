@@ -11,7 +11,7 @@ fi
 
 # Executes the imports
 python3 import_users.py $1 $2
-#python3 import_facilities.py $1 $2
-#python3 import_assets.py $1 $2
+python3 import_facilities.py $1 $2
+python3 import_assets.py $1 $2
 #python3 import_transfers.py $1 $2
 

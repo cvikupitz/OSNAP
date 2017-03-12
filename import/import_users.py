@@ -4,7 +4,7 @@ Author: Cole Vikupitz
 
 Imports information from the file 'users.csv' into the users table in the specified
 database from the indicated directory. The data that is imported is committed to the
-new database.
+database.
 
 Usage:
     >> python3 import_users.py [dbname] [input_dir]
@@ -21,12 +21,15 @@ import psycopg2
 Imports the data from 'users.csv' into the database.
 """
 def user_import(name, directory):
+
+    # Connect to the database.
     with psycopg2.connect(dbname = name, host = '127.0.0.1', port = 5432) as conn:
         cur = conn.cursor()
         inputfile = open(os.path.join(directory, 'users.csv'))
         reader = csv.reader(inputfile)
         users = list(reader)
 
+        # Iterate through the list of users
         for user in users[1:]:
             if user[2] == 'Logistics Officer':
                 role = 1
