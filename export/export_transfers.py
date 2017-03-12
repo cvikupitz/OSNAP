@@ -53,12 +53,12 @@ def transfer_export(name, output):
         approver = cur.fetchone()[0]
 
         # Source facility.
-        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (transfers[6],))
+        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (transfer[6],))
         conn.commit()
         src = cur.fetchone()[0]
 
         # Destination facility.
-        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (transfers[7],))
+        cur.execute("SELECT fcode FROM facilities WHERE facility_pk=%s", (transfer[7],))
         conn.commit()
         dest = cur.fetchone()[0]
 
