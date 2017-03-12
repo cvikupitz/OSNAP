@@ -1,0 +1,4 @@
+username,password,role,active
+user1,p1,Logistics Officer,True
+user2,p2,Facilities Officer,True
+user3,p3,Logistics Officer,False
