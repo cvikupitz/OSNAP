@@ -1,6 +1,80 @@
-Repository for the LOST Web Application - Designed for CIS 322.
+Welcome to my repository for L.O.S.T.
+
+=============== What is OSNAP? ===============
+
+OSNAP is a project designed and implemented for a group of customers with specific requirements
+on how they want to manage the assets in their business. This implementation is referred to as
+L.O.S.T., whick keeps track of assets, facilities of storage, where assets are located, transfer
+requests of assets between two facilities, and generating asset and transfer reports. All of these
+features have been implemented based on these clients' requests and have helped made business
+organization much easier for their company. The web application was designed and built over a ten
+week course for CIS 322 at the University of Oregon.
+
+=============== Installation ===============
+
+To run the application, you will need to install postgres 9.5., and Apache httpd-2.4.25 or a later
+version.
+
+To install postgres, run the commands:
+
+>> git clone https://github.com/postgres/postgres.git
+>> cd postgres/
+>> ./configure --prefix=$1
+>> make
+>> make install
+
+where $1 is the install prefix.
+
+To install Apache, run the commands:
+
+>> curl -o httpd-2.4.25.tar.bz2 http://apache.mirrors.tds.net//httpd/httpd-2.4.25.tar.bz2
+>> tar -xjf httpd-2.4.25.tar.bz2
+>> cd httpd-2.4.25/
+>> ./configure --prefix=$1
+>> make
+>> make install
+
+where $1 is the install prefix.
+
+To clone this repository, run the command:
+
+>> git clone http://github.com/cvikupitz/OSNAP.git
+
+=============== Running the Application ===============
+
+First, create and start a database cluster on your machine with the following commands:
+
+>> initdb -D $1
+>> pg_ctl -D $1 -l logfile start
+
+where $1 is the specified directory on your system to store the database.
+
+Next, create the database by running:
+
+>> createdb -p $1 $2
+
+where $1 is the port number and $2 is the name of the database.
+
+Finally, change into the OSNAP directory and run the preflight script by running:
+
+>> ./preflight.sh $1
+
+where $1 is the name of the database you created.
+
+Open your browser and go to http://127.0.0.1:8080 to use the web application.
+
 
 =============== Repository Directories/Contents ===============
+
+* doc/ - This sub-directory contains documentation on the design/implementation L.O.S.T.
+* export/ - This sub-directory contains a script to run for exporting data from your database.
+* import/ - This sub-directory contains a script to run for importing data into your database.
+* lectures/ - This sub-directory contains files/notes from the CIS 322 class page.
+* sql/ - This sub-directory contains SQL scripts used to generate tables in the database.
+* src/ - This sub-directory contains source files for the L.O.S.T. application.
+* preflight.sh
+Usage: ./preflight.sh <dbname>
+<dbname> - The name of the database for L.O.S.T. to use.
 
 ...
 |
@@ -78,7 +152,7 @@ Repository for the LOST Web Application - Designed for CIS 322.
 |    |    |-- message.html
 |    |    |-- transfer_report.html
 |    |    |-- transfer_req.html
-|    |    |-- udate_transit.html
+|    |    |-- update_transit.html
 |    |
 |    |-- app.py
 |    |-- config.py
