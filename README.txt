@@ -72,6 +72,7 @@ Open your browser and go to http://127.0.0.1:8080 to use the web application.
 * lectures/ - This sub-directory contains files/notes from the CIS 322 class page.
 * sql/ - This sub-directory contains SQL scripts used to generate tables in the database.
 * src/ - This sub-directory contains source files for the L.O.S.T. application.
+* tesdoc/ - This sub-directory contains testing documents with use cases of the application.
 * preflight.sh
 Usage: ./preflight.sh <dbname>
 <dbname> - The name of the database for L.O.S.T. to use.
@@ -159,6 +160,10 @@ Usage: ./preflight.sh <dbname>
 |    |-- lost_config.json
 |    |-- psql.py
 |    |-- util.py
+|
+|-- testdoc/
+|    |
+|    |-- test_plan.pdf
 |
 |-- preflight.sh
 |
