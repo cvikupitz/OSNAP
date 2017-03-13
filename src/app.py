@@ -56,6 +56,48 @@ def login():
 
 
 """
+Send the user to the create user screen. Here, users can
+create a new account by giving a username and password
+16 characters or less. Checks to see if the new info
+exists and alerts users if so.
+"""
+@app.route('/create_user', methods = ['GET','POST'])
+def create_user():
+
+    # Loads the create user page.
+    if (request.method == 'GET'):
+        msg = session['message']
+        session['message'] = ""
+        return render_template('create_user.html', message = msg)
+
+    # User creates a new account, creates the account or rejects the request.
+    else:
+        if ('username' in request.form and 'password' in request.form and 'confirm' in request.form and 'role' in request.form):
+            entries = (request.form['username'], request.form['password'],
+                       request.form['confirm'], request.form['role'])
+
+            # Password and confirmation must match.
+            if (entries[1] != entries[2]):
+                session['message'] = "Password Mismatch: Make sure that your passwords match."
+                return redirect(url_for('create_user', message = session['message']))
+
+            # Check to see if there already exists an account with the username.
+            if (user_exists(entries[0])):
+                session['message'] = "Occupied User: That username already exists."
+                return redirect(url_for('create_user', message = session['message']))
+
+            # Creates the new account, goes to the dashboard.
+            create_account(entries[0], entries[1], entries[3])
+            session['username'] = entries[0]
+            session['role'] = fetch_role(entries[0])
+            return redirect(url_for('dashboard'))
+
+        else:
+            session['message'] = "Occupied User: That username already exists."
+            return redirect(url_for('create_user', message = session['message']))
+
+
+"""
 Send the user to the dashboard screen upon login. Displays
 the username on the screen. User should be able to logout
 from here.
