@@ -190,4 +190,3 @@ INSERT INTO requests (id_stamp, requester, approver, submit_date, approve_date, 
 INSERT INTO requests (id_stamp, requester, approver, submit_date, approve_date, src_facility, dest_facility, asset_fk, load_time, unload_time) VALUES ('0435a71d628677fd4dca','1','2','03/15/2014','03/17/2014','4','1','15','03/01/2002 10:20:00','04/01/2002	016:45:00');
 */
 
-
