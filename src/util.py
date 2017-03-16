@@ -75,6 +75,22 @@ def time_to_string(time):
 
 
 """
+Scans the datetime object and returns a string representation of the given date
+in the format MM/DD/YYYY. Used for displaying the date in the reports.
+
+Args:
+    date - The datetime object to convert.
+Returns:
+    A string representation of the given date object.
+"""
+def date_to_string(date):
+    try:
+        return date.strftime('%m/%d/%Y')
+    except:
+        return 'None'
+
+
+"""
 Generates a random 20-character string used for the ID's of transfer requests.
 
 Args:

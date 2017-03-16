@@ -46,9 +46,14 @@ def asset_import(name, directory):
             conn.commit()
             facility = cur.fetchone()[0]
 
+            # Get the depart date
+            depart = asset[4]
+            if (asset[4] == 'NULL' or asset[4] == ''):
+                depart = None
+
             # Insert into the asset_at table.
             cur.execute("INSERT INTO asset_at (asset_fk, facility_fk, arrive_date, depart_date) VALUES (%s, %s, %s, %s)",
-                        (asset_fk, facility, asset[3], asset[4]))
+                        (asset_fk, facility, asset[3], depart))
             conn.commit()
         print("-- Imported", len(assets)-1, "assets from", os.path.join(directory, 'assets.csv'))
         inputfile.close()

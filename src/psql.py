@@ -394,7 +394,7 @@ def generate_report(facility, date):
             cur.execute("SELECT * FROM facilities WHERE facility_pk=%s", (asset[2],))
             conn.commit()
             b_temp = cur.fetchone()[2]
-            report.append((a_temp[1], a_temp[2], b_temp, asset[3], asset[4],))
+            report.append((a_temp[1], a_temp[2], b_temp, date_to_string(asset[3]), date_to_string(asset[4],)))
         return report
 
 
