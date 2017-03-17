@@ -13,8 +13,6 @@ from psql import *
 # Set up flask application
 app = Flask(__name__, template_folder = 'templates')
 app.config['SECRET_KEY'] = "5a7c8059c6f4b390b06bcdbf81c03affdc67a3f8f0006c8e"
-conn = psycopg2.connect(dbname = dbname, host = dbhost, port = dbport)
-cur = conn.cursor()
 
 
 """
