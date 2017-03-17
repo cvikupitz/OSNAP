@@ -69,7 +69,6 @@ Open your browser and go to http://127.0.0.1:8080 to use the web application.
 * doc/ - This sub-directory contains documentation on the design/implementation L.O.S.T.
 * export/ - This sub-directory contains a script to run for exporting data from your database.
 * import/ - This sub-directory contains a script to run for importing data into your database.
-* lectures/ - This sub-directory contains files/notes from the CIS 322 class page.
 * sql/ - This sub-directory contains SQL scripts used to generate tables in the database.
 * src/ - This sub-directory contains source files for the L.O.S.T. application.
 * tesdoc/ - This sub-directory contains testing documents with use cases of the application.
@@ -83,6 +82,7 @@ Usage: ./preflight.sh <dbname>
 |    |
 |    |-- derp_req.pdf
 |    |-- doc.tgz
+|    |-- lectures.tgz
 |    |-- lost_req.pdf
 |    |-- who_req.pdf
 |
@@ -102,10 +102,6 @@ Usage: ./preflight.sh <dbname>
 |    |-- import_facilities.py
 |    |-- import_transfers.py
 |    |-- import_users.py
-|
-|-- lectures/
-|    |
-|    |-- < Lecture slides & notes are here. >
 |
 |-- sql/
 |    |
