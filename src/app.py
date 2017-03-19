@@ -3,6 +3,11 @@ app.py
 Author: Cole Vikupitz
 
 Flask application that runs the L.O.S.T. website.
+
+For assignment 10:
+    Web service done in two different service calls:
+    /create_user - Activates/creates a user account.
+    /revoke_user - Deactivates a user account, preventing login.
 """
 
 # Imports
@@ -54,7 +59,10 @@ def login():
 
 
 """
-FIXME
+Used for the web service to activate users for the L.O.S.T.
+database. A username and password are given to create a new
+account if the username is unique, or activates and replaces
+the account's password.
 """
 @app.route('/create_user', methods = ['POST'])
 def create_user():
@@ -68,9 +76,11 @@ def create_user():
         else:
             activate_account(request.form['username'], request.form['password'])
         print("-- The user", request.form['username'], "was successfully activated.")
+        return ''
 
     else:
-        print("-- The activation failed.")
+        print("-- User activation failed.")
+        return ''
 
 
 """

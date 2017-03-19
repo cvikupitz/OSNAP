@@ -45,19 +45,15 @@ if __name__ == "__main__":
         args['role'] = 1
     else:
         args['role'] = 2
-    #data = urlencode(args)
+    data = urlencode(args)
     print("-- Activating the user", sys.argv[2])
 
-    sargs = dict()
-    sargs['arguments'] = json.dumps(args)
-    sargs['signature'] = ''
-    data = urlencode(sargs)
-
     # Make the request.
-    path = sys.argv[1] + 'create_user'
-    req = Request(path, data.encode('ascii'), method = 'POST')
-    res = urlopen(req)
+    try:
+        path = sys.argv[1] + 'create_user'
+        req = Request(path, data.encode('ascii'), method = 'POST')
+        res = urlopen(req)
+        print("-- Successfully activated the user", args['username'])
+    except:
+        print("Something went wrong, activation failed.")
 
-
-    resp = json.loads(res.read().decode('ascii'))
-    #print(resp)
