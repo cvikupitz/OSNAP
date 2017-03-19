@@ -37,12 +37,19 @@ if __name__ == "__main__":
         print("Role must be 'logofc' or 'facofc'.")
         sys.exit()
 
-    # -------------------
-    print("Creating the user", sys.argv[2])
-    ####
-    print("User", sys.argv[2], "was successfully activated.")
+    # Put the username, password, role into dictionary & encode.
+    args = dict()
+    args['username'] = sys.argv[2]
+    args['password'] = sys.argv[3]
+    if sys.argv[4] == 'logofc':
+        args['role'] = 1
+    else:
+        args['role'] = 2
+    data = urlencode(args)
+    print("-- Activating the user", sys.argv[2])
 
-
-
-
+    # Make the request.
+    url = sys.argv[1] + 'create_user'
+    request = Request(url, data.encode('ascii'), method = 'POST')
+    res = urlopen(request)
 

@@ -56,6 +56,41 @@ def create_account(uname, password, role):
 
 
 """
+Activates an account given the username and password. The password will be
+updated, and the active flag will be set back to true.
+
+Args:
+    uname - The account's username.
+    password - The account's password.
+Returns:
+    None
+"""
+def activate_account(uname, password):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("UPDATE users SET password=%s, active=TRUE WHERE username=%s", (password, uname,))
+        conn.commit()
+        return None
+
+
+"""
+Deactivates an account given the username. Sets the active flag for that
+account to false so that the account may not log into the L.O.S.T. database.
+
+Args:
+    uname - The account's username.
+Returns:
+    None
+"""
+def deactivate_account(uname):
+    with psycopg2.connect(dbname = dbname, host = dbhost, port = dbport) as conn:
+        cur = conn.cursor()
+        cur.execute("UPDATE users SET active=FALSE WHERE username=%s", (uname,))
+        conn.commit()
+        return None
+
+
+"""
 Checks to see if the given username currently belongs to an account.
 
 Args:
@@ -583,5 +618,3 @@ def delete_request(ident):
         cur.execute("DELETE FROM requests WHERE id_stamp=%s", (ident,))
         conn.commit()
         return None
-
-

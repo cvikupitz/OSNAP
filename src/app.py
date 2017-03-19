@@ -54,45 +54,39 @@ def login():
 
 
 """
-Send the user to the create user screen. Here, users can
-create a new account by giving a username and password
-16 characters or less. Checks to see if the new info
-exists and alerts users if so.
+FIXME
 """
-@app.route('/create_user', methods = ['GET','POST'])
+@app.route('/create_user', methods = ['POST'])
 def create_user():
 
-    # Loads the create user page.
-    if (request.method == 'GET'):
-        msg = session['message']
-        session['message'] = ""
-        return render_template('create_user.html', message = msg)
+    if (request.method == 'POST'):
+        # Create user if it does not exist.
+        if not user_exists(request.form['username']):
+            create_account(request.form['username'], request.form['password'], request.form['role'])
 
-    # User creates a new account, creates the account or rejects the request.
-    else:
-        if ('username' in request.form and 'password' in request.form and 'confirm' in request.form and 'role' in request.form):
-            entries = (request.form['username'], request.form['password'],
-                       request.form['confirm'], request.form['role'])
-
-            # Password and confirmation must match.
-            if (entries[1] != entries[2]):
-                session['message'] = "Password Mismatch: Make sure that your passwords match."
-                return redirect(url_for('create_user', message = session['message']))
-
-            # Check to see if there already exists an account with the username.
-            if (user_exists(entries[0])):
-                session['message'] = "Occupied User: That username already exists."
-                return redirect(url_for('create_user', message = session['message']))
-
-            # Creates the new account, goes to the dashboard.
-            create_account(entries[0], entries[1], entries[3])
-            session['username'] = entries[0]
-            session['role'] = fetch_role(entries[0])
-            return redirect(url_for('dashboard'))
-
+        # If user does exist, then replace password and activate.
         else:
-            session['message'] = "Occupied User: That username already exists."
-            return redirect(url_for('create_user', message = session['message']))
+            activate_account(request.form['username'], request.form['password'])
+        print("-- The user", request.form['username'], "was successfully activated.")
+
+    else:
+        print("-- The activation failed.")
+
+
+"""
+FIXME
+"""
+@app.route('/revoke_user', methods = ['POST'])
+def revoke_user():
+    if (request.method == 'POST'):
+        if not user_exists(request.form['username']):
+            print("-- The deactivation failed. That username does not exist.")
+            return
+        else:
+            deactivate_account(request.form['username'])
+        print("-- The user", request.form['username'], "was successfully deactivated.")
+    else:
+        print("-- The deactivation failed.")
 
 
 """
