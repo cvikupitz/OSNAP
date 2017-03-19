@@ -66,6 +66,7 @@ Open your browser and go to http://127.0.0.1:8080 to use the web application.
 
 =============== Repository Directories/Contents ===============
 
+* clients/ - This sub-directory contains scripts for activating and deactivating users.
 * doc/ - This sub-directory contains documentation on the design/implementation L.O.S.T.
 * export/ - This sub-directory contains a script to run for exporting data from your database.
 * import/ - This sub-directory contains a script to run for importing data into your database.
@@ -77,6 +78,11 @@ Usage: ./preflight.sh <dbname>
 <dbname> - The name of the database for L.O.S.T. to use.
 
 ...
+|
+|-- clients/
+|    |
+|    |-- activate_user.py
+|    |-- revoke_user.py
 |
 |-- doc/
 |    |

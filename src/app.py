@@ -6,7 +6,7 @@ Flask application that runs the L.O.S.T. website.
 
 For assignment 10:
     Web service done in two different service calls:
-    /create_user - Activates/creates a user account.
+    /create_user - Activates or creates a user account.
     /revoke_user - Deactivates a user account, preventing login.
 """
 
@@ -76,27 +76,34 @@ def create_user():
         else:
             activate_account(request.form['username'], request.form['password'])
         print("-- The user", request.form['username'], "was successfully activated.")
-        return ''
+        return ""
 
     else:
         print("-- User activation failed.")
-        return ''
+        return ""
 
 
 """
-FIXME
+Used for the web service to deactivate users for the L.O.S.T.
+database. A username is given to disable the account. If the
+username given does not exist, nothing should happen.
 """
 @app.route('/revoke_user', methods = ['POST'])
 def revoke_user():
+
     if (request.method == 'POST'):
+        # If the user does not exist, do nothing.
         if not user_exists(request.form['username']):
             print("-- The deactivation failed. That username does not exist.")
-            return
+            return ""
+
+        # Sets the account's active flag to false.
         else:
             deactivate_account(request.form['username'])
         print("-- The user", request.form['username'], "was successfully deactivated.")
     else:
         print("-- The deactivation failed.")
+        return ""
 
 
 """

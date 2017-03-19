@@ -10,8 +10,8 @@ Usage:
     >> python3 activate_user.py [host_url] [username] [password] [role]
 """
 
+# Imports
 import sys
-import json
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 
