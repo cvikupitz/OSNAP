@@ -27,19 +27,14 @@ if __name__ == "__main__":
     # Put the username into dictionary & encode.
     args = dict()
     args['username'] = sys.argv[2]
-    args['password'] = sys.argv[3]
-    if sys.argv[4] == 'logofc':
-        args['role'] = 1
-    else:
-        args['role'] = 2
     data = urlencode(args)
-    print("-- Activating the user", sys.argv[2])
+    print("-- Deactivating the user", sys.argv[2])
 
     # Make the request.
     try:
-        path = sys.argv[1] + 'create_user'
+        path = sys.argv[1] + 'revoke_user'
         req = Request(path, data.encode('ascii'), method = 'POST')
         res = urlopen(req)
-        print("-- Successfully activated the user", args['username'])
+        print("-- Successfully deactivated the user", args['username'])
     except:
-        print("Something went wrong, activation failed.")
+        print("Something went wrong, deactivation failed.")

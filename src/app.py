@@ -95,12 +95,12 @@ def revoke_user():
         # If the user does not exist, do nothing.
         if not user_exists(request.form['username']):
             print("-- The deactivation failed. That username does not exist.")
-            return ""
 
         # Sets the account's active flag to false.
         else:
             deactivate_account(request.form['username'])
         print("-- The user", request.form['username'], "was successfully deactivated.")
+        return ""
     else:
         print("-- The deactivation failed.")
         return ""
