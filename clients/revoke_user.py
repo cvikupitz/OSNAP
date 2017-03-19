@@ -28,13 +28,10 @@ if __name__ == "__main__":
     args = dict()
     args['username'] = sys.argv[2]
     data = urlencode(args)
-    print("-- Deactivating the user", sys.argv[2])
 
     # Make the request.
-    try:
-        path = sys.argv[1] + 'revoke_user'
-        req = Request(path, data.encode('ascii'), method = 'POST')
-        res = urlopen(req)
-        print("-- Successfully deactivated the user", args['username'])
-    except:
-        print("Something went wrong, deactivation failed.")
+    path = sys.argv[1] + 'revoke_user'
+    req = Request(path, data.encode('ascii'), method = 'POST')
+    res = urlopen(req)
+    print(res.read().decode('ascii'))
+

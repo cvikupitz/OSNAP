@@ -46,14 +46,10 @@ if __name__ == "__main__":
     else:
         args['role'] = 2
     data = urlencode(args)
-    print("-- Activating the user", sys.argv[2])
 
     # Make the request.
-    try:
-        path = sys.argv[1] + 'create_user'
-        req = Request(path, data.encode('ascii'), method = 'POST')
-        res = urlopen(req)
-        print("-- Successfully activated the user", args['username'])
-    except:
-        print("Something went wrong, activation failed.")
+    path = sys.argv[1] + 'create_user'
+    req = Request(path, data.encode('ascii'), method = 'POST')
+    res = urlopen(req)
+    print(res.read().decode('ascii'))
 

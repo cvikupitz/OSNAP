@@ -75,12 +75,10 @@ def create_user():
         # If user does exist, then replace password and activate.
         else:
             activate_account(request.form['username'], request.form['password'])
-        print("-- The user", request.form['username'], "was successfully activated.")
-        return ""
+        return "-- Successfully activated the user " + request.form['username']
 
     else:
-        print("-- User activation failed.")
-        return ""
+        return "Something went wrong, activation failed."
 
 
 """
@@ -94,16 +92,14 @@ def revoke_user():
     if (request.method == 'POST'):
         # If the user does not exist, do nothing.
         if not user_exists(request.form['username']):
-            print("-- The deactivation failed. That username does not exist.")
+            return "-- Deactivation failed, that username does not exist."
 
         # Sets the account's active flag to false.
         else:
             deactivate_account(request.form['username'])
-        print("-- The user", request.form['username'], "was successfully deactivated.")
-        return ""
+            return "-- Successfully deactivated the user " + request.form['username']
     else:
-        print("-- The deactivation failed.")
-        return ""
+        return "Something went wrong, deactivation failed."
 
 
 """
