@@ -155,7 +155,9 @@ Usage: ./preflight.sh <dbname>
 |
 |-- testdoc/
 |    |
+|    |-- rubric.pdf
 |    |-- test_plan.pdf
+|    |-- test_report_wk10.txt
 |
 |-- preflight.sh
 |
