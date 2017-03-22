@@ -12,6 +12,9 @@ week course for CIS 322 at the University of Oregon.
 
 =============== Installation ===============
 
+If you have a virtual machine installed, you may download the image on the releases page, otherwise
+keep reading.
+
 To run the application, you will need to install postgres 9.5., and Apache httpd-2.4.25 or a later
 version.
 
