@@ -75,3 +75,89 @@ Open your browser and go to http://127.0.0.1:8080 to use the web application.
 
 Usage: ./preflight.sh <dbname>
 <dbname> - The name of the database for L.O.S.T. to use.
+
+```
+...
+|
+|- clients
+|	|
+|	|- activate_user.py
+|	|- revoke_user.py
+|
+|- doc
+|	|
+|	|- derp_req.pdf
+|	|- doc.tgz
+|	|- lectures.tgz
+|	|- lost_req.pdf
+|	|- who_req.pdf
+|
+|- export
+|	|
+|	|- directory.py
+|	|- export_assets.py
+|	|- export_data.sh
+|	|- export_facilities.py
+|	|- export_transfers.py
+|	|- export_users.py
+|
+|- import
+|	|
+|	|- import_assets.py
+|	|- import_data.sh
+|	|- import_facilities.py
+|	|- import_transfers.py
+|	|- import_users.py
+|
+|- sql
+|	|
+|	|- create_tables.sql
+|
+|- src
+|	|
+|	|- static/
+|	|	|
+|	|	|- add_asset_icon.png
+|	|	|- add_facility_icon.png
+|	|	|- alien_icon.png
+|	|	|- asset_report_icon.png
+|	|	|- checkmark.png
+|	|	|- dashboard_icon.png
+|	|	|- dispose_asset_icon.png
+|	|	|- password_icon.png
+|	|	|- stop.png
+|	|	|- transfer_report_icon.png
+|	|	|- transfer_request_icon.png
+|	|	|- user_icon.png
+|	|
+|	|- templates/
+|	|	|
+|	|	|- add_asset.html
+|	|	|- add_facility.html
+|	|	|- approve_req.html
+|	|	|- asset_report.html
+|	|	|- create_user.html
+|	|	|- dashboard.html
+|	|	|- dispose_asset.html
+|	|	|- error.html
+|	|	|- login.html
+|	|	|- logout.html
+|	|	|- message.html
+|	|	|- transfer_report.html
+|	|	|- transfer_req.html
+|	|	|- update_transit.html
+|	|
+|	|- app.py
+|	|- config.py
+|	|- lost_config.json
+|	|- psql.py
+|	|- util.py
+|
+|- testdoc
+|	|
+|	|- rubric.pdf
+|	|- test_plan.pdf
+|	|- test_report_wk10.txt
+|
+|
+```
