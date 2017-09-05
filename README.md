@@ -1,7 +1,6 @@
-Welcome to my repository for L.O.S.T.
+# L.O.S.T. Repository
 
-=============== What is OSNAP? ===============
-
+## =============== What is OSNAP? ===============
 OSNAP is a project designed and implemented for a group of customers with specific requirements
 on how they want to manage the assets in their business. This implementation is referred to as
 L.O.S.T., whick keeps track of assets, facilities of storage, where assets are located, transfer
@@ -10,10 +9,8 @@ features have been implemented based on these clients' requests and have helped 
 organization much easier for their company. The web application was designed and built over a ten
 week course for CIS 322 at the University of Oregon.
 
-=============== Installation ===============
-
-If you have a virtual machine installed, you may download the image on the releases page, otherwise
-keep reading.
+## =============== Installation ===============
+If you have a virtual machine installed, you may download the image on the releases page.
 
 To run the application, you will need to install postgres 9.5., and Apache httpd-2.4.25 or a later
 version.
@@ -43,8 +40,7 @@ To clone this repository, run the command:
 
 >> git clone http://github.com/cvikupitz/OSNAP.git
 
-=============== Running the Application ===============
-
+## =============== Running the Application ===============
 First, create and start a database cluster on your machine with the following commands:
 
 >> initdb -D $1
@@ -67,8 +63,7 @@ where $1 is the name of the database you created.
 Open your browser and go to http://127.0.0.1:8080 to use the web application.
 
 
-=============== Repository Directories/Contents ===============
-
+## =============== Repository Directories/Contents ===============
 * clients/ - This sub-directory contains scripts for activating and deactivating users.
 * doc/ - This sub-directory contains documentation on the design/implementation L.O.S.T.
 * export/ - This sub-directory contains a script to run for exporting data from your database.
