@@ -17,46 +17,46 @@ version.
 
 To install postgres, run the commands:
 
->> git clone https://github.com/postgres/postgres.git
->> cd postgres/
->> ./configure --prefix=$1
->> make
->> make install
+`$ git clone https://github.com/postgres/postgres.git`  
+`$ cd postgres/`  
+`$ ./configure --prefix=$1`  
+`$ make`  
+`$ make install`  
 
 where $1 is the install prefix.
 
 To install Apache, run the commands:
 
-`$ curl -o httpd-2.4.25.tar.bz2 http://apache.mirrors.tds.net//httpd/httpd-2.4.25.tar.bz2`
-`$ tar -xjf httpd-2.4.25.tar.bz2`
-`$ cd httpd-2.4.25/`
-`$ ./configure --prefix=$1`
-`$ make`
-`$ make install`
+`$ curl -o httpd-2.4.25.tar.bz2 http://apache.mirrors.tds.net//httpd/httpd-2.4.25.tar.bz2`  
+`$ tar -xjf httpd-2.4.25.tar.bz2`  
+`$ cd httpd-2.4.25/`  
+`$ ./configure --prefix=$1`  
+`$ make`  
+`$ make install`  
 
 where $1 is the install prefix.
 
 To clone this repository, run the command:
 
->> git clone http://github.com/cvikupitz/OSNAP.git
+`$ git clone http://github.com/cvikupitz/OSNAP.git`  
 
 ## Running the Application
 First, create and start a database cluster on your machine with the following commands:
 
->> initdb -D $1
->> pg_ctl -D $1 -l logfile start
+`$ initdb -D $1`  
+`$ pg_ctl -D $1 -l logfile start`  
 
 where $1 is the specified directory on your system to store the database.
 
 Next, create the database by running:
 
->> createdb -p $1 $2
+`$ createdb -p $1 $2`  
 
 where $1 is the port number and $2 is the name of the database.
 
 Finally, change into the OSNAP directory and run the preflight script by running:
 
->> ./preflight.sh $1
+`$ ./preflight.sh $1`  
 
 where $1 is the name of the database you created.
 
@@ -72,5 +72,6 @@ Open your browser and go to http://127.0.0.1:8080 to use the web application.
 * src/ - This sub-directory contains source files for the L.O.S.T. application.
 * tesdoc/ - This sub-directory contains testing documents with use cases of the application.
 * preflight.sh
+
 Usage: ./preflight.sh <dbname>
 <dbname> - The name of the database for L.O.S.T. to use.
