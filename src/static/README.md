@@ -1,5 +1,7 @@
 This directory contains static files used by the web application.
 
+```
+
 ...
 |
 |-- add_asset_icon.png
@@ -15,3 +17,5 @@ This directory contains static files used by the web application.
 |-- transfer_request_icon.png
 |-- user_icon.png
 |
+
+```

@@ -1,5 +1,7 @@
 This directory contains the template files (HTML) used by the web app.
 
+```
+
 ...
 |
 |-- add_asset.html
@@ -17,3 +19,5 @@ This directory contains the template files (HTML) used by the web app.
 |-- transfer_req.html
 |-- update_transit.html
 |
+
+```

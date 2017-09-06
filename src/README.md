@@ -14,6 +14,8 @@ during execution.
 * util.py - File that contains a collection of other useful functions used by the web
 	    application.
 
+```
+
 ...
 |
 |-- static/
@@ -23,3 +25,5 @@ during execution.
 |-- psql.py
 |-- util.py
 |
+
+```

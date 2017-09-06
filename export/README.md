@@ -6,7 +6,8 @@ Use the export_data.sh script to execute the export. The python files (.py) are
 called by the script so you don't need to execute them on their own.
 
 * export_data.sh
-Usage: ./export_data.sh <dbname> <output_directory>
+Usage: 
+`$ ./export_data.sh <dbname> <output_directory>`
 <dbname> - The name of the database used by L.O.S.T. to extract the data from.
 <output_directory> - The directory to export the files to. Creates the directory
 		     if it does not exist, or overwrites all files in the
@@ -21,6 +22,8 @@ WARNING: It is recommended that you export to a new directory so that you do not
 * export_transfers.py - Exports the transfers from the database to the file 'transfers.csv'.
 * export_users.py - Exports the users from the database to the file 'users.csv'.
 
+```
+
 ...
 |
 |-- directory.py
@@ -30,3 +33,5 @@ WARNING: It is recommended that you export to a new directory so that you do not
 |-- export_transfers.py
 |-- export_users.py
 |
+
+```
