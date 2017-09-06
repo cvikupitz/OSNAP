@@ -8,12 +8,12 @@ called by the script so you don't need to execute them on their own.
 * export_data.sh  
 Usage:  
 `$ ./export_data.sh <dbname> <output_directory>`  
-<dbname> - The name of the database used by L.O.S.T. to extract the data from.  
-<output_directory> - The directory to export the files to. Creates the directory
+dbname - The name of the database used by L.O.S.T. to extract the data from.  
+output_directory - The directory to export the files to. Creates the directory
 		     if it does not exist, or overwrites all files in the
 		     directory if it does.  
 WARNING: It is recommended that you export to a new directory so that you do not
-	 risk losing any other files/data on your computer.  
+	 risk losing any other files/data on your computer.
 
 * directory.py - Creates the new directory, or overwrites the files inside the
 		 directory if it already exists.

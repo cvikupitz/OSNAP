@@ -9,10 +9,10 @@ called by the script so you don't need to execute them on their own.
 * import_data.sh  
 Usage:  
 `$ ./import_data.sh <dbname> <input_directory>`  
-<dbname> - The name of the database used by L.O.S.T. to import the data into.  
+dbname - The name of the database used by L.O.S.T. to import the data into.  
 WARNING: It is recommended that you import to a new database so that you do not
 	 risk importing any duplicated data.  
-<input_directory> - The directory to import the files from.  
+input_directory - The directory to import the files from.
 
 * import_assets.py - Exports the assets from the file 'assets.csv' to the database.
 * import_facilities.py - Exports the assets from the file 'facilities.csv' to the database.
