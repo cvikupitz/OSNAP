@@ -13,7 +13,8 @@ week course for CIS 322 at the University of Oregon.
 If you have a virtual machine installed, you may download the image on the releases page.
 
 To run the application, you will need to install postgres 9.5., and Apache httpd-2.4.25 or a later
-version.
+version. You may run the install_daemons script provided to install the needed applications.
+Otherwise, follow the rest of the installation instructions below.
 
 To install postgres, run the commands:
 
@@ -59,8 +60,14 @@ Finally, change into the OSNAP directory and run the preflight script by running
 `$ ./preflight.sh $1`  
 
 where $1 is the name of the database you created.
+Then run the command:
+
+`$ apachectl start`  
 
 Open your browser and go to http://127.0.0.1:8080 to use the web application.
+You may stop the web application by running:
+
+`$ apachectl stop`  
 
 
 ## Repository Directories/Contents
@@ -71,7 +78,10 @@ Open your browser and go to http://127.0.0.1:8080 to use the web application.
 * sql/ - This sub-directory contains SQL scripts used to generate tables in the database.
 * src/ - This sub-directory contains source files for the L.O.S.T. application.
 * tesdoc/ - This sub-directory contains testing documents with use cases of the application.
+* install_daemons.sh
 * preflight.sh
+
+Usage: ./install_daemons.sh
 
 Usage: ./preflight.sh <dbname>
 <dbname> - The name of the database for L.O.S.T. to use.
