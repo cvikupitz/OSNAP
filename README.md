@@ -10,8 +10,6 @@ organization much easier for their company. The web application was designed and
 week course for CIS 322 at the University of Oregon.
 
 ## Installation
-If you have a virtual machine installed, you may download the image on the releases page.
-
 To run the application, you will need to install postgres 9.5., and Apache httpd-2.4.25 or a later
 version. You may run the install_daemons script provided to install the needed applications.
 Otherwise, follow the rest of the installation instructions below.
