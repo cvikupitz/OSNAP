@@ -81,10 +81,6 @@ You may stop the web application by running:
 * install_daemons.sh
 * preflight.sh
 
-Usage: ./install_daemons.sh
-
-Usage: ./preflight.sh <dbname>
-<dbname> - The name of the database for L.O.S.T. to use.
 
 ```
 ...
